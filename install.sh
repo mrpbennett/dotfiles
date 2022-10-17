@@ -5,9 +5,12 @@ export DOTFILES_DIR
 
 DOTFILES_DIR="$HOME/.dotfiles"
 
+# Check if MacOs or not.
+unameOut=$(uname -s)
+
 # Creating symlinks 
 echo "Creating symlinks..."
-
+sleep 1
 
 ln -sfv "$DOTFILES_DIR/.config/zsh/.zshrc" $HOME # ZSH config
 ln -sfv "$DOTFILES_DIR/.config/bash/.bashrc" $HOME # Bash config
@@ -46,14 +49,11 @@ function centos_install(){
 
 # INSTALLING PACKAGES CONDIONTIALLY ###########################################
 
-# Check if MacOs or not.
-unameOut=$(uname -s)
-
-# Check for server OS
-serverOS=$(cat /etc/os-release)
-
-
 if [[ "${unameOut}" == "Darwin" ]]; then
+
+    echo "Setting up MacOS"
+    sleep 1
+
     # MacOS
    . "$DOTFILES_DIR/install/desktop/macos/packages.sh"
    . "$DOTFILES_DIR/install/zsh-install.sh"
@@ -61,12 +61,21 @@ if [[ "${unameOut}" == "Darwin" ]]; then
 else
     # Linux
 
+    # Check for server OS
+    serverOS=$(cat /etc/os-release)
+
     # Check if server os is ubuntu or centos then install packages
     while read os; do
         if [ "$os" == "ID=ubuntu" ]; then
+            echo "Setting up Ubuntu Desktop/Server"
+            sleep 1
+
             # ubuntu srv
             ubuntu_install
         else
+            echo "Setting up CentOS Server"
+            sleep 1
+
             # centos
             centos_install
         fi
