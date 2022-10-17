@@ -60,27 +60,7 @@ if [[ "${unameOut}" == "Darwin" ]]; then
    . "$DOTFILES_DIR/macos/defaults.sh"
 else
     # Linux
-
-    # Check for server OS
-    serverOS=$(cat /etc/os-release)
-
-    # Check if server os is ubuntu or centos then install packages
-    while read os; do
-        if [ "$os" == "ID=ubuntu" ]; then
-            echo "Setting up Ubuntu Desktop/Server"
-            sleep 1
-
-            # ubuntu srv
-            ubuntu_install
-        else
-            echo "Setting up CentOS Server"
-            sleep 1
-
-            # centos
-            centos_install
-        fi
-    done < serverOS
-    
+    ubuntu_install
 fi
 
 
