@@ -9,7 +9,7 @@ DOTFILES_DIR="$HOME/.dotfiles"
 unameOut=$(uname -s)
 
 # Creating symlinks 
-echo "Creating symlinks..."
+echo "Creating symlinks...\n"
 sleep 1
 
 ln -sfv "$DOTFILES_DIR/.config/zsh/.zshrc" $HOME # ZSH config
