@@ -21,10 +21,16 @@ apps=(
     gh
     node
     npm
-    mysql
     prettier
     sass/sass/sass
     tree
+    
+    # python 
+    python
+    black
+    isort
+    flake8
+    pylint
 )   
 
 brew install "${apps[@]}"
@@ -36,7 +42,6 @@ apps=(
     appcleaner
     bitwarden
     fig
-    google-chrome
     ngrok
     spotify
     slack
