@@ -1,6 +1,8 @@
 [user]
 	name = Paul Bennett
 	email = pbennett.uk@gmail.com
+[init]
+	defaultBranch = main
 
 [color]
 	ui = auto
