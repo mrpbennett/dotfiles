@@ -1,0 +1,241 @@
+{
+  "editor.detectIndentation": true,
+  "editor.fontSize": 13,
+  "editor.fontFamily": "FiraCode Nerd Font Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": false,
+  "editor.rulers": [88],
+  "editor.snippetSuggestions": "top",
+  "editor.wordBasedSuggestions": false,
+  "editor.suggest.localityBonus": true,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.tabCompletion": "on",
+  "editor.suggestSelection": "first",
+  "editor.largeFileOptimizations": false,
+  "editor.accessibilitySupport": "off",
+  "editor.inlineSuggest.enabled": true,
+  "explorer.confirmDragAndDrop": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "editor.linkedEditing": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true,
+    "source.sortMembers": true,
+    "source.fixAll.eslint": false
+  },
+
+  // CODE RUNNER ---
+  "code-runner.defaultLanguage": "python",
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.executorMap": {
+    "javascript": "node",
+    "python": "pipenv run python $fileName",
+    "sass": "sass --style expanded"
+  },
+  "code-runner.runInTerminal": true,
+  "code-runner.showExecutionMessage": false,
+
+  // CSS ---
+  "tailwindCSS.emmetCompletions": true,
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "[css]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  // ESLint ---
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // Files ---
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+
+  // Git ---
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autoStash": true,
+  "git.branchProtection": ["main", "master"],
+  "git.mergeEditor": true,
+  "git.pruneOnFetch": true,
+  "githubPullRequests.pullBranch": "never",
+
+  // HTML ---
+  "html.format.enable": false,
+  "html.format.indentInnerHtml": true,
+  "html.format.indentHandlebars": true,
+  "[html]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+
+  // Java ---
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+
+  // JavaScript ---
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggestSelection": "recentlyUsed",
+    "editor.suggest.showKeywords": false
+  },
+
+  // React ---
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+
+  // JSON ---
+  "json.maxItemsComputed": 10000000,
+
+  "[json]": {
+    "editor.insertSpaces": true,
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // JSON with comments ---
+  "[jsonc]": {
+    "editor.insertSpaces": true,
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // Prettier ---
+  "prettier.resolveGlobalModules": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.bracketSpacing": false,
+  "prettier.endOfLine": "lf",
+  "prettier.htmlWhitespaceSensitivity": "css",
+  "prettier.insertPragma": false,
+  "prettier.bracketSameLine": false,
+  "prettier.jsxSingleQuote": false,
+  "prettier.printWidth": 80,
+  "prettier.proseWrap": "always",
+  "prettier.quoteProps": "as-needed",
+  "prettier.requirePragma": false,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "all",
+  "prettier.useTabs": false,
+
+  // Python ---
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true, // ruff
+      "source.organizeImports": true // ruff
+    }
+  },
+  "python.formatting.provider": "none",
+  "python.languageServer": "Pylance",
+  "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+  "python.venvPath": "$HOME/.local/share/virtualenvs/${workspaceFolder}",
+  "python.linting.enabled": true,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "none",
+    "reportMissingModuleSource": "none"
+  },
+  "python.diagnostics.sourceMapsEnabled": true,
+  "python.terminal.activateEnvironment": false,
+  // Ruff
+  "ruff.path": ["/opt/homebrew/bin/ruff"],
+  "ruff.interpreter": ["/opt/homebrew/bin/python3"],
+  "ruff.showNotifications": "onWarning",
+  // Jupyter
+  "jupyter.themeMatplotlibPlots": true,
+  "notebook.lineNumbers": "on",
+  "notebook.formatOnSave.enabled": true,
+
+  // RUST
+  "[rust]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  },
+
+  // Terminal ---
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.scrollback": 25000,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+
+  // TypeScript ---
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggestSelection": "recentlyUsed"
+  },
+
+  // WORKBENCH ---
+  "workbench.editor.untitled.hint": "hidden",
+  "workbench.colorTheme": "Default Dark+ Experimental",
+  "workbench.editorLargeFileConfirmation": 1907,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook",
+    "*.sqlite3": "default"
+  },
+
+  // YAML ---
+  "[yml]": {
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": null
+  },
+
+  // OTHER ---
+
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": false,
+    "markdown": false,
+    "javascript": true,
+    "typescript": true,
+    "python": true
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "style"],
+  "githubPullRequests.createOnPublishBranch": "never",
+  "explorer.confirmDelete": false,
+  "debug.console.closeOnEnd": true,
+  "debug.terminal.clearBeforeReusing": true,
+  "notebook.output.textLineLimit": 3000000,
+  "editor.wordWrap": "on"
+}
