@@ -1,32 +1,37 @@
-#!/bin/zsh
+#!/usr/bin/bash
+
+sudo apt install curl
 
 # Get current dir (so run this script from anywhere)
 export DOTFILES_DIR
 
+export DOTFILES_DIR DOTFILES_CACHE DOTFILES_EXTRA_DIR
 DOTFILES_DIR="$HOME/.dotfiles"
+DOTFILES_CACHE="$DOTFILES_DIR/.cache.sh"
 
-# Check if MacOs or not.
-unameOut=$(uname -s)
+# Make utilities available
+PATH="$DOTFILES_DIR/bin:$PATH"
 
-# Creating symlinks 
+
+# Update dotfiles itself first
+if is-executable git -a -d "$DOTFILES_DIR/.git"; then git --work-tree="$DOTFILES_DIR" --git-dir="$DOTFILES_DIR/.git" pull origin master; fi
+
+
+
+# Creating bunch of symlinks 
 echo "Creating symlinks...\n"
 sleep 1
 
-ln -sfv "$DOTFILES_DIR/.config/zsh/.zshrc" $HOME # ZSH config
 ln -sfv "$DOTFILES_DIR/.config/bash/.bashrc" $HOME # Bash config
-
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" $HOME # Git config
-
 ln -sfv "$DOTFILES_DIR/.config/vim/.vimrc" $HOME # Vim
-ln -sfv "$DOTFILES_DIR/.config/nvim" "$HOME/.config" # NeoVim
-ln -sfv "$DOTFILES_DIR/.config/lvim" "$HOME/.config" # LunarVim
-
-ln -sfv "$DOTFILES_DIR/.config/kitty/kitty.conf" "$HOME/.config" # Kitty conf
-
 ln -sfv "$DOTFILES_DIR/.config/starship/starship.toml" "$HOME/.config" # Starship prompt
 
 
-# SERVER PACKAGES #############################################################
+# PACKAGES #############################################################
+
+# Check if MacOs or not.
+unameOut=$(uname -s)
 
 # install things if server OS = ubuntu
 function ubuntu_install(){
@@ -34,15 +39,6 @@ function ubuntu_install(){
     sleep 1
 
     . "$DOTFILES_DIR/install/desktop/ubuntu/packages.sh"
-    . "$DOTFILES_DIR/install/bash-install.sh"
-}
-
-# install things if server OS = centos
-function centos_install(){
-    echo "Setting up CentOS"
-    sleep 1
-
-    . "$DOTFILES_DIR/install/server/centos/packages.sh"
     . "$DOTFILES_DIR/install/bash-install.sh"
 }
 
