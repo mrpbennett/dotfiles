@@ -33,7 +33,7 @@ function ubuntu_install(){
     echo "Setting up Ubuntu"
     sleep 1
 
-    . "$DOTFILES_DIR/install/server/ubuntu/packages.sh"
+    . "$DOTFILES_DIR/install/desktop/ubuntu/packages.sh"
     . "$DOTFILES_DIR/install/bash-install.sh"
 }
 
