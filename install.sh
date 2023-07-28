@@ -26,6 +26,7 @@ ln -sfv "$DOTFILES_DIR/.config/bash/.bashrc" $HOME # Bash config
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" $HOME # Git config
 ln -sfv "$DOTFILES_DIR/.config/vim/.vimrc" $HOME # Vim
 ln -sfv "$DOTFILES_DIR/.config/starship/starship.toml" "$HOME/.config" # Starship prompt
+ln -sfv "$DOTFILES_DIR/
 
 
 # PACKAGES #############################################################
