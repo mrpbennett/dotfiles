@@ -5,6 +5,9 @@
 # First update system
 sudo apt update -y && sudo apt upgrade -y
 
+# install build-essentials
+sudo apt install build-essential
+
 # Install the locate cmd
 sudo apt install plocate -y
 
