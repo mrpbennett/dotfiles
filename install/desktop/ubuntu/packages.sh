@@ -31,11 +31,14 @@ git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 rm -rf ~/.config/nvim/.git
 
+# FiraCode Nerd Fonts
+sudo apt install fonts-firacode
 
 # Snap store installs
 sudo snap install datagrip --classic
 sudo snap install spotify
 sudo snap install multipass
+
 
 # Install Docker
 . "$DOTFILES_DIR/install/desktop/ubuntu/docker.sh
