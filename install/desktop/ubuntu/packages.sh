@@ -36,6 +36,8 @@ sudo apt install fonts-firacode
 
 # Snap store installs
 sudo snap install datagrip --classic
+sudo snap install intellij-idea-community --classic
+
 sudo snap install spotify
 sudo snap install multipass
 
