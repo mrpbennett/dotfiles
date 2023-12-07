@@ -31,6 +31,10 @@ apps=(
     isort
     flake8
     pylint
+
+    # terminal
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )   
 
 brew install "${apps[@]}"
