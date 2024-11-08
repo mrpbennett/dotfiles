@@ -17,36 +17,20 @@ brew upgrade
 # Apps
 apps=(
     docker
-    eslint
     gh
-    node
-    npm
-    prettier
-    sass/sass/sass
     tree
-    
-    # python 
+
+    # python
     python
     black
-    isort
-    flake8
-    pylint
-
-    # terminal
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)   
+)
 
 brew install "${apps[@]}"
 
-
 # Casks
 apps=(
-    alfred
     appcleaner
     bitwarden
-    fig
-    ngrok
     spotify
     slack
     visual-studio-code

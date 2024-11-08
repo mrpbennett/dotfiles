@@ -1,87 +1,55 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
+# PATHS ---
+export ZSH="$HOME/.oh-my-zsh"                     #oh-my-zsh
+export PATH="$PATH:/Users/paul/.local/bin"        #pipx
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH" #krew
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
 
-# Plugins
 plugins=(
-    git
-    zsh-syntax-highlighting
-    zsh-autosuggestions
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Aliases ---
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='lvim'
-else
-  export EDITOR='lvim'
-fi
-
-# Aliases
-alias zshconfig="lvim ~/.zshrc"
-alias ohmyzsh="lvim ~/.oh-my-zsh"
-
-# VIM configs
-alias vconfig="lvim ~/.vimrc"
-alias nvconfig="lvim /Users/paul/.config/nvim/init.vim"
-
-# Shortcuts
-alias dt="cd ~/Desktop"
 alias dev="cd ~/Developer"
-alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
 
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
 
-# Node Shortcuts
-alias nm="nodemon $1"
-alias tw="npm install -D tailwindcss postcss autoprefixer && npx tailwindcss init -p"
-alias lint="npm install -D prettier eslint-config-prettier prettier-plugin-tailwindcss"
+# AWS
+alias s3m="aws s3 ls --endpoint-url http://minio.70ld.home:9000 --profile homelab"
+
+# Kuberenetes
+alias k="kubectl --kubeconfig ~/.kube/homelab --context talos"
+alias kw="kubectl --kubeconfig ~/.kube/work --context et-ma2-prod -n tam"
+alias kw-token="cat ~/.kube/cache/oidc-login/lga-dm-dev/* | jq -r '.id_token'"
+
+alias kctx="kubectl config get-contexts"
+alias kuse="kubectl config use-context $1"
 
 # Python Shortcuts
 alias python="python3"
 alias pip="pip3"
-alias jn="jupyter notebook"
+alias pa="poetry add $1"
+alias ps="poetry shell"
 
-# Pipenv Shortcuts
-alias pi="pipenv install $1" # allows you to just type the package
-alias ps="pipenv shell" # start a env with just "ps"
-alias pr="pipenv run python $1"
+# SSH
+alias sshc="ssh-copy-id -i ~/.ssh/id_ed25519.pub $1"
 
-# Rust Shortcuts
-alias r="rustc $1"
+li() {
+  ssh -i ~/.ssh/id_ed25519.pub sysadm@"$2"
+}
 
-# Chrome Shortcuts
-alias chrome="open -na Google\ Chrome --args --user-data-dir=/tmp/temporary-chrome-profile-dir --disable-web-security"
-
-# Kubernetes Shortcuts
-alias kc="kubectl"
-alias kui="kubectl proxy -p 8002"
-alias kconfig="code .kube/config"
-
-
+# Custom Tweaks ---
 # opens VSC from the cmd line:
-code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
-
-
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/paul/Desktop/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/paul/Desktop/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/paul/Desktop/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/paul/Desktop/google-cloud-sdk/completion.zsh.inc'; fi
-
-eval $(thefuck --alias)
-
-export PATH="/Users/paul/.deta/bin:$PATH"
+code() { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $*; }
 
 eval "$(starship init zsh)"
-
-
-# Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
-
