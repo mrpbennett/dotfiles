@@ -23,6 +23,9 @@ apps=(
     # python
     python
     black
+
+    mitmproxy
+    derailed/k9s/k9s
 )
 
 brew install "${apps[@]}"
