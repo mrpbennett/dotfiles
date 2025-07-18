@@ -34,9 +34,9 @@ brew install "${apps[@]}"
 apps=(
     appcleaner
     bitwarden
-    spotify
     slack
     visual-studio-code
+    warp
 )
 
 brew install --cask "${apps[@]}"
