@@ -1,39 +1,36 @@
-## Install
+## Tools I Use
 
-1. Ensure your system is up to date
+### Terminals
 
-- Ubuntu
+Still deciding between the two...cya iTerm2
 
-```
-sudo apt-get update
-```
+- [Ghostty](https://ghostty.org/): Ghostty is a fast, feature-rich, and cross-platform terminal emulator
+- [Warp](https://www.warp.dev/terminal): Warp’s modern interface combined with the #1 terminal agent will make you a command-line power user on day one.
 
-- CentOS
+### Terminal Tools
 
-```
-sudo yum upgrade
-```
+- [LazyVim](https://www.lazyvim.org/): LazyVim is a Neovim setup powered by 💤 lazy.nvim to make it easy to customize and extend your config.
+- [LazyGit](https://github.com/jesseduffield/lazygit): A simple terminal UI for git commands
+- [K9s](https://k9scli.io/): Kubernetes CLI To Manage Your Clusters In Style!
+- [Posting](https://posting.sh/): The API client that lives in your terminal.
 
-- MacOS
+### CLI Tools
 
-```
-sudo softwareupdate -i -a
-xcode-select --install
-```
+- [Starship](https://starship.rs/): The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+- [Github CLI](https://cli.github.com/): Github from the terminal
+- [Curlie](https://github.com/rs/curlie): The power of curl, the ease of use of httpie.
 
-2. Clone with Git
+## Themes
 
-```
-git clone git@github.com:mrpbennett/dotfiles.git ~/.dotfiles
-```
+<h3 align="center">
+	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/logos/exports/1544x1544_circle.png" width="100" alt="Logo"/><br/>
+	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+	Catppuccin
+	<img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/misc/transparent.png" height="30" width="0px"/>
+</h3>
 
-3. Run the installation script
+<p align="center">
+  <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="400" />
+</p>
 
-```
-source ~/.dotfiles/install.sh
-```
-
-## Credits
-
-The [dotfiles community](https://dotfiles.github.io) and
-[webpro](https://github.com/webpro/dotfiles) who I've adapted these from
+All the themse i use are a flavour of Catppuccin in some form or another.
