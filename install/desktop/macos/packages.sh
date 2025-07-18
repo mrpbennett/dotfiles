@@ -26,6 +26,7 @@ apps=(
 
     mitmproxy
     derailed/k9s/k9s
+    httpie
 )
 
 brew install "${apps[@]}"
@@ -37,6 +38,7 @@ apps=(
     slack
     visual-studio-code
     warp
+    ghostty
 )
 
 brew install --cask "${apps[@]}"
