@@ -1,11 +1,3 @@
-###############################################################################
-# MacOS packages ##############################################################
-###############################################################################
-
-###############################################################################
-# HomeBrew ##############################################################
-###############################################################################
-
 # Install XCode command line toosl
 xcode-select --install
 
@@ -15,44 +7,49 @@ xcode-select --install
 # Make sure we’re using the latest Homebrew.
 brew update
 
-# Upgrade any already-installed formulae.
-brew upgrade
+# Python
+brew install python
+brew install black
 
-# Apps
-apps=(
-    docker
-    gh
-    tree
-    python
-    black
-    mitmproxy
-    derailed/k9s/k9s
-    curlie
-)
+# Github CLI
+brew install gh
 
-brew install "${apps[@]}"
+# CLI Tools
+# Yazi - CLI file manager
+brew install yazi ffmpeg sevenzip jq poppler resvg imagemagick font-symbols-only-nerd-font tree curlie derailed/k9s/k9s zoxide bat
+brew install yazi --HEAD
 
-# Casks
-apps=(
-    appcleaner
-    bitwarden
-    slack
-    visual-studio-code
+# Posting - API tooling
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv tool install --python 3.13 posting
 
-    # terminal goodies
-    warp
-    ghostty
-)
+# Starship prompt
+curl -sS https://starship.rs/install.sh | sh
 
-brew install --cask "${apps[@]}"
+# cask packages
+brew install --cask ghostty
+brew install --cask warp
+brew install --cask visual-studio-code
+brew install --cask mitmproxy
+
+# Install Neovim & LazyVim ----------------
+brew install neovim
+brew install lazygit fzf ripgrep fd
+
+# required
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+# End LazyVim ----------------
+
+
+# Install LazySQL
+brew tap jorgerojas26/lazysql
+brew install lazysql
+
 
 # Remove outdated versions from the cellar.
 brew cleanup
-
-###############################################################################
-# Other ##############################################################
-###############################################################################
-
-# Install Posting for API terminal use
-curl -LsSf https://astral.sh/uv/install.sh | sh
-uv tool install posting
