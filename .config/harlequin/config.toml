@@ -1,0 +1,33 @@
+default_profile = "supabase"
+
+[profiles.cnpg_cluster]
+limit = 100_000
+theme = "catppuccin-mocha"
+adapter = "postgres"
+host = "192.168.7.80"
+port = 5432
+user = "paul"
+password = "password"
+dbname = "main"
+
+
+[profiles.supabase]
+limit = 100_000
+theme = "catppuccin-mocha"
+adapter = "postgres"
+host = "aws-0-us-east-1.pooler.supabase.com"
+port = 5432
+user = "postgres.kzqeciwvlkrgokcvgjci"
+password = "fYjc4g*r2^L%3&"
+dbname = "postgres"
+
+[profiles.trino]
+limit = 100_000
+theme = "catppuccin-mocha"
+adapter = "trino"
+host = "ma2-prod-trinos.pulsepoint.com"
+port = 8443
+user = "pbennett"
+password = "Pulsepoint!pb"
+catalog = "gridhive"
+https_scheme = "https"

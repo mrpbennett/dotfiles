@@ -1,0 +1,8 @@
+theme: catppuccin-mocha
+editor: nvim
+
+response:
+  prettify_json: true
+
+export: copy as curl
+curl_export_extra_args: "-v -w %{time_total} %{http_code}"
