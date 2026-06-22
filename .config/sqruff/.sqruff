@@ -1,0 +1,30 @@
+[sqruff]
+dialect = trino
+max_line_length = 120
+exclude_rules = LT01,LT12,AM06
+
+[sqruff:indentation]
+indent_unit = space
+tab_space_size = 4
+indented_using_on = False
+implicit_indents = allow
+
+[sqruff:layout:type:alias_expression]
+spacing_before = align
+align_within = select_clause
+align_scope = bracketed
+
+[sqruff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.functions]
+extended_capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.literals]
+extended_capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.types]
+extended_capitalisation_policy = lower

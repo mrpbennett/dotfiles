@@ -1,0 +1,11 @@
+[[manager.prepend_keymap]]
+on = ["g", "c"]
+run = "cd ~/.config"
+desc = "Go to config directory"
+
+[[manager.prepend_keymap]]
+on = ["g", "p"]
+run = "cd ~/Developer/"
+desc = "Go to projects"
+
+

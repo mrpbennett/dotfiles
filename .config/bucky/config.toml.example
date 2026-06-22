@@ -1,0 +1,35 @@
+theme = "auto"
+sort_by = "name"
+sort_order = "asc"
+show_hidden = "false"
+
+[sync]
+dry_run_default = false
+compare_mode = "mtime_size"
+delete_default = false
+no_overwrite_default = false
+concurrency = 4
+
+[profile.seaweedfs]
+name = "seaweedfs"
+type = "s3"
+bucket = "*"
+access_key = "YOUR_ACCESS_KEY"
+secret_key = "YOUR_SECRET_KEY"
+endpoint = "https://your-seaweedfs-endpoint"
+
+[profile.example-s3]
+name = "example-s3"
+type = "s3"
+bucket = "your-bucket-name"
+access_key = "YOUR_AWS_ACCESS_KEY"
+secret_key = "YOUR_AWS_SECRET_KEY"
+
+[profile.example-sftp]
+name = "example-sftp"
+type = "sftp"
+host = "your-sftp-host.amazonaws.com"
+port = 22
+username = "your_username"
+private_key_path = "~/.ssh/id_rsa"
+password = ""  # optional, key auth takes priority

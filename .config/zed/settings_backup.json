@@ -1,0 +1,164 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "autosave": "on_focus_change",
+  "context_servers": {
+    "mcp-server-github": {
+      "enabled": true,
+      "remote": false,
+      "settings": {
+        "github_personal_access_token": "",
+      },
+    },
+    "mcp-server-context7": {
+      "enabled": true,
+      "remote": false,
+      "settings": {
+        "context7_api_key": "",
+      },
+    },
+  },
+  "edit_predictions": {
+    "enabled_in_text_threads": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "colorize_brackets": true,
+  "disable_ai": false,
+  "show_edit_predictions": false,
+  "agent": {
+    "dock": "right",
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "favorite_models": [],
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-5-mini",
+    },
+    "default_profile": "write",
+    "model_parameters": [],
+  },
+  "agent_servers": {
+    "opencode": {
+      "type": "registry",
+    },
+    "claude": {
+      "default_model": "sonnet",
+      "env": {
+        "CLAUDE_CODE_EXECUTABLE": "/opt/homebrew/bin/claude",
+      },
+    },
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+    },
+  },
+  "inlay_hints": {
+    "enabled": true,
+  },
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "ui_font_family": ".ZedSans",
+  "icon_theme": "Catppuccin Mocha",
+  // vim settings ---
+  "vim_mode": true,
+  "cursor_blink": false,
+  "relative_line_numbers": "enabled",
+  "scroll_beyond_last_line": "off",
+  "scrollbar": { "show": "never" },
+  // vim settings end ---
+  "ui_font_size": 16.0,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "system",
+    "light": "Catppuccin Latte - No Italics",
+    "dark": "Gruvbox Dark",
+  },
+  // Indentation, rainbow indentation
+  "indent_guides": {
+    "background_coloring": "disabled",
+    "enabled": true,
+    "coloring": "indent_aware",
+  },
+  "format_on_save": "on",
+  // Indivdual language settings :::
+  "languages": {
+    "Python": {
+      "language_servers": ["ty", "ruff", "!basedpyright"],
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "language_server": {
+            "name": "ruff",
+          },
+        },
+      ],
+      "code_actions_on_format": {
+        "source.organizeImports.ruff": true,
+        "source.fixAll.ruff": true,
+      },
+    },
+    "YAML": {
+      "tab_size": 2,
+      "hard_tabs": false,
+      "formatter": "language_server",
+    },
+  },
+  // language server settings : python - go - yaml
+  "lsp": {
+    // PYTHON
+    "ruff": {
+      "initialization_options": {
+        "lineLength": 80,
+        "lint": {
+          "extendSelect": ["I"],
+          "quoteStyle": "single",
+          "docstringCodeFormat": true,
+        },
+      },
+    },
+    // GO
+    "gopls": {
+      "initialization_options": {
+        "gofumpt": true,
+      },
+    },
+    // YAML
+    "yaml-language-server": {
+      "settings": {
+        "yaml": {
+          "keyOrdering": false,
+          "validate": true,
+          "completion": true,
+          "hover": true,
+          "editor": { "tabSize": 2 },
+          "format": { "enable": true, "singleQuote": true },
+          "schemaStore": { "enable": true },
+          "schemas": {
+            "kubernetes": "**/*.yaml",
+          },
+        },
+      },
+    },
+  },
+}

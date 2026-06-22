@@ -1,0 +1,63 @@
+
+# $HOME/.config/ghostty/config
+
+confirm-close-surface = false
+macos-option-as-alt = true
+copy-on-select = true
+
+# ============================================================================
+# MULTIPLEXER type settings
+# ============================================================================
+shell-integration = zsh
+window-save-state = always
+focus-follows-mouse = true
+term = "xterm-256color"
+
+# ============================================================================
+# APPEARANCE
+# ============================================================================
+theme = light:Catppuccin Latte, dark:Catppuccin Macchiato
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 15
+background-blur-radius = 20
+mouse-hide-while-typing = true
+window-decoration = "auto"
+split-divider-color = "#A6E3A1"
+unfocused-split-opacity = 0.80
+
+# ============================================================================
+# KEYBINDINGS - Taking advantage of Home Row Mods
+#
+# A: ctrl S: alt D: super F: shift
+#
+# J: shift K: super L: alt ;: ctrl
+# ============================================================================
+
+# Split navigation
+keybind = super+shift+h=goto_split:left
+keybind = super+shift+j=goto_split:bottom
+keybind = super+shift+k=goto_split:top
+keybind = super+shift+l=goto_split:right
+
+# Split generation
+keybind = alt+super+h=new_split:left
+keybind = alt+super+j=new_split:down
+keybind = alt+super+k=new_split:up
+keybind = alt+super+l=new_split:right
+keybind = alt+super+f=toggle_split_zoom
+
+# Split resizing
+keybind = ctrl+shift+h=resize_split:left,50
+keybind = ctrl+shift+l=resize_split:right,50
+keybind = ctrl+shift+j=resize_split:down,50
+keybind = ctrl+shift+k=resize_split:up,50
+
+# Close current split
+keybind = super+shift+x=close_surface
+
+# Tab navigation
+keybind = super+shift+n=next_tab
+keybind = super+shift+u=previous_tab
+
+# Rename Tab
+keybind = super+shift+t=prompt_tab_title

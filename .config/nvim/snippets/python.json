@@ -1,0 +1,62 @@
+{
+  "Python main()": {
+    "prefix": "pmain",
+    "body": [
+      "def main():",
+      "    ${1}",
+      "",
+      "",
+      "if __name__ == '__main__':",
+      "    main()"
+    ],
+    "description": "Python main()"
+  },
+  "Requests": {
+    "prefix": "req",
+    "body": [
+      "try:",
+      "    res = requests.${1}('${2}')",
+      "    res.raise_for_status()",
+      "",
+      "    if res.status_code == requests.codes.ok:",
+      "        data: object = res.json()",
+      "",
+      "except HTTPError as error:",
+      "    raise error"
+    ]
+  },
+
+  "Connect to SFTP via Paramiko": {
+    "prefix": "sftp_",
+    "body": [
+      "def connect_to_sftp_and_upload_file(localpath, remotepath):",
+      "    try:",
+      "        transport = paramiko.Transport(config['hostname'], config['port'])",
+      "        transport.start_client()",
+      "        transport.auth_password(config['username'], config['password'])",
+      "",
+      "        sftp = paramiko.SFTPClient.from_transport(transport):",
+      "        sftp.chdir(${2})",
+      "        sftp.put(localpath, remotepath)",
+      "        sftp.close()",
+      "",
+      "    except Exception as err:",
+      "        print(f'Could not connect SFTP client: {err}')",
+      "        raise err"
+    ]
+  },
+  "logging": {
+    "prefix": "logger",
+    "body": [
+      "logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - line:%(lineno)d - %(filename)s:%(funcName)s -> %(message)s')"
+    ]
+  },
+  "Python Class": {
+    "prefix": "classpy",
+    "body": [
+      "class ${1}:",
+      "    def __init__(self, ${2}):",
+      "        self.${3}"
+    ]
+  }
+}

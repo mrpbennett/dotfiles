@@ -1,0 +1,9 @@
+[mgr]
+ratio = [2, 2, 4]  # Adjust pane ratios
+sort_dir_first = true
+show_hidden = true
+
+[preview]
+wrap = "yes"
+max_width = 1000
+max_height = 1000
