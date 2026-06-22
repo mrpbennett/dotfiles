@@ -1,4 +1,8 @@
-# dotfiles
+<h1 align="center">
+    <img src="assets/mascot.png" width="300" alt="Bucky logo"/>
+    <br/>
+    <sub>Collection of configuration files</sub>
+</h1>
 
 Personal configuration files managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
@@ -6,26 +10,26 @@ Personal configuration files managed with [GNU Stow](https://www.gnu.org/softwar
 
 All configs live under `.config/` and cover:
 
-| Tool | Purpose |
-|------|---------|
-| `fish` | Shell + functions/completions |
-| `nvim` | Neovim (Lua config) |
-| `tmux` | Multiplexer + TPM plugins |
-| `zed` | Editor |
-| `ghostty` | Terminal emulator |
-| `zellij` | Terminal multiplexer (alt) |
-| `starship` | Shell prompt |
-| `atuin` | Shell history sync |
-| `yazi` | File manager |
-| `lazygit` / `lazydocker` | Git / Docker TUIs |
-| `k9s` | Kubernetes TUI |
-| `karabiner` | Keyboard remapping |
-| `mise` | Runtime version manager |
-| `bat` / `btop` | `cat` replacement / system monitor |
-| `gh` / `gh-dash` | GitHub CLI + dashboard |
-| `raycast` | Launcher extensions |
-| `television` | Fuzzy finder |
-| `nushell` | Nu shell config |
+| Tool                     | Purpose                                   |
+| ------------------------ | ----------------------------------------- |
+| `fish`                   | Shell + functions/completions             |
+| `nvim`                   | [LazyVim](https://www.lazyvim.org) config |
+| `tmux`                   | Multiplexer + TPM plugins                 |
+| `zed`                    | Editor                                    |
+| `ghostty`                | Terminal emulator                         |
+| `zellij`                 | Terminal multiplexer (alt)                |
+| `starship`               | Shell prompt                              |
+| `atuin`                  | Shell history sync                        |
+| `yazi`                   | File manager                              |
+| `lazygit` / `lazydocker` | Git / Docker TUIs                         |
+| `k9s`                    | Kubernetes TUI                            |
+| `karabiner`              | Keyboard remapping                        |
+| `mise`                   | Runtime version manager                   |
+| `bat` / `btop`           | `cat` replacement / system monitor        |
+| `gh` / `gh-dash`         | GitHub CLI + dashboard                    |
+| `raycast`                | Launcher extensions                       |
+| `television`             | Fuzzy finder                              |
+| `nushell`                | Nu shell config                           |
 
 ## Install
 
@@ -57,11 +61,3 @@ stow --target="$HOME" --delete .
 ## Security note
 
 **Never commit credentials to this repo.** Files with secrets (API keys, tokens, passwords) belong in `.gitignore`. Use a secrets manager or per-machine env files sourced outside this repo instead.
-
-Add sensitive config files to `.gitignore`:
-
-```
-.config/bucky/config.toml
-.config/argocd/config
-```
-# dootfiles
