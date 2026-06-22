@@ -31,32 +31,121 @@ All configs live under `.config/` and cover:
 | `television`             | Fuzzy finder                              |
 | `nushell`                | Nu shell config                           |
 
-## Install
+## Install (fresh machine)
 
 **Prerequisites:** `brew install stow`
 
 ```sh
-git clone <repo-url> ~/dotfiles
-cd ~/dotfiles
+git clone <repo-url> ~/Developer/personal/dootfiles
+cd ~/Developer/personal/dootfiles
+```
+
+Back up any existing configs that would conflict (stow errors rather than overwrites):
+
+```sh
+# Batch rename every matching dir to .bak
+cd ~/.config
+for dir in atuin bat btop bucky fish gh gh-dash ghostty hunk k9s karabiner \
+           lazydocker lazygit mise nushell nvim raycast sqruff starship \
+           television tmux yazi zed zellij; do
+  [ -d "$dir" ] && mv "$dir" "${dir}.bak"
+done
+```
+
+Then stow:
+
+```sh
+cd ~/Developer/personal/dootfiles
 stow --target="$HOME" .
 ```
 
-Stow will symlink everything under `.config/` into `~/.config/`. If a target file already exists and isn't a symlink, stow will error — back it up first:
+## Stow command reference
+
+### Dry run — preview before touching anything
 
 ```sh
-mv ~/.config/fish ~/.config/fish.bak   # example
+stow --simulate --target="$HOME" .
+# short form
+stow -nv --target="$HOME" .
 ```
 
-To remove symlinks (unstow):
+Always run this first if you're unsure. It prints what *would* happen without making any changes.
+
+### Stow (create symlinks)
 
 ```sh
-stow --target="$HOME" --delete .
+stow --target="$HOME" .
 ```
 
-## Adding new configs
+Stow is idempotent — safe to re-run anytime. Already-correct symlinks are left alone.
 
-1. Put the config under `.config/<tool>/` in this repo
-2. Run `stow --target="$HOME" .` again — stow is idempotent
+### Restow — use after adding or moving configs
+
+```sh
+stow --restow --target="$HOME" .
+```
+
+Equivalent to unstow + stow in one step. Use this whenever you add a new tool or rename something.
+
+### Unstow — remove all symlinks
+
+```sh
+stow --delete --target="$HOME" .
+```
+
+Removes every symlink stow created. Your original `.bak` dirs are untouched — rename them back to restore.
+
+### Verbose — see exactly what stow is doing
+
+```sh
+stow --verbose --target="$HOME" .
+# or combine with dry run
+stow -nv --target="$HOME" .
+```
+
+### Verify a symlink is correct
+
+```sh
+readlink ~/.config/fish
+# should print: ../Developer/personal/dootfiles/.config/fish
+```
+
+## Adding a new app's config
+
+```sh
+mv ~/.config/newapp ~/Developer/personal/dootfiles/.config/newapp
+cd ~/Developer/personal/dootfiles
+stow --restow --target="$HOME" .
+```
+
+Then commit the new directory.
+
+## Removing an app's config from stow
+
+```sh
+# Remove from repo
+rm -rf ~/Developer/personal/dootfiles/.config/oldapp
+
+# Restow to clean up the dead symlink
+stow --restow --target="$HOME" .
+
+# The app will recreate ~/.config/oldapp fresh on next launch
+```
+
+## Recovering from conflicts
+
+If stow errors with `conflicts`, it means a real file (not a symlink) exists at the target. Options:
+
+```sh
+# Option 1: back it up and re-run
+mv ~/.config/problem-app ~/.config/problem-app.bak
+stow --target="$HOME" .
+
+# Option 2: adopt it (stow moves the file INTO the repo and links back)
+# Only use this if you want to capture the existing file into your dotfiles
+stow --adopt --target="$HOME" .
+git diff  # review what was pulled in before committing
+```
 
 ## Security note
 
