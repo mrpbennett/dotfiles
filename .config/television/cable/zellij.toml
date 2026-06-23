@@ -1,0 +1,26 @@
+[metadata]
+name = "zellij-sessions"
+description = "List, attach, and delete Zellij sessions"
+
+[source]
+command = "zellij list-sessions --no-formatting 2>/dev/null"
+output = "{split: :0}"
+no_sort = true
+
+[keybindings]
+shortcut = "f8"
+enter = "actions:attach"
+alt-d = "actions:delete"
+alt-k = "actions:kill"
+
+[actions.attach]
+command = "zellij attach '{split: :0}'"
+mode = "execute"
+
+[actions.delete]
+command = "zellij delete-session '{split: :0}' "
+mode = "fork"
+
+[actions.kill]
+command = "zellij kill-session '{split: :0}' "
+mode = "fork"
