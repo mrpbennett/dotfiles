@@ -1,0 +1,20 @@
+[metadata]
+name = "grep"
+description = "Search directory contents with ripgrep"
+requirements = ["rg", "bat"]
+
+[source]
+command = "rg --line-number --no-heading --color=never ."
+output = "{split:\\::..2}"
+
+[preview]
+command = "bat --color=always -H '{split:\\::1}' '{split:\\::0}'"
+offset = "{split:\\::1}"
+
+[keybindings]
+enter = "actions:edit"
+
+[actions.edit]
+description = "Open file at matched line"
+command = "${EDITOR:-vim} +'{split:\\::1}' '{split:\\::0}'"
+mode = "execute"
