@@ -1,7 +1,6 @@
 
 export PATH="$HOME/.local/bin:$PATH"
 
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -16,7 +15,6 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
-
 
 source $ZSH/oh-my-zsh.sh
 
@@ -217,12 +215,6 @@ export PATH="$PATH:/Users/paul/.local/bin"
 export PATH=/Users/paul/.opencode/bin:$PATH
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-eval "$(mise activate zsh)"
-
-alias meltest="cargo watch -x 'build' -s './target/debug/melon'"
-
 # Create a Tmux Dev Layout with editor, ai, and terminal
 # Usage: tdl <c|cx|codex|other_ai> [<second_ai>]
 tdl() {
@@ -293,6 +285,11 @@ if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)
 
 eval "$(atuin init zsh)"
 eval "$(tv init zsh)"
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(mise activate zsh)"
+#
+#
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/pbennett/.docker/completions $fpath)
 autoload -Uz compinit
