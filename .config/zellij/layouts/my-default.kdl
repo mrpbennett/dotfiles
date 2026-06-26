@@ -1,0 +1,54 @@
+
+layout {
+    tab name="LazyVim" focus=true {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane command="nvim" {
+          args "."
+        }
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+    tab name="ClaudeCode" focus=false {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane command="claude" {
+        }
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+    tab name="Hunk" focus=false {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane command="hunk" {
+            args "diff" "--watch"
+        }
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+    tab name="Console" focus=false {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane {
+        }
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+    new_tab_template {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+}
