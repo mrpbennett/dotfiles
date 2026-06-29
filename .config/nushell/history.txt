@@ -31,3 +31,6 @@ zsh
 ls
 e
 exit
+clear
+ls
+zsh
