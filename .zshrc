@@ -1,4 +1,5 @@
 
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # If you come from bash you might have to change your $PATH.
@@ -73,14 +74,13 @@ compinit
 # Seperate shell files to keep .zshrc clean
 export SHELL_SOURCE="/Users/pbennett/Developer/personal/dootfiles/shell/"
 # ALIASES
-source $SHELL_SOURCE/aliases.sh
-source $SHELL_SOURCE/docker/aliases.sh
-source $SHELL_SOURCE/kube/aliases.sh
-source $SHELL_SOURCE/git/aliases.sh
-source $SHELL_SOURCE/dev/aliases.sh
+source $SHELL_SOURCE/aliases/main.sh
+source $SHELL_SOURCE/aliases/docker.sh
+source $SHELL_SOURCE/aliases/kube.sh
+source $SHELL_SOURCE/aliases/git.sh
+source $SHELL_SOURCE/aliases/dev.sh
 # FUNCTIONS
 source $SHELL_SOURCE/fns/tmux/tmux.sh
 
 # Added Scripts that are not commited to dootfiles
 source ~/pulsepoint.sh
-
