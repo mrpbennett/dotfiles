@@ -36,4 +36,4 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-source ~/.local/share/dootfiles/shell/rc.sh
+source ~/.local/share/dotfiles/shell/rc.sh
