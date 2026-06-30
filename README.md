@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="assets/mascot.png" width="280" alt="Dot Mascot"/>
+    <img src="assets/mascot.png" width="350" alt="Dot Mascot"/>
     <br/>
     <sub>dotfiles</sub>
 </h1>
