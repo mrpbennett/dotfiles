@@ -1,13 +1,13 @@
 <h1 align="center">
-    <img src="assets/mascot.png" width="280" alt="Bucky logo"/>
+    <img src="assets/mascot.png" width="280" alt="Dot Mascot"/>
     <br/>
-    <sub>dootfiles</sub>
+    <sub>dotfiles</sub>
 </h1>
 
 <p align="center">
     <img alt="GNU Stow" src="https://img.shields.io/badge/managed_with-GNU_Stow-4CAF50?style=flat-square&logo=gnu&logoColor=white"/>
     <img alt="macOS" src="https://img.shields.io/badge/platform-macOS-000000?style=flat-square&logo=apple&logoColor=white"/>
-    <img alt="fish shell" src="https://img.shields.io/badge/shell-fish-4FC3F7?style=flat-square"/>
+    <img alt="zsh shell" src="https://img.shields.io/badge/shell-zsh-4FC3F7?style=flat-square"/>
     <img alt="LazyVim" src="https://img.shields.io/badge/editor-LazyVim-7C3AED?style=flat-square"/>
 </p>
 
@@ -33,47 +33,47 @@ All configs live under `.config/` and are symlinked into `~/.config` via GNU Sto
 
 ### Shell
 
-| Config | What it does |
-| --- | --- |
-| `fish` | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here |
-| `nushell` | Nu shell config for when you want structured data pipelines instead of text streams |
+| Config     | What it does                                                                                 |
+| ---------- | -------------------------------------------------------------------------------------------- |
+| `zsh`      | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here       |
+| `nushell`  | Nu shell config for when you want structured data pipelines instead of text streams          |
 | `starship` | Cross-shell prompt that shows only what's relevant: git state, language versions, exit codes |
-| `atuin` | Replaces shell history with a searchable, syncable SQLite database |
+| `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           |
 
 ### Editor & Terminal
 
-| Config | What it does |
-| --- | --- |
-| `nvim` | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl |
-| `zed` | Fast native editor for when you want to stay out of the terminal |
-| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency |
-| `tmux` | Session persistence and window management; TPM handles plugins |
-| `zellij` | Multiplexer alternative with a built-in layout system — useful for complex workspace configs |
+| Config    | What it does                                                                                 |
+| --------- | -------------------------------------------------------------------------------------------- |
+| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl              |
+| `zed`     | Fast native editor for when you want to stay out of the terminal                             |
+| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                         |
+| `tmux`    | Session persistence and window management; TPM handles plugins                               |
+| `zellij`  | Multiplexer alternative with a built-in layout system — useful for complex workspace configs |
 
 ### TUI Tools
 
-| Config | What it does |
-| --- | --- |
-| `lazygit` | Git operations without memorizing flags — branches, rebases, and diffs in a single view |
-| `lazydocker` | Container and image management TUI that replaces most `docker` invocations |
-| `k9s` | Kubernetes cluster management from the terminal; essential when `kubectl get` isn't enough |
-| `yazi` | Terminal file manager with previews, bulk operations, and plugin support |
-| `television` | Fuzzy finder built for speed — a ripgrep-powered `fzf` alternative |
-| `hunk` | Patch review and staging TUI |
+| Config       | What it does                                                                               |
+| ------------ | ------------------------------------------------------------------------------------------ |
+| `lazygit`    | Git operations without memorizing flags — branches, rebases, and diffs in a single view    |
+| `lazydocker` | Container and image management TUI that replaces most `docker` invocations                 |
+| `k9s`        | Kubernetes cluster management from the terminal; essential when `kubectl get` isn't enough |
+| `yazi`       | Terminal file manager with previews, bulk operations, and plugin support                   |
+| `television` | Fuzzy finder built for speed — a ripgrep-powered `fzf` alternative                         |
+| `hunk`       | Patch review and staging TUI                                                               |
 
 ### System & Productivity
 
-| Config | What it does |
-| --- | --- |
-| `karabiner` | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching |
-| `mise` | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` |
-| `bat` | `cat` with syntax highlighting, line numbers, and git diff markers |
-| `btop` | System monitor with a layout that actually uses your terminal width |
-| `gh` | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal |
-| `gh-dash` | Dashboard TUI for `gh` — all your open PRs and issues in one view |
-| `raycast` | Launcher extensions and scripts |
-| `sqruff` | SQL linter and formatter config |
-| `bucky` | Local configuration for this setup's custom tooling |
+| Config      | What it does                                                                                         |
+| ----------- | ---------------------------------------------------------------------------------------------------- |
+| `karabiner` | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       |
+| `mise`      | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` |
+| `bat`       | `cat` with syntax highlighting, line numbers, and git diff markers                                   |
+| `btop`      | System monitor with a layout that actually uses your terminal width                                  |
+| `gh`        | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         |
+| `gh-dash`   | Dashboard TUI for `gh` — all your open PRs and issues in one view                                    |
+| `raycast`   | Launcher extensions and scripts                                                                      |
+| `sqruff`    | SQL linter and formatter config                                                                      |
+| `bucky`     | Local configuration for this setup's custom tooling                                                  |
 
 ---
 
@@ -119,7 +119,7 @@ Always run this first on an unfamiliar machine:
 stow -nv --target="$HOME" .
 ```
 
-Prints every link that *would* be created or removed. Nothing is changed.
+Prints every link that _would_ be created or removed. Nothing is changed.
 
 ### Stow — create symlinks
 
@@ -200,7 +200,7 @@ stow --adopt --target="$HOME" .
 git diff  # always review before committing — adopt can be destructive
 ```
 
-> **Note on `--adopt`:** This flag rewrites the file *in your repo* to match what's on disk. If the on-disk version is worse than what you had committed, you'll overwrite your config. Check `git diff` before you `git add` anything.
+> **Note on `--adopt`:** This flag rewrites the file _in your repo_ to match what's on disk. If the on-disk version is worse than what you had committed, you'll overwrite your config. Check `git diff` before you `git add` anything.
 
 ---
 
@@ -210,7 +210,7 @@ git diff  # always review before committing — adopt can be destructive
 
 API keys, tokens, session cookies, and passwords do not belong here. The right pattern:
 
-- Machine-specific secrets live in a file sourced *outside* this repo (e.g. `~/.config/fish/local.fish` added to `.gitignore`)
+- Machine-specific secrets live in a file sourced _outside_ this repo (e.g. `~/.config/fish/local.fish` added to `.gitignore`)
 - Long-term secrets belong in a password manager or secrets manager, not in any dotfile
 - If you accidentally commit a secret, treat it as compromised immediately — git history is public
 
