@@ -1,0 +1,18 @@
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+blacklist = ["scratch"]
+
+sort_order = [
+  "tmuxinator", # show first
+  "config",
+  "tmux",
+  "zoxide",     # show last
+]
+
+cache = true
+
+[[session]]
+name = "dotfiles"
+path = "$HOME/Developer/personal/dotfiles"
+startup_command = "nvim ."
+preview_command = "bat --color=always $HOME/Developer/personal/dotfiles/README.md"
