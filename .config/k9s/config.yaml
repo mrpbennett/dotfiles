@@ -9,7 +9,9 @@ k9s:
   noExitOnCtrlC: false
   portForwardAddress: localhost
   ui:
-    skin: catppuccin-macchiato
+    # skin: catppuccin-macchiato
+    darkSkin: catppuccin-macchiato
+    lightSkin: catppuccin-latte
     enableMouse: true
     headless: false
     logoless: true

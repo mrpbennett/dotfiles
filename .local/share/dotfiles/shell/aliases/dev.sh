@@ -11,7 +11,7 @@ gomod() {
 # POETRY ---
 alias pa="poetry add $1"
 alias pr="poetry run python $1"
-alias pi="poetry install"
+alias pin="poetry install"
 
 # UV ---
 alias ui="uv init"

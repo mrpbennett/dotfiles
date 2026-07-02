@@ -1,0 +1,71 @@
+[user]
+    name = Paul Bennett
+    email = pbennett.uk@outlook.com
+
+[core]
+    editor = nvim
+    autocrlf = input          # LF on commit, don't touch on checkout (Linux/Mac)
+    excludesfile = ~/.gitignore_global
+	  pager = hunk pager
+
+[init]
+    defaultBranch = main
+
+[pull]
+    rebase = true             # rebase instead of merge on pull
+
+[push]
+    default = current         # push to same-named remote branch
+    autoSetupRemote = true    # auto --set-upstream on first push
+
+[rebase]
+    autoStash = true          # stash dirty working tree before rebase
+
+[merge]
+    conflictstyle = zdiff3    # better conflict markers (shows base too)
+
+[diff]
+    colorMoved = default      # color moved lines differently from changed lines
+    algorithm = histogram     # better diff algorithm
+
+[fetch]
+    prune = true              # auto-remove deleted remote branches
+    prunetags = true
+
+[commit]
+    gpgsign = false           # set true if using GPG signing
+
+[tag]
+    sort = version:refname    # sort tags by version number
+
+[rerere]
+    enabled = true            # remember conflict resolutions, replay on rebase
+
+[branch]
+    sort = -committerdate     # most recently used branches first
+
+[credential]
+    helper = osxkeychain
+
+
+# ── Aliases ─────────────────────────────────────────────────────────────────
+[alias]
+    # Shortcuts
+    st = status -sb
+    co = checkout
+    br = branch
+    cp = cherry-pick
+    rb = rebase
+
+    # Logging
+    lg = log --oneline --graph --decorate --all
+    ll = log --oneline --decorate -20
+    last = log -1 HEAD --stat
+
+    # Undo helpers
+    undo = reset HEAD~1 --mixed    # undo last commit, keep changes staged
+    unstage = restore --staged     # unstage a file
+    discard = restore              # discard working tree changes
+
+    # Cleanup
+    gone = "!git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"

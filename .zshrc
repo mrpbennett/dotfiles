@@ -37,3 +37,6 @@ compinit
 # End of Docker CLI completions
 
 source ~/.local/share/dotfiles/shell/rc.sh
+
+# Pi
+export PATH="/Users/pbennett/.local/share/mise/installs/node/26.4.0/bin:$PATH"
