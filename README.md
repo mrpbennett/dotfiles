@@ -31,11 +31,18 @@
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
 
+### Color Scheme
+
+![catppuccin](assets/colorscheme.png)
+
+My setup consists of auto theme switching with catppuccin. Latte for light, and Macchiato for dark. For tmux this is done by setting up [hooks](https://github.com/catppuccin/tmux#for-tmux-versions-prior-to-36) and with LazyVim this is done with the plugin [auto-dark-mode](https://github.com/f-person/auto-dark-mode.nvim)
+
 ### Shell
 
 | Config     | What it does                                                                                 |
 | ---------- | -------------------------------------------------------------------------------------------- |
 | `zsh`      | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here       |
+| `fish`     | Friendly interactive shell config with `conf.d` hooks for atuin and toolchain env setup      |
 | `nushell`  | Nu shell config for when you want structured data pipelines instead of text streams          |
 | `starship` | Cross-shell prompt that shows only what's relevant: git state, language versions, exit codes |
 | `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           |
@@ -47,8 +54,9 @@ All configs live under `.config/` and are symlinked into `~/.config` via GNU Sto
 | `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl              |
 | `zed`     | Fast native editor for when you want to stay out of the terminal                             |
 | `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                         |
-| `tmux`    | Session persistence and window management; TPM handles plugins                               |
-| `zellij`  | Multiplexer alternative with a built-in layout system — useful for complex workspace configs |
+| `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar |
+| `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach |
+| `zellij`  | Multiplexer alternative with named layouts: `desktop`, `laptop`, `devops`, `dual-agent`, `my-default` |
 
 ### TUI Tools
 
@@ -82,7 +90,7 @@ All configs live under `.config/` and are symlinked into `~/.config` via GNU Sto
 **Prerequisites:** `brew install stow`
 
 ```sh
-git clone <repo-url> ~/Developer/personal/dootfiles
+git clone <repo-url> ~/Developer/personal/dotfiles
 ```
 
 Before stowing, back up any existing configs that would conflict. Stow refuses to overwrite real files — it errors rather than silently clobbering:
@@ -90,7 +98,7 @@ Before stowing, back up any existing configs that would conflict. Stow refuses t
 ```sh
 cd ~/.config
 for dir in atuin bat btop bucky fish gh gh-dash ghostty hunk k9s karabiner \
-           lazydocker lazygit mise nushell nvim raycast sqruff starship \
+           lazydocker lazygit mise nushell nvim raycast sesh sqruff starship \
            television tmux yazi zed zellij; do
   [ -d "$dir" ] && mv "$dir" "${dir}.bak"
 done
@@ -105,7 +113,7 @@ stow --target="$HOME" .
 
 That's it. Every tool that reads from `~/.config` will now pick up the versioned config.
 
-> **Verify it worked:** `readlink ~/.config/fish` should print `../Developer/personal/dootfiles/.config/fish`
+> **Verify it worked:** `readlink ~/.config/tmux` should print `../Developer/personal/dotfiles/.config/tmux`
 
 ---
 
