@@ -1,36 +1,9 @@
-k get nodes
-kubectl get nodes
 ls
-ls | sort-by size | reverse
-ps
-clear
-ls
-clear
+ls a
 lsa
-ls
+ip a
+git status
 clear
 ls
-kubectl get nodes
 k get nodes
 kubectl get nodes
-cd
-cledar
-clear
-.config/nushell/
-v config.nu
-nvim config.nu
-&nu.config-path
-$nu
-$nu.config-path
-clear
-ls
-fish
-zsh
-zsh
-zsh
-ls
-e
-exit
-clear
-ls
-zsh
