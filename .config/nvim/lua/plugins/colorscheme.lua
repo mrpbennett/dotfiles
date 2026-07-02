@@ -19,19 +19,18 @@ return {
       vim.g.everforest_better_performance = 1
     end,
   },
-  --
-  -- Set Theme here:
-  -- opts:
-  --  catppuccin
-  --  dracula
-  --  boo-berry
-  --  gruvbox
-  --  vault
-  --  everforest
+  -- Auto dark/light mode switching based on macOS appearance
   {
-    "LazyVim/LazyVim",
+    "f-person/auto-dark-mode.nvim",
+    lazy = false,
+    priority = 1000,
     opts = {
-      colorscheme = vim.o.background == "dark" and "catppuccin-macchiato" or "catppuccin-latte",
+      set_dark_mode = function()
+        vim.cmd.colorscheme("catppuccin-macchiato")
+      end,
+      set_light_mode = function()
+        vim.cmd.colorscheme("catppuccin-latte")
+      end,
     },
   },
 }

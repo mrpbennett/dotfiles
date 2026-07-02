@@ -16,6 +16,7 @@ term = "xterm-256color"
 # ============================================================================
 # APPEARANCE
 # ============================================================================
+window-theme = auto
 theme = light:Catppuccin Latte, dark:Catppuccin Macchiato
 font-family = "JetBrainsMono Nerd Font Mono"
 font-size = 15
