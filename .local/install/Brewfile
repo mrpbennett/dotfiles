@@ -1,0 +1,58 @@
+
+# CLI tools
+brew "bat"
+brew "btop"
+brew "carapace"
+brew "curlie"
+brew "eza"
+brew "fd"
+brew "fzf"
+brew "jq"
+brew "mas"
+brew "ripgrep"
+brew "sevenzip"
+brew "stow"
+brew "tree"
+brew "wget"
+brew "zoxide"
+
+# Shells
+brew "fish"
+brew "nushell"
+
+# Dev tools
+brew "gh"
+brew "lazygit"
+brew "neovim"
+brew "sqruff"
+brew "vercel-cli"
+brew "worktrunk"
+brew "lazydocker"
+
+# Media
+brew "ffmpeg-full"
+brew "imagemagick-full"
+brew "poppler"
+brew "resvg"
+
+# Terminal / multiplexers
+brew "sesh"
+brew "tmux"
+
+# TUI apps
+brew "television"
+brew "yazi"
+
+# From taps
+brew "derailed/k9s/k9s"
+brew "modem-dev/tap/hunk"
+
+# Postgres client (standalone, no server)
+brew "libpq"
+
+# Casks
+cask "font-jetbrains-mono"
+cask "font-symbols-only-nerd-font"
+cask "ghostty"
+cask "mitmproxy"
+cask "ngrok"

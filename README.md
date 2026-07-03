@@ -32,6 +32,8 @@
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
 
+`.local/install/` holds machine bootstrap scripts — notably `brew.sh` and the curated `Brewfile` that restores all Homebrew formulae and casks on a fresh machine.
+
 ### Color Scheme
 
 ![catppuccin](assets/colorscheme.png)
@@ -88,11 +90,21 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 
 ## Fresh machine setup
 
-**Prerequisites:** `brew install stow`
+**Prerequisites:** Homebrew — `brew.sh` will install it if missing.
 
 ```sh
 git clone <repo-url> ~/Developer/personal/dotfiles
 ```
+
+### 1. Install packages
+
+```sh
+~/Developer/personal/dotfiles/.local/install/brew.sh
+```
+
+Installs Homebrew if needed, then runs `brew bundle` against `.local/install/Brewfile` to restore all formulae and casks.
+
+### 2. Symlink configs
 
 Before stowing, back up any existing configs that would conflict. Stow refuses to overwrite real files — it errors rather than silently clobbering:
 
