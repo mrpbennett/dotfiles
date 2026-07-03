@@ -82,7 +82,7 @@ defaults:
   refetchIntervalMinutes: 30
 keybindings:
   universal:
-    - key: g
+    - key: ctrl+g
       name: lazygit
       command: >
         cd {{.RepoPath}} && lazygit

@@ -18,3 +18,6 @@ alias ui="uv init"
 alias ua="uv add $1"
 alias us="uv sync"
 alias ur="uv run $1"
+
+# AI ---
+alias oc="opencode"

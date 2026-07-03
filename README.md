@@ -23,6 +23,7 @@
 - [Day-to-day workflows](#day-to-day-workflows)
 - [Recovering from conflicts](#recovering-from-conflicts)
 - [Security](#security)
+- [AI](#ai)
 - [Quick cheatsheet](#quick-cheatsheet)
 
 ---
@@ -221,6 +222,12 @@ API keys, tokens, session cookies, and passwords do not belong here. The right p
 - Machine-specific secrets live in a file sourced _outside_ this repo (e.g. `~/.config/fish/local.fish` added to `.gitignore`)
 - Long-term secrets belong in a password manager or secrets manager, not in any dotfile
 - If you accidentally commit a secret, treat it as compromised immediately — git history is public
+
+---
+
+## AI
+
+A `.claude/CLAUDE.md` file lives in this repo and instructs [Claude Code](https://claude.ai/code) how to behave when working here. In short: plan before building, extend configs rather than rewriting them, keep GitHub access read-only, never commit secrets, and always verify changes before marking work done.
 
 ---
 
