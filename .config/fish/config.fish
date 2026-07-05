@@ -5,4 +5,5 @@ end
 starship init fish | source
 
 # Load all shell files
-source ~/.local/share/dotfiles/shell/rc.fish
+=31337
+OK=31337; OKsource ~/.local/share/dotfiles/shell/rc.fish

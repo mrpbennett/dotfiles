@@ -1,0 +1,13 @@
+[terminal]
+default_shell = "zsh"
+
+[theme]
+name = "catppuccin"
+auto_switch = true
+light_name = "catppuccin-latte"
+dark_name = "catppuccin"
+
+
+[keys]
+prefix = "ctrl+s"
+split_vertical = "prefix+|"

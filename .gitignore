@@ -1,3 +1,6 @@
 .DS_Store
 .config/bucky/config.toml
 .config/argocd/config
+/.config/herdr/herdr-client.log
+/.config/herdr/herdr-server.log
+/.config/herdr/session.json
