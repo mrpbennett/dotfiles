@@ -46,45 +46,43 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 | ---------- | -------------------------------------------------------------------------------------------- |
 | `zsh`      | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here       |
 | `fish`     | Friendly interactive shell config with `conf.d` hooks for atuin and toolchain env setup      |
-| `nushell`  | Nu shell config for when you want structured data pipelines instead of text streams          |
 | `starship` | Cross-shell prompt that shows only what's relevant: git state, language versions, exit codes |
 | `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           |
 
 ### Editor & Terminal
 
-| Config    | What it does                                                                                 |
-| --------- | -------------------------------------------------------------------------------------------- |
-| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl              |
-| `zed`     | Fast native editor for when you want to stay out of the terminal                             |
-| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                         |
-| `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar |
-| `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach |
-| `zellij`  | Multiplexer alternative with named layouts: `desktop`, `laptop`, `devops`, `dual-agent`, `my-default` |
+| Config           | What it does                                                                                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `nvim + lazyvim` | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      |
+| `ghostty`        | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 |
+| `tmux`           | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar |
+| `sesh`           | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         |
+| `zed`            | Fast native editor for when you want to stay out of the terminal                                                                                                     |
 
 ### TUI Tools
 
 | Config       | What it does                                                                               |
 | ------------ | ------------------------------------------------------------------------------------------ |
 | `lazygit`    | Git operations without memorizing flags — branches, rebases, and diffs in a single view    |
-| `lazydocker` | Container and image management TUI that replaces most `docker` invocations                 |
+| `hunk`       | Patch review and staging TUI, great for checking diffs                                     |
+| `herdr`      | Your coding agents from one terminal                                                       |
 | `k9s`        | Kubernetes cluster management from the terminal; essential when `kubectl get` isn't enough |
 | `yazi`       | Terminal file manager with previews, bulk operations, and plugin support                   |
+| `lazydocker` | Container and image management TUI that replaces most `docker` invocations                 |
 | `television` | Fuzzy finder built for speed — a ripgrep-powered `fzf` alternative                         |
-| `hunk`       | Patch review and staging TUI                                                               |
 
 ### System & Productivity
 
-| Config      | What it does                                                                                         |
-| ----------- | ---------------------------------------------------------------------------------------------------- |
-| `karabiner` | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       |
-| `mise`      | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` |
-| `bat`       | `cat` with syntax highlighting, line numbers, and git diff markers                                   |
-| `btop`      | System monitor with a layout that actually uses your terminal width                                  |
-| `gh`        | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         |
-| `gh-dash`   | Dashboard TUI for `gh` — all your open PRs and issues in one view                                    |
-| `raycast`   | Launcher extensions and scripts                                                                      |
-| `sqruff`    | SQL linter and formatter config                                                                      |
-| `bucky`     | Local configuration for this setup's custom tooling                                                  |
+| Config                                         | What it does                                                                                         |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `karabiner`                                    | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       |
+| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` |
+| `bat`                                          | `cat` with syntax highlighting, line numbers, and git diff markers                                   |
+| `btop`                                         | System monitor with a layout that actually uses your terminal width                                  |
+| `gh`                                           | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         |
+| `gh-dash`                                      | Dashboard TUI for `gh` — all your open PRs and issues in one view                                    |
+| `sqruff`                                       | SQL linter and formatter config                                                                      |
+| [`bucky`](https://github.com/mrpbennett/bucky) | A personal S3/FTP TUI for managing object storage                                                    |
 
 ---
 
@@ -108,19 +106,10 @@ Installs Homebrew if needed, then runs `brew bundle` against `.local/install/Bre
 
 Before stowing, back up any existing configs that would conflict. Stow refuses to overwrite real files — it errors rather than silently clobbering:
 
-```sh
-cd ~/.config
-for dir in atuin bat btop bucky fish gh gh-dash ghostty hunk k9s karabiner \
-           lazydocker lazygit mise nushell nvim raycast sesh sqruff starship \
-           television tmux yazi zed zellij; do
-  [ -d "$dir" ] && mv "$dir" "${dir}.bak"
-done
-```
-
 Then create the symlinks:
 
 ```sh
-cd ~/Developer/personal/dootfiles
+cd ~/Developer/personal/dotfiles
 stow --target="$HOME" .
 ```
 
@@ -183,7 +172,7 @@ stow -nv --target="$HOME" .
 Move the existing config into the repo, then restow:
 
 ```sh
-mv ~/.config/newapp ~/Developer/personal/dootfiles/.config/newapp
+mv ~/.config/newapp ~/Developer/personal/dotfiles/.config/newapp
 cd ~/Developer/personal/dootfiles
 stow --restow --target="$HOME" .
 ```
@@ -194,7 +183,7 @@ Then commit the new directory. The symlink is live immediately — no restart ne
 
 ```sh
 # Remove from repo
-rm -rf ~/Developer/personal/dootfiles/.config/oldapp
+rm -rf ~/Developer/personal/dotfiles/.config/oldapp
 
 # Clean up the now-dead symlink
 stow --restow --target="$HOME" .
