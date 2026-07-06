@@ -20,4 +20,5 @@ alias us="uv sync"
 alias ur="uv run $1"
 
 # AI ---
+alias hrc="herdr server reload-config"
 alias oc="opencode"

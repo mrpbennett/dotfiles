@@ -38,6 +38,7 @@ brew "resvg"
 # Terminal / multiplexers
 brew "sesh"
 brew "tmux"
+brew "herdr"
 
 # TUI apps
 brew "television"

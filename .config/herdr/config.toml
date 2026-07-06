@@ -8,6 +8,15 @@ light_name = "catppuccin-latte"
 dark_name = "catppuccin"
 
 
+# Mirror my tmux key bindings
 [keys]
 prefix = "ctrl+s"
-split_vertical = "prefix+|"
+
+split_vertical = "prefix+|" # split window right
+new_tab = "prefix+t"        # new tab with <prefix>
+
+rename_tab = "prefix+r"        # rename tab
+resize_mode = "prefix+shift+r" # resize mode
+
+[ui.toast]
+delivery = "herdr"
