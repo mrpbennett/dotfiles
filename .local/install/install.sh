@@ -35,3 +35,6 @@ curl https://mise.run | sh
 # Same issue as brew: the installer doesn't update PATH for this session.
 export PATH="$HOME/.local/bin:$PATH"
 mise install
+
+# Install TMP (tmux plugin manager)
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

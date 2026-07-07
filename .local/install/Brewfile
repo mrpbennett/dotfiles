@@ -44,9 +44,8 @@ brew "herdr"
 brew "television"
 brew "yazi"
 
-# From taps
-brew "derailed/k9s/k9s"
-brew "modem-dev/tap/hunk"
+brew "k9s"
+brew "hunk"
 
 # Postgres client (standalone, no server)
 brew "libpq"
