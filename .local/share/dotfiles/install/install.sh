@@ -24,12 +24,15 @@ brew bundle --file="$BREWFILE"
 # there and stow would later refuse to symlink ours over it. Symlinking first
 # + KEEP_ZSHRC=yes below makes oh-my-zsh see our .zshrc already in place and
 # leave it alone.
+echo "Now running STOW to generate symlinks..."
 stow --dir="$REPO_ROOT" --target="$HOME" .
 
 # Install XCode Command Line Tools
+echo "Installing Command Line Tools..."
 source "$SCRIPT_DIR/cmd-line-tools.sh"
 
 # Install oh-my-zsh
+echo "Installing oh-my-zsh with plugings..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
@@ -39,10 +42,13 @@ fi
 [ -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # Install mise packages
+echo "Installing mise packages..."
 mise install
 
 # Install TMP (tmux plugin manager)
+echo "Installing TMP..."
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
 # Setup MacOS the way I like it.
+echo "Setting up MacOS how I like it, will require a reboot..."
 source "$SCRIPT_DIR/macos/defaults.sh"
