@@ -1,17 +1,48 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
---
-vim.keymap.set("i", "jk", "<Esc>", { noremap = false })
+local map = vim.keymap.set
 
--- TIP: Disable arrow keys in normal mode
-vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+-- ============================================================================
+-- Normal Mode
+-- ============================================================================
+-- Disable arrow keys in normal mode
+map("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
+map("n", "<right>", '<cmd>echo "Use l to move!!"<CR>')
+map("n", "<up>", '<cmd>echo "Use k to move!!"<CR>')
+map("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
+
+-- ============================================================================
+-- Insert Mode
+-- ============================================================================
+
+-- Exit insert mode with jk
+map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+
+-- ============================================================================
+-- Visual Mode
+-- ============================================================================
+
+-- Copy to system clipboard with Cmd+C (without affecting yank register)
+map("v", "<D-c>", function()
+  local saved_reg = vim.fn.getreg('"')
+  local saved_regtype = vim.fn.getregtype('"')
+  vim.cmd('silent normal! "+ygv')
+  vim.fn.setreg('"', saved_reg, saved_regtype)
+end, { desc = "Copy to system clipboard" })
+
+-- ============================================================================
+-- Terminal Mode
+-- ============================================================================
+
+-- Exit terminal mode with double Escape
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- ============================================================================
+-- TUI Tooling
+-- ============================================================================
 
 -- Pop a terminal window with K9s
 if vim.fn.executable("k9s") == 1 then
-  vim.keymap.set("n", "<leader>tk", function()
+  map("n", "<leader>tk", function()
     Snacks.terminal("k9s")
   end, { desc = "K9s (Kubernetes)" })
 
@@ -23,11 +54,11 @@ end
 
 -- Pop a terminal window with Hunk
 if vim.fn.executable("hunk") == 1 then
-  vim.keymap.set("n", "<leader>thd", function()
+  map("n", "<leader>thd", function()
     Snacks.terminal("hunk diff")
   end, { desc = "Hunk Diff" })
 
-  vim.keymap.set("n", "<leader>ths", function()
+  map("n", "<leader>ths", function()
     Snacks.terminal("hunk show")
   end, { desc = "Hunk Show" })
 
@@ -39,7 +70,7 @@ end
 
 -- Pop a terminal window with LazyDocker
 if vim.fn.executable("lazydocker") == 1 then
-  vim.keymap.set("n", "<leader>td", function()
+  map("n", "<leader>td", function()
     Snacks.terminal("lazydocker")
   end, { desc = "LazyDocker" })
 
@@ -51,7 +82,7 @@ end
 
 -- Pop a terminal window with Bucky
 if vim.fn.executable("bucky") == 1 then
-  vim.keymap.set("n", "<leader>tb", function()
+  map("n", "<leader>tb", function()
     Snacks.terminal("bucky")
   end, { desc = "Bucky" })
 
@@ -63,7 +94,7 @@ end
 
 -- Pop GH-Dash window
 if vim.fn.executable("gh-dash") == 1 then
-  vim.keymap.set("n", "<leader>tg", function()
+  map("n", "<leader>tg", function()
     Snacks.terminal("gh-dash")
   end, { desc = "GH-Dash" })
 

@@ -97,7 +97,7 @@ git clone <repo-url> ~/Developer/personal/dotfiles
 ### 1. Install packages
 
 ```sh
-~/Developer/personal/dotfiles/.local/install/brew.sh
+~/Developer/personal/dotfiles/.local/install/.sh
 ```
 
 Installs Homebrew if needed, then runs `brew bundle` against `.local/install/Brewfile` to restore all formulae and casks.
