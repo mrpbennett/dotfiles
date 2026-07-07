@@ -21,6 +21,9 @@ brew bundle --file="$BREWFILE"
 # leave it alone.
 stow --dir="$REPO_ROOT" --target="$HOME" .
 
+# Install XCode Command Line Tools
+source "$SCRIPT_DIR/cmd-line-tools.sh"
+
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
