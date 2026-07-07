@@ -9,15 +9,15 @@ gomod() {
 }
 
 # POETRY ---
-alias pa="poetry add $1"
-alias pr="poetry run python $1"
+alias pa="poetry add"
+alias pr="poetry run python"
 alias pin="poetry install"
 
 # UV ---
 alias ui="uv init"
-alias ua="uv add $1"
+alias ua="uv add"
 alias us="uv sync"
-alias ur="uv run $1"
+alias ur="uv run"
 
 # AI ---
 alias hrc="herdr server reload-config"

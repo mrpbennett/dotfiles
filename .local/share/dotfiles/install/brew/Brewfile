@@ -32,6 +32,7 @@ brew "worktrunk"
 brew "lazydocker"
 brew "k9s"
 brew "hunk"
+brew "mise"
 
 # Media
 brew "ffmpeg-full"

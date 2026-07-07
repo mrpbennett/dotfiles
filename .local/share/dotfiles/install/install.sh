@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install Homebrew if not found
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
+
+# Homebrew is required for the managed install flow.
 if ! command -v brew &>/dev/null; then
-  echo "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # The installer only prints the shellenv line for you to run later; without
-  # this, the brew bundle call below fails with "command not found" here.
-  BREW_BIN=/opt/homebrew/bin/brew
-  [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
-  eval "$("$BREW_BIN" shellenv)"
+  echo "Homebrew is required but was not found. Install it first: https://brew.sh"
+  exit 1
 fi
 
-BREWFILE="$(dirname "$0")/brew/Brewfile"
+BREWFILE="$SCRIPT_DIR/brew/Brewfile"
 echo "Installing packages from $BREWFILE..."
 brew bundle --file="$BREWFILE"
 
@@ -21,25 +19,22 @@ brew bundle --file="$BREWFILE"
 # there and stow would later refuse to symlink ours over it. Symlinking first
 # + KEEP_ZSHRC=yes below makes oh-my-zsh see our .zshrc already in place and
 # leave it alone.
-stow --target="$HOME" .
+stow --dir="$REPO_ROOT" --target="$HOME" .
 
 # Install oh-my-zsh
-KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+fi
 
 # Install oh-my-zsh plugins
 [ -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 [ -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# Install Starship prompt
-curl -sS https://starship.rs/install.sh | sh
-
-# Install mise and install mise packages
-curl https://mise.run | sh
-export PATH="$HOME/.local/bin:$PATH"
+# Install mise packages
 mise install
 
 # Install TMP (tmux plugin manager)
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+[ -d "$HOME/.tmux/plugins/tpm" ] || git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
 # Setup MacOS the way I like it.
-source $(dirname "$0")/macos/defaults.sh
+source "$SCRIPT_DIR/macos/defaults.sh"

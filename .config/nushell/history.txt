@@ -1,9 +1,0 @@
-ls
-ls a
-lsa
-ip a
-git status
-clear
-ls
-k get nodes
-kubectl get nodes

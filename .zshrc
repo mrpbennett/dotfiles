@@ -31,15 +31,15 @@ if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)
 . "$HOME/.atuin/bin/env"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/pbennett/.docker/completions $fpath)
+fpath=("$HOME/.docker/completions" $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-source ~/.local/share/dotfiles/shell/rc.sh
+source ~/.local/share/dotfiles/default/shell/rc.sh
 
 # Pi
-export PATH="/Users/pbennett/.local/share/mise/installs/node/26.4.0/bin:$PATH"
+export PATH="$HOME/.local/share/mise/installs/node/26.4.0/bin:$PATH"
 
 # opencode
-export PATH=/Users/pbennett/.opencode/bin:$PATH
+export PATH="$HOME/.opencode/bin:$PATH"

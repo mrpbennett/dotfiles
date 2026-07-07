@@ -10,7 +10,7 @@ set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx LANG en_US.UTF-8
 set -gx EDITOR /opt/homebrew/bin/nvim
 set -gx POETRY_VIRTUALENVS_IN_PROJECT true
-fish_add_path /Users/paul/.opencode/bin
+fish_add_path "$HOME/.opencode/bin"
 fish_add_path /opt/homebrew/opt/libpq/bin
 fish_add_path "$HOME/.local/bin"
 

@@ -22,5 +22,3 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 
 source "~/.cargo/env.nu"
 
-# Load in shell files
-source "~/.local/share/dotfiles/shell/rc.sh"

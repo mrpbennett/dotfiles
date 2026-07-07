@@ -32,7 +32,7 @@
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
 
-`.local/share/dotfiles/setup/` holds machine bootstrap scripts — notably `install.sh` and the curated `Brewfile` that restores all Homebrew formulae and casks on a fresh machine.
+`.local/share/dotfiles/install/` holds machine bootstrap scripts (install flow, Brewfile, and macOS defaults), while `.local/share/dotfiles/default/` contains shared shell modules.
 
 ### Color Scheme
 
@@ -88,7 +88,7 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 
 ## Fresh machine setup
 
-**Prerequisites:** Homebrew — `brew.sh` will install it if missing.
+**Prerequisites:** Homebrew must already be installed.
 
 ```sh
 git clone <repo-url> ~/Developer/personal/dotfiles
@@ -97,10 +97,10 @@ git clone <repo-url> ~/Developer/personal/dotfiles
 ### 1. Install packages
 
 ```sh
-~/Developer/personal/dotfiles/.local/share/dotfiles/setup/install.sh
+~/Developer/personal/dotfiles/.local/share/dotfiles/install/install.sh
 ```
 
-Installs Homebrew if needed, then runs `brew bundle` against `.local/share/dotfiles/setup/brew/Brewfile` to restore all formulae and casks.
+Runs `brew bundle` against `.local/share/dotfiles/install/brew/Brewfile` to restore all formulae and casks, then installs shell/runtime extras.
 
 ### 2. Symlink configs
 
@@ -173,7 +173,7 @@ Move the existing config into the repo, then restow:
 
 ```sh
 mv ~/.config/newapp ~/Developer/personal/dotfiles/.config/newapp
-cd ~/Developer/personal/dootfiles
+cd ~/Developer/personal/dotfiles
 stow --restow --target="$HOME" .
 ```
 
