@@ -4,10 +4,15 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
 
-# Homebrew is required for the managed install flow.
+# Install Homebrew if not found
 if ! command -v brew &>/dev/null; then
-  echo "Homebrew is required but was not found. Install it first: https://brew.sh"
-  exit 1
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # The installer only prints the shellenv line for you to run later; without
+  # this, the brew bundle call below fails with "command not found" here.
+  BREW_BIN=/opt/homebrew/bin/brew
+  [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
+  eval "$("$BREW_BIN" shellenv)"
 fi
 
 BREWFILE="$SCRIPT_DIR/brew/Brewfile"
