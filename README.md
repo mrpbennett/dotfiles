@@ -32,7 +32,7 @@
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
 
-`.local/install/` holds machine bootstrap scripts — notably `brew.sh` and the curated `Brewfile` that restores all Homebrew formulae and casks on a fresh machine.
+`.local/share/dotfiles/setup/` holds machine bootstrap scripts — notably `install.sh` and the curated `Brewfile` that restores all Homebrew formulae and casks on a fresh machine.
 
 ### Color Scheme
 
@@ -97,10 +97,10 @@ git clone <repo-url> ~/Developer/personal/dotfiles
 ### 1. Install packages
 
 ```sh
-~/Developer/personal/dotfiles/.local/install/.sh
+~/Developer/personal/dotfiles/.local/share/dotfiles/setup/install.sh
 ```
 
-Installs Homebrew if needed, then runs `brew bundle` against `.local/install/Brewfile` to restore all formulae and casks.
+Installs Homebrew if needed, then runs `brew bundle` against `.local/share/dotfiles/setup/brew/Brewfile` to restore all formulae and casks.
 
 ### 2. Symlink configs
 

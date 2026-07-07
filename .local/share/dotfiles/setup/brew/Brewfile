@@ -1,5 +1,6 @@
 
 # CLI tools
+brew "atuin"
 brew "bat"
 brew "btop"
 brew "carapace"
@@ -16,9 +17,10 @@ brew "tree"
 brew "wget"
 brew "zoxide"
 
-# Shells
+# Shells & Prompts
 brew "fish"
 brew "nushell"
+brew "starship"
 
 # Dev tools
 brew "gh"
@@ -28,6 +30,8 @@ brew "sqruff"
 brew "vercel-cli"
 brew "worktrunk"
 brew "lazydocker"
+brew "k9s"
+brew "hunk"
 
 # Media
 brew "ffmpeg-full"
@@ -35,7 +39,7 @@ brew "imagemagick-full"
 brew "poppler"
 brew "resvg"
 
-# Terminal / multiplexers
+# Multiplexers
 brew "sesh"
 brew "tmux"
 brew "herdr"
@@ -43,9 +47,6 @@ brew "herdr"
 # TUI apps
 brew "television"
 brew "yazi"
-
-brew "k9s"
-brew "hunk"
 
 # Postgres client (standalone, no server)
 brew "libpq"

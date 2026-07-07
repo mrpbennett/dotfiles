@@ -12,7 +12,7 @@ if ! command -v brew &>/dev/null; then
   eval "$("$BREW_BIN" shellenv)"
 fi
 
-BREWFILE="$(dirname "$0")/Brewfile"
+BREWFILE="$(dirname "$0")/brew/Brewfile"
 echo "Installing packages from $BREWFILE..."
 brew bundle --file="$BREWFILE"
 
@@ -30,11 +30,16 @@ KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohm
 [ -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 [ -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# Install Starship prompt
+curl -sS https://starship.rs/install.sh | sh
+
 # Install mise and install mise packages
 curl https://mise.run | sh
-# Same issue as brew: the installer doesn't update PATH for this session.
 export PATH="$HOME/.local/bin:$PATH"
 mise install
 
 # Install TMP (tmux plugin manager)
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Setup MacOS the way I like it.
+source $(dirname "$0")/macos/defaults.sh

@@ -1,0 +1,419 @@
+"  ___     _          __   ___
+" |_ _|__| | ___  __ \ \ / (_)_ __ ___
+"  | |/ _` |/ _ \/ _` \ V /| | '_ ` _ \
+"  | | (_| |  __/ (_| || | | | | | | | |
+" |___\__,_|\___|\__,_||_| |_|_| |_| |_|
+"
+" LazyVim-inspired .ideavimrc for IntelliJ IDEA
+" ================================================
+
+" ─────────────────────────────────────────────────
+"  PLUGINS
+" ─────────────────────────────────────────────────
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'kana/vim-textobj-entire'
+Plug 'machakann/vim-highlightedyank'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'preservim/nerdtree'
+
+" ─────────────────────────────────────────────────
+"  SETTINGS
+" ─────────────────────────────────────────────────
+set scrolloff=8
+set sidescrolloff=8
+set number
+set relativenumber
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set showmode
+set showcmd
+set visualbell
+set clipboard=unnamedplus        " sync with system clipboard
+set ideajoin                     " use IntelliJ's smart join (J)
+set ideamarks                    " sync marks with IDE bookmarks
+set ideastatusicon=gray
+set idearefactormode=keep        " keep visual mode after refactor
+set iskeyword+=-                 " treat hyphenated words as one word
+set notimeout
+
+" ─────────────────────────────────────────────────
+"  LEADER
+" ─────────────────────────────────────────────────
+let mapleader = " "
+let maplocalleader = "\\"
+
+" ─────────────────────────────────────────────────
+"  WHICH-KEY DESCRIPTIONS
+" ─────────────────────────────────────────────────
+let g:WhichKey_ShowVimActions = "true"
+let g:WhichKeyDesc_leader            = "<leader>  Leader"
+
+let g:WhichKeyDesc_find              = "<leader>f  Find"
+let g:WhichKeyDesc_find_files        = "<leader>ff  Find Files"
+let g:WhichKeyDesc_find_recent       = "<leader>fr  Recent Files"
+let g:WhichKeyDesc_find_text         = "<leader>fg  Live Grep"
+let g:WhichKeyDesc_find_symbol       = "<leader>fs  Find Symbol"
+let g:WhichKeyDesc_find_action       = "<leader>fa  Find Action"
+
+let g:WhichKeyDesc_buffer            = "<leader>b  Buffer"
+let g:WhichKeyDesc_buffer_list       = "<leader>bb  Switch Buffer"
+let g:WhichKeyDesc_buffer_delete     = "<leader>bd  Close Buffer"
+let g:WhichKeyDesc_buffer_prev       = "<leader>bp  Previous Buffer"
+let g:WhichKeyDesc_buffer_next       = "<leader>bn  Next Buffer"
+
+let g:WhichKeyDesc_code              = "<leader>c  Code"
+let g:WhichKeyDesc_code_action       = "<leader>ca  Code Action"
+let g:WhichKeyDesc_code_rename       = "<leader>cr  Rename"
+let g:WhichKeyDesc_code_format       = "<leader>cf  Format"
+let g:WhichKeyDesc_code_fix          = "<leader>cq  Quickfix"
+let g:WhichKeyDesc_code_generate     = "<leader>cg  Generate"
+
+let g:WhichKeyDesc_goto              = "<leader>g  Go To / Git"
+let g:WhichKeyDesc_goto_def          = "<leader>gd  Go to Definition"
+let g:WhichKeyDesc_goto_ref          = "<leader>gr  Go to References"
+let g:WhichKeyDesc_goto_impl         = "<leader>gi  Go to Implementation"
+let g:WhichKeyDesc_goto_type         = "<leader>gt  Go to Type Definition"
+let g:WhichKeyDesc_goto_prev_change  = "<leader>g[  Previous Change"
+let g:WhichKeyDesc_goto_next_change  = "<leader>g]  Next Change"
+
+let g:WhichKeyDesc_lsp               = "<leader>l  LSP / Errors"
+let g:WhichKeyDesc_lsp_next          = "<leader>ln  Next Error"
+let g:WhichKeyDesc_lsp_prev          = "<leader>lp  Previous Error"
+let g:WhichKeyDesc_lsp_list          = "<leader>ll  Show Error List"
+let g:WhichKeyDesc_lsp_hover         = "<leader>lk  Hover Doc"
+
+let g:WhichKeyDesc_run               = "<leader>r  Run / Debug"
+let g:WhichKeyDesc_run_run           = "<leader>rr  Run"
+let g:WhichKeyDesc_run_debug         = "<leader>rd  Debug"
+let g:WhichKeyDesc_run_test          = "<leader>rt  Run Tests"
+let g:WhichKeyDesc_run_stop          = "<leader>rs  Stop"
+let g:WhichKeyDesc_run_coverage      = "<leader>rc  Run with Coverage"
+
+let g:WhichKeyDesc_toggle            = "<leader>u  Toggle UI"
+let g:WhichKeyDesc_toggle_tree       = "<leader>ue  Explorer"
+let g:WhichKeyDesc_toggle_terminal   = "<leader>ut  Terminal"
+let g:WhichKeyDesc_toggle_zen        = "<leader>uz  Zen Mode"
+let g:WhichKeyDesc_toggle_wrap       = "<leader>uw  Word Wrap"
+let g:WhichKeyDesc_toggle_inlay      = "<leader>ui  Inlay Hints"
+let g:WhichKeyDesc_toggle_breakpoint = "<leader>ub  Breakpoint"
+
+let g:WhichKeyDesc_window            = "<leader>w  Window"
+let g:WhichKeyDesc_window_split_v    = "<leader>wv  Split Vertical"
+let g:WhichKeyDesc_window_split_h    = "<leader>wh  Split Horizontal"
+let g:WhichKeyDesc_window_close      = "<leader>wc  Close Split"
+let g:WhichKeyDesc_window_max        = "<leader>wm  Maximise"
+
+let g:WhichKeyDesc_quit              = "<leader>q  Quit"
+let g:WhichKeyDesc_quit_quit         = "<leader>qq  Quit / Close All"
+
+" ─────────────────────────────────────────────────
+"  EDITOR NAVIGATION (LSP-style)
+" ─────────────────────────────────────────────────
+" Go to definition / references / implementations
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gr <Action>(FindUsages)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gt <Action>(GotoTypeDeclaration)
+nmap <leader>gs <Action>(GotoSuperMethod)
+nmap <leader>gh <Action>(CallHierarchy)
+
+" Quick peek (without leaving current file)
+nmap gd <Action>(GotoDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gr <Action>(FindUsages)
+nmap gI <Action>(QuickImplementations)
+nmap gK <Action>(QuickJavaDoc)
+nmap gy <Action>(GotoTypeDeclaration)
+
+" ─────────────────────────────────────────────────
+"  DIAGNOSTICS / ERRORS
+" ─────────────────────────────────────────────────
+nmap <leader>ln <Action>(GotoNextError)
+nmap <leader>lp <Action>(GotoPreviousError)
+nmap <leader>ll <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>lk <Action>(QuickJavaDoc)
+nmap ]d        <Action>(GotoNextError)
+nmap [d        <Action>(GotoPreviousError)
+
+" ─────────────────────────────────────────────────
+"  CODE ACTIONS
+" ─────────────────────────────────────────────────
+nmap <leader>ca <Action>(ShowIntentionActions)
+nmap <leader>cr <Action>(RenameElement)
+nmap <leader>cf <Action>(ReformatCode)
+nmap <leader>cq <Action>(QuickFixAll)
+nmap <leader>cg <Action>(Generate)
+nmap <leader>co <Action>(OptimizeImports)
+nmap <leader>ci <Action>(InspectCode)
+
+" ─────────────────────────────────────────────────
+"  FIND / SEARCH (Telescope-equivalent)
+" ─────────────────────────────────────────────────
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fr <Action>(RecentFiles)
+nmap <leader>fg <Action>(FindInPath)
+nmap <leader>fs <Action>(GotoSymbol)
+nmap <leader>fa <Action>(GotoAction)
+nmap <leader>fc <Action>(GotoClass)
+nmap <leader>fb <Action>(Switcher)
+nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>, <Action>(Switcher)
+
+" ─────────────────────────────────────────────────
+"  BUFFER / TAB MANAGEMENT
+" ─────────────────────────────────────────────────
+nmap <leader>bb <Action>(Switcher)
+nmap <leader>bd <Action>(CloseContent)
+nmap <leader>bD <Action>(CloseAllEditors)
+nmap <leader>bn <Action>(NextTab)
+nmap <leader>bp <Action>(PreviousTab)
+nmap <leader>bo <Action>(CloseAllEditorsButActive)
+nmap [b         <Action>(PreviousTab)
+nmap ]b         <Action>(NextTab)
+
+" ─────────────────────────────────────────────────
+"  WINDOW MANAGEMENT
+" ─────────────────────────────────────────────────
+nmap <leader>wv <Action>(SplitVertically)
+nmap <leader>wh <Action>(SplitHorizontally)
+nmap <leader>wc <Action>(Unsplit)
+nmap <leader>wm <Action>(MaximizeEditorInSplit)
+nmap <leader>wo <Action>(UnsplitAll)
+nmap <leader>ww <C-w>w
+
+" Move between splits (LazyVim uses <C-hjkl>)
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <C-k> <C-w>k
+nmap <C-j> <C-w>j
+
+" ─────────────────────────────────────────────────
+"  RUN & DEBUG
+" ─────────────────────────────────────────────────
+nmap <leader>rr <Action>(Run)
+nmap <leader>rd <Action>(Debug)
+nmap <leader>rt <Action>(RunTests)
+nmap <leader>rT <Action>(RunClass)
+nmap <leader>rs <Action>(Stop)
+nmap <leader>rc <Action>(RunWithCoverage)
+
+" Breakpoints
+nmap <leader>ub <Action>(ToggleLineBreakpoint)
+nmap <leader>uB <Action>(ViewBreakpoints)
+
+" Step through debug
+nmap <F5>  <Action>(Resume)
+nmap <F10> <Action>(StepOver)
+nmap <F11> <Action>(StepInto)
+nmap <F12> <Action>(StepOut)
+
+" ─────────────────────────────────────────────────
+"  GIT
+" ─────────────────────────────────────────────────
+nmap <leader>gg <Action>(ActivateVersionControlToolWindow)
+nmap <leader>gb <Action>(Annotate)
+nmap <leader>gB <Action>(Git.Branches)
+nmap <leader>gc <Action>(CheckinProject)
+nmap <leader>gf <Action>(Git.Fetch)
+nmap <leader>gp <Action>(Git.Pull)
+nmap <leader>gP <Action>(Git.Push)
+nmap <leader>gl <Action>(Git.Log)
+nmap <leader>gL <Action>(Git.Log.File)
+nmap <leader>gr <Action>(Git.ResolveConflicts)
+nmap ]g        <Action>(VcsShowNextChangeMarker)
+nmap [g        <Action>(VcsShowPrevChangeMarker)
+nmap <leader>g] <Action>(VcsShowNextChangeMarker)
+nmap <leader>g[ <Action>(VcsShowPrevChangeMarker)
+nmap <leader>gd <Action>(Compare.LastVersion)
+nmap <leader>gu <Action>(Vcs.RollbackChangedLines)
+
+" ─────────────────────────────────────────────────
+"  TOGGLE UI (LazyVim <leader>u)
+" ─────────────────────────────────────────────────
+nmap <leader>ue <Action>(ActivateProjectToolWindow)
+nmap <leader>ut <Action>(ActivateTerminalToolWindow)
+nmap <leader>uz <Action>(ToggleDistractionFreeMode)
+nmap <leader>uZ <Action>(TogglePresentationMode)
+nmap <leader>uw <Action>(EditorToggleUseSoftWraps)
+nmap <leader>ui <Action>(EditorToggleShowWhitespaces)
+nmap <leader>uh <Action>(LocalHistory.ShowHistory)
+nmap <leader>up <Action>(TogglePinnedMode)
+nmap <leader>us <Action>(ChangeView)
+
+" ─────────────────────────────────────────────────
+"  REFACTORING
+" ─────────────────────────────────────────────────
+nmap <leader>rm <Action>(ExtractMethod)
+nmap <leader>rv <Action>(IntroduceVariable)
+nmap <leader>rc <Action>(IntroduceConstant)
+nmap <leader>rp <Action>(IntroduceParameter)
+nmap <leader>ri <Action>(Inline)
+nmap <leader>rf <Action>(MoveRefactoring)
+nmap <leader>rs <Action>(ChangeSignature)
+
+" ─────────────────────────────────────────────────
+"  FOLDING
+" ─────────────────────────────────────────────────
+nmap zo <Action>(ExpandRegion)
+nmap zO <Action>(ExpandAllRegions)
+nmap zc <Action>(CollapseRegion)
+nmap zC <Action>(CollapseAllRegions)
+nmap za <Action>(CollapseRegionRecursively)
+nmap zm <Action>(CollapseAllRegions)
+nmap zr <Action>(ExpandAllRegions)
+nmap zR <Action>(ExpandAllRegions)
+
+" ─────────────────────────────────────────────────
+"  HARPOON-STYLE BOOKMARKS
+" ─────────────────────────────────────────────────
+nmap <leader>ma <Action>(ToggleBookmark)
+nmap <leader>ml <Action>(ShowBookmarks)
+nmap <leader>mn <Action>(GotoNextBookmark)
+nmap <leader>mp <Action>(GotoPreviousBookmark)
+
+" ─────────────────────────────────────────────────
+"  QUIT
+" ─────────────────────────────────────────────────
+nmap <leader>qq <Action>(CloseProject)
+nmap <leader>qa <Action>(Exit)
+
+" ─────────────────────────────────────────────────
+"  EDITOR QUALITY-OF-LIFE
+" ─────────────────────────────────────────────────
+" Better up/down on wrapped lines
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
+
+" Move lines (LazyVim: <A-j> / <A-k>)
+nmap <A-j> <Action>(MoveLineDown)
+nmap <A-k> <Action>(MoveLineUp)
+vmap <A-j> <Action>(MoveLineDown)
+vmap <A-k> <Action>(MoveLineUp)
+
+" Indentation: stay in visual mode
+vmap < <gv
+vmap > >gv
+
+" Clear search highlight
+nmap <Esc> :nohlsearch<CR>
+
+" Select all
+nmap <C-a> ggVG
+
+" Save
+nmap <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>a
+
+" Duplicate line
+nmap <leader>d yyp
+vmap <leader>d yP
+
+" Join lines without space
+nmap J mzJ`z
+
+" Keep cursor centred when jumping
+nmap <C-d> <C-d>zz
+nmap <C-u> <C-u>zz
+nmap n nzzzv
+nmap N Nzzzv
+
+" Paste without yanking selection
+vmap p "_dP
+
+" Delete without yanking to clipboard
+nmap <leader>x "_x
+nmap <leader>X "_dd
+vmap <leader>x "_d
+
+" Undo / redo
+nmap U <C-r>
+
+" Navigate between methods
+nmap ]m <Action>(MethodDown)
+nmap [m <Action>(MethodUp)
+
+" Parameter info on insert
+imap <C-k> <Action>(ParameterInfo)
+
+" Quick surround word
+nmap <leader>s" ciw""<Esc>P
+nmap <leader>s' ciw''<Esc>P
+
+" ─────────────────────────────────────────────────
+"  MULTIPLE CURSORS (vim-multiple-cursors)
+" ─────────────────────────────────────────────────
+nmap <C-n>    <Plug>NextWholeOccurrence
+xmap <C-n>    <Plug>NextWholeOccurrence
+nmap g<C-n>   <Plug>NextOccurrence
+xmap g<C-n>   <Plug>NextOccurrence
+xmap <C-x>    <Plug>SkipOccurrence
+xmap <C-p>    <Plug>RemoveOccurrence
+
+" ─────────────────────────────────────────────────
+"  TEXT OBJECTS (via plugins)
+" ─────────────────────────────────────────────────
+" vim-indent-object:  vii / vai / vaI
+" argtextobj:         via / cia / dia (function args)
+" vim-textobj-entire: vae / vie (entire buffer)
+" vim-surround:       cs"' ds" ysiw" etc.
+
+" ─────────────────────────────────────────────────
+"  HIGHLIGHTED YANK
+" ─────────────────────────────────────────────────
+let g:highlightedyank_highlight_duration = 150
+
+" ─────────────────────────────────────────────────
+"  NERDTree
+" ─────────────────────────────────────────────────
+nmap <leader>e :NERDTreeToggle<CR>
+let g:NERDTreeMapActivateNode = 'l'
+let g:NERDTreeMapCloseDir     = 'h'
+let g:NERDTreeMapUpdir        = 'H'
+
+" ─────────────────────────────────────────────────
+"  COMMAND MODE SHORTCUTS
+" ─────────────────────────────────────────────────
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+" ─────────────────────────────────────────────────
+"  INSERT MODE SHORTCUTS (Emacs-lite)
+" ─────────────────────────────────────────────────
+imap <C-a> <Home>
+imap <C-e> <End>
+imap <C-b> <Left>
+imap <C-f> <Right>
+
+" ─────────────────────────────────────────────────
+"  HANDLER OVERRIDES
+"  Tell IdeaVim to own certain keys instead of IDE
+" ─────────────────────────────────────────────────
+sethandler <C-a> a:vim
+sethandler <C-b> a:vim
+sethandler <C-c> a:ide
+sethandler <C-d> a:vim
+sethandler <C-e> a:vim
+sethandler <C-f> a:vim
+sethandler <C-h> a:vim
+sethandler <C-i> a:vim
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+sethandler <C-l> a:vim
+sethandler <C-n> a:vim
+sethandler <C-o> a:vim
+sethandler <C-p> a:vim
+sethandler <C-r> a:vim
+sethandler <C-s> a:vim
+sethandler <C-u> a:vim
+sethandler <C-v> a:ide
+sethandler <C-w> a:vim
+sethandler <C-x> a:ide

@@ -12,4 +12,4 @@ source ~/.local/share/dotfiles/shell/aliases/dev.sh
 source ~/.local/share/dotfiles/shell/fns/tmux/tmux.sh
 
 # Scripts that are not to be commited to repo
-source ~/pulsepoint.sh
+[ -f ~/pulsepoint.sh ] && source ~/pulsepoint.sh
