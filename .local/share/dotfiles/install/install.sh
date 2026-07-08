@@ -27,10 +27,6 @@ brew bundle --file="$BREWFILE"
 echo "Now running STOW to generate symlinks..."
 stow --dir="$REPO_ROOT" --target="$HOME" .
 
-# Install XCode Command Line Tools
-echo "Installing Command Line Tools..."
-source "$SCRIPT_DIR/cmd-line-tools.sh"
-
 # Install oh-my-zsh
 echo "Installing oh-my-zsh with plugings..."
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

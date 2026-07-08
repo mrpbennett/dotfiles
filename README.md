@@ -9,15 +9,21 @@
     <img alt="macOS" src="https://img.shields.io/badge/platform-macOS-000000?style=flat-square&logo=apple&logoColor=white"/>
     <img alt="zsh shell" src="https://img.shields.io/badge/shell-zsh-4FC3F7?style=flat-square"/>
     <img alt="LazyVim" src="https://img.shields.io/badge/editor-LazyVim-7C3AED?style=flat-square"/>
+    <img alt="Catppuccin" src="https://img.shields.io/badge/theme-Catppuccin-F5C2E7?style=flat-square"/>
 </p>
 
 <p align="center">Personal configuration files — symlinked, versioned, and ready to clone.</p>
 
 ---
 
+I live in the terminal. Everything in this repo exists to make that true without friction: one shell config that behaves the same on every machine, one theme that follows macOS between light and dark automatically, and every tool's config tracked in git instead of scattered across `~/.config` and hoped-for memory. It's stowed rather than copied, so editing a config here _is_ editing it live — no sync step, no drift.
+
 ## Table of Contents
 
+- [Philosophy](#philosophy)
 - [What's in here](#whats-in-here)
+- [Directory structure](#directory-structure)
+- [Screenshots / demo](#screenshots--demo)
 - [Fresh machine setup](#fresh-machine-setup)
 - [Stow reference](#stow-reference)
 - [Day-to-day workflows](#day-to-day-workflows)
@@ -28,11 +34,24 @@
 
 ---
 
+## Philosophy
+
+I'd rather run one extra `brew install` than carry a GUI app I can't diff, script, or put in git. A few choices that look arbitrary until you know the reasoning:
+
+- **Ghostty over iTerm2.** iTerm2's config lives in a plist edited through a preferences window with hundreds of panes — it's not diffable and it's not something I can hand to a fresh machine. Ghostty's entire config is one text file, it's GPU-accelerated, and it starts instantly. I lost nothing switching and gained a config I can actually version.
+- **LazyVim over vanilla Neovim.** I want modal editing and an instant-start terminal editor, not a slower VS Code. Hand-rolling LSP, treesitter, and completion wiring from scratch is a hobby in itself — LazyVim gives me sane, well-maintained defaults for all of it, and I only override what I actually disagree with. Less config to maintain, not more.
+- **mise over nvm/pyenv/rbenv.** I was tired of three different tools each doing per-project version shims their own way, with three different config file formats. `mise` is one binary, one `.mise.toml`, and it covers Node, Python, Ruby, and anything else with a runtime plugin. One mental model instead of three.
+- **tmux over Zellij.** I tried Zellij — there's a config still parked in `.config/zellij` from that evaluation — but tmux's plugin ecosystem (session persistence, Catppuccin theming, `sesh` integration) is more mature, and the client-server model means a session survives an SSH drop without a "reconnect" feature bolted on. Familiar keybindings I've had muscle memory for since college didn't hurt either.
+
+> **Nothing here is precious.** If a tool gets replaced, the old config gets deleted, not commented out. Git history is the changelog.
+
+---
+
 ## What's in here
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
 
-`.local/share/dotfiles/install/` holds machine bootstrap scripts (install flow, Brewfile, and macOS defaults), while `.local/share/dotfiles/default/` contains shared shell modules.
+`.local/share/dotfiles/install/` holds machine bootstrap scripts (install flow, Brewfile, and macOS defaults), while `.local/share/dotfiles/default/` contains shared shell modules sourced by both zsh and fish.
 
 ### Color Scheme
 
@@ -40,80 +59,119 @@ All configs live under `.config/` and are symlinked into `~/.config` via GNU Sto
 
 My setup consists of auto theme switching with catppuccin. Latte for light, and Macchiato for dark. For tmux this is done by setting up [hooks](https://github.com/catppuccin/tmux#for-tmux-versions-prior-to-36) and with LazyVim this is done with the plugin [auto-dark-mode](https://github.com/f-person/auto-dark-mode.nvim)
 
+> **Why bother automating this?** Because I switch environments (bright office, dark room) more often than I remember to run a theme command. If it's not automatic, it doesn't happen.
+
 ### Shell
 
-| Config     | What it does                                                                                 |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| `zsh`      | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here       |
-| `fish`     | Friendly interactive shell config with `conf.d` hooks for atuin and toolchain env setup      |
-| `starship` | Cross-shell prompt that shows only what's relevant: git state, language versions, exit codes |
-| `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           |
+| Config     | What it does                                                                                 | Why I use it                                                                                       |
+| ---------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `zsh`      | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here       | It's the macOS default and what most completion scripts target — no reason to fight it             |
+| `fish`     | Friendly interactive shell config with `conf.d` hooks for atuin and toolchain env setup      | Sane defaults out of the box, no config required — good for pairing sessions on someone else's box |
+| `starship` | Cross-shell prompt that shows only what's relevant: git state, language versions, exit codes | One binary and one TOML file renders identically in zsh and fish — I stopped hand-rolling `PROMPT` |
+| `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           | Ctrl+R across every terminal I've ever opened, synced across machines — I stopped losing commands  |
 
 ### Editor & Terminal
 
-| Config           | What it does                                                                                                                                                         |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `nvim + lazyvim` | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      |
-| `ghostty`        | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 |
-| `tmux`           | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar |
-| `sesh`           | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         |
-| `zed`            | Fast native editor for when you want to stay out of the terminal                                                                                                     |
+| Config    | What it does                                                                                                                                                         | Why I use it                                                                                                         |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      | LSP, treesitter, and telescope pre-wired means I spend time editing, not configuring — see [Philosophy](#philosophy) |
+| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 | Config is a text file, not a preferences GUI — see [Philosophy](#philosophy) for why this replaced iTerm2            |
+| `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar | Sessions survive SSH drops and reboots — I want panes exactly where I left them                                      |
+| `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         | One keystroke into any project's session instead of `tmux ls` and squinting at names                                 |
+| `zed`     | Fast native editor for when you want to stay out of the terminal                                                                                                     | The rare moment I want a mouse-driven multi-file diff view without leaving a native app                              |
 
 ### TUI Tools
 
-| Config       | What it does                                                                               |
-| ------------ | ------------------------------------------------------------------------------------------ |
-| `lazygit`    | Git operations without memorizing flags — branches, rebases, and diffs in a single view    |
-| `hunk`       | Patch review and staging TUI, great for checking diffs                                     |
-| `herdr`      | Your coding agents from one terminal                                                       |
-| `k9s`        | Kubernetes cluster management from the terminal; essential when `kubectl get` isn't enough |
-| `yazi`       | Terminal file manager with previews, bulk operations, and plugin support                   |
-| `lazydocker` | Container and image management TUI that replaces most `docker` invocations                 |
-| `television` | Fuzzy finder built for speed — a ripgrep-powered `fzf` alternative                         |
+| Config       | What it does                                                                               | Why I use it                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| `lazygit`    | Git operations without memorizing flags — branches, rebases, and diffs in a single view    | I know git's plumbing but I'm not typing `git rebase -i HEAD~6` from memory every time      |
+| `hunk`       | Patch review and staging TUI, great for checking diffs                                     | Reviewing hunk-by-hunk in a TUI beats scrolling one giant unified diff                      |
+| `herdr`      | Your coding agents from one terminal                                                       | Running several coding agents at once, I needed one window to watch all of them, not N tabs |
+| `k9s`        | Kubernetes cluster management from the terminal; essential when `kubectl get` isn't enough | `kubectl get` in a `watch` loop is not a debugging strategy                                 |
+| `yazi`       | Terminal file manager with previews, bulk operations, and plugin support                   | Image and archive previews without shelling out to `open` keeps me from breaking flow       |
+| `lazydocker` | Container and image management TUI that replaces most `docker` invocations                 | `docker ps` piped through `less` was never a real workflow                                  |
+| `television` | Fuzzy finder built for speed — a ripgrep-powered `fzf` alternative                         | Same job as fzf, noticeably snappier on large file trees since it's Rust end to end         |
 
 ### System & Productivity
 
-| Config                                         | What it does                                                                                         |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `karabiner`                                    | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       |
-| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` |
-| `bat`                                          | `cat` with syntax highlighting, line numbers, and git diff markers                                   |
-| `btop`                                         | System monitor with a layout that actually uses your terminal width                                  |
-| `gh`                                           | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         |
-| `gh-dash`                                      | Dashboard TUI for `gh` — all your open PRs and issues in one view                                    |
-| `sqruff`                                       | SQL linter and formatter config                                                                      |
-| [`bucky`](https://github.com/mrpbennett/bucky) | A personal S3/FTP TUI for managing object storage                                                    |
+| Config                                         | What it does                                                                                         | Why I use it                                                                                                   |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `karabiner`                                    | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       | Home-row mods and layer switching need to live below the OS keybinding layer — nothing else gets this granular |
+| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` | One tool instead of three, see [Philosophy](#philosophy)                                                       |
+| `bat`                                          | `cat` with syntax highlighting, line numbers, and git diff markers                                   | Costs nothing and I run `cat` constantly — may as well see syntax and git gutters                              |
+| `btop`                                         | System monitor with a layout that actually uses your terminal width                                  | The only monitor I've used that doesn't waste half the terminal on padding                                     |
+| `gh`                                           | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         | PRs and issues without opening a browser tab I'll forget to close                                              |
+| `gh-dash`                                      | Dashboard TUI for `gh` — all your open PRs and issues in one view                                    | Better triage than GitHub's notification page, refreshed on keypress                                           |
+| `sqruff`                                       | SQL linter and formatter config                                                                      | Consistent SQL formatting so PR review isn't an opinion war over comma placement                               |
+| [`bucky`](https://github.com/mrpbennett/bucky) | A personal S3/FTP TUI for managing object storage                                                    | Wrote it myself — nothing else gave me a fast TUI for poking at buckets                                        |
 
 ---
 
+## Directory structure
+
+```text
+.
+├── .claude/
+│   └── CLAUDE.md              # instructions for Claude Code when it works in this repo — see AI
+├── .config/                   # stowed straight into ~/.config, one directory per tool
+│   ├── nvim/                  # LazyVim
+│   ├── tmux/
+│   ├── ghostty/
+│   ├── zellij/                # parked from an evaluation — tmux won, see Philosophy
+│   └── ...                    # one directory per tool in the tables above
+├── .local/share/dotfiles/
+│   ├── default/shell/         # modules sourced by both zsh and fish
+│   │   ├── aliases
+│   │   ├── envs.sh
+│   │   ├── fns
+│   │   ├── init.sh            # `eval $(... init)` hooks: atuin, television, starship, zoxide, mise
+│   │   ├── rc.sh
+│   │   └── rc.fish
+│   └── install/
+│       ├── install.sh         # the one script that bootstraps a fresh machine
+│       ├── brew/Brewfile      # every formula and cask this setup depends on
+│       └── macos/defaults.sh  # `defaults write` tweaks — trackpad speed, key repeat, etc.
+├── assets/                    # README images — excluded from stow, see .stow-local-ignore
+├── .zshrc
+├── .ideavimrc
+├── .hushlogin
+└── README.md
+```
+
 ## Fresh machine setup
 
-**Prerequisites:** Homebrew must already be installed.
+**Assumes:** macOS 26 (Tahoe) or later, Apple Silicon. Nothing here is version-pinned to a specific macOS release — the `defaults write` keys in `macos/defaults.sh` have been stable since Big Sur — but this is what I've actually tested against.
+
+### 0. Command Line Tools
+
+```sh
+# Installs git, among other things stow/homebrew need later
+xcode-select --install
+```
+
+### 1. Clone the repo
 
 ```sh
 git clone <repo-url> ~/Developer/personal/dotfiles
 ```
 
-### 1. Install packages
+### 2. Run the installer
 
 ```sh
 ~/Developer/personal/dotfiles/.local/share/dotfiles/install/install.sh
 ```
 
-Runs `brew bundle` against `.local/share/dotfiles/install/brew/Brewfile` to restore all formulae and casks, then installs shell/runtime extras.
+`install.sh` does exactly this, in order:
 
-### 2. Symlink configs
+1. **Installs Homebrew** if `brew` isn't already on `$PATH` (same one-liner as [brew.sh](https://brew.sh): `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`).
+2. **Runs `brew bundle`** against `brew/Brewfile` — CLI tools, shells, dev tools, and a handful of casks (Ghostty, JetBrains Mono Nerd Font, mitmproxy, ngrok).
+3. **Stows the repo** _before_ installing oh-my-zsh, deliberately — see the note below.
+4. **Installs oh-my-zsh** plus the `zsh-autosuggestions` and `zsh-syntax-highlighting` plugins.
+5. **Runs `mise install`** to pull every pinned language runtime.
+6. **Clones `tpm`** (tmux plugin manager) so `prefix + I` inside tmux can install the rest.
+7. **Applies macOS defaults** from `macos/defaults.sh` — trackpad tracking speed, disabling press-and-hold accent popups (it fights vim's key repeat), and a few Finder/Dock tweaks. Requires a logout or reboot to fully apply.
 
-Before stowing, back up any existing configs that would conflict. Stow refuses to overwrite real files — it errors rather than silently clobbering:
-
-Then create the symlinks:
-
-```sh
-cd ~/Developer/personal/dotfiles
-stow --target="$HOME" .
-```
-
-That's it. Every tool that reads from `~/.config` will now pick up the versioned config.
+> **Why stow before oh-my-zsh?** A fresh machine has no `~/.zshrc`. If oh-my-zsh installs first, it writes its own template there, and stow later refuses to symlink over a real file. Stowing first means oh-my-zsh finds our `.zshrc` already in place and leaves it alone.
 
 > **Verify it worked:** `readlink ~/.config/tmux` should print `../Developer/personal/dotfiles/.config/tmux`
 
@@ -121,11 +179,19 @@ That's it. Every tool that reads from `~/.config` will now pick up the versioned
 
 ## Stow reference
 
+<details>
+<summary>How stow's symlinking actually works, plus the full command reference</summary>
+
+### The mental model
+
+This repo's root is laid out to **mirror your home directory** — `.config/tmux` in the repo corresponds to `~/.config/tmux`, `.zshrc` in the repo corresponds to `~/.zshrc`. Stow's only job is walking that tree and creating a symlink at each real-world path pointing back into the repo. Nothing is copied; editing `~/.config/tmux/tmux.conf` _is_ editing the file in git, because it's the same inode reached through a different path.
+
+That's also why conflicts happen: if a real file already sits where a symlink needs to go, stow won't silently replace it — it errors and asks you to move it out of the way first.
+
 ### Dry run — preview without touching anything
 
-Always run this first on an unfamiliar machine:
-
 ```sh
+# Always run this first on an unfamiliar machine
 stow -nv --target="$HOME" .
 ```
 
@@ -142,10 +208,11 @@ Idempotent. Already-correct symlinks are left alone — safe to re-run anytime.
 ### Restow — sync after changes
 
 ```sh
+# Run after adding a new tool config, renaming a directory, or pulling someone else's changes
 stow --restow --target="$HOME" .
 ```
 
-Unstow + stow in a single step. Run this after adding a new tool config, renaming a directory, or pulling in someone else's changes.
+Unstow + stow in a single step.
 
 ### Unstow — remove all symlinks
 
@@ -153,7 +220,7 @@ Unstow + stow in a single step. Run this after adding a new tool config, renamin
 stow --delete --target="$HOME" .
 ```
 
-Removes every symlink stow created. Your `.bak` directories are untouched — rename them back to restore the originals.
+Removes every symlink stow created. Your `.bak` directories (if you made any) are untouched — rename them back to restore the originals.
 
 ### Verbose output
 
@@ -162,6 +229,8 @@ stow --verbose --target="$HOME" .
 # combine with dry run:
 stow -nv --target="$HOME" .
 ```
+
+</details>
 
 ---
 
@@ -218,21 +287,47 @@ git diff  # always review before committing — adopt can be destructive
 
 **Never commit credentials to this repo.**
 
-API keys, tokens, session cookies, and passwords do not belong here. The right pattern:
+API keys, tokens, session cookies, and passwords do not belong here. The right pattern is a machine-local file that's sourced but never tracked:
 
-- Machine-specific secrets live in a file sourced _outside_ this repo (e.g. `~/.config/fish/local.fish` added to `.gitignore`)
+```sh
+# ~/.config/fish/local.fish — gitignored, sourced from conf.d, never leaves this machine
+set -gx GITHUB_TOKEN "ghp_..."
+set -gx OPENAI_API_KEY "sk-..."
+```
+
+```sh
+# equivalent for zsh — ~/.env.local, sourced from the end of .zshrc
+export GITHUB_TOKEN="ghp_..."
+export OPENAI_API_KEY="sk-..."
+```
+
+Both live outside the repo entirely (or inside it but git-ignored) — either way, `git status` should never be able to see them. A few rules that follow from that:
+
+- Machine-specific secrets live in a file sourced _outside_ this repo's tracked files (e.g. `~/.config/fish/local.fish`, added to `.gitignore` — not `.stow-local-ignore`, which only controls what stow skips, not what git tracks)
 - Long-term secrets belong in a password manager or secrets manager, not in any dotfile
 - If you accidentally commit a secret, treat it as compromised immediately — git history is public
+
+> **Before every commit:** run `git diff --staged` and actually read it. A one-line "just adding a new alias" commit is exactly the kind of diff where a pasted token hides in plain sight.
 
 ---
 
 ## AI
 
-A `.claude/CLAUDE.md` file lives in this repo and instructs [Claude Code](https://claude.ai/code) how to behave when working here. In short: plan before building, extend configs rather than rewriting them, keep GitHub access read-only, never commit secrets, and always verify changes before marking work done.
+A [`.claude/CLAUDE.md`](.claude/CLAUDE.md) file lives in this repo and instructs [Claude Code](https://claude.ai/code) how to behave when it works here. It's not boilerplate — it encodes the same caution I'd want from a human collaborator touching my personal environment:
+
+- **Read-only GitHub access** — no PRs, commits, or pushes on my behalf. This repo is mine to review before anything leaves my machine.
+- **Extend, don't replace** — when editing an existing config or keybinding, preserve what's already there instead of regenerating it from scratch. My tmux/nvim keymaps have years of muscle memory baked in; a clean-slate rewrite breaks that even when the result is "better."
+- **Plan before touching config** — non-trivial changes get a written plan first, since a bad symlink or a botched `stow --adopt` can quietly eat a config I care about.
+- **Verify before claiming done** — actually check the change worked (`readlink`, a dry-run stow, a re-sourced shell) rather than assuming a diff that looks right behaves right.
+
+Most dotfiles repos don't bother with this because most dotfiles repos aren't edited by an agent. Mine is, often, so the instructions are load-bearing rather than decorative.
 
 ---
 
 ## Quick cheatsheet
+
+<details>
+<summary>Every stow command you'll actually need, in one block</summary>
 
 ```sh
 # Preview what stow will do (always run first)
@@ -250,3 +345,5 @@ stow --delete --target="$HOME" .
 # Verify a specific symlink
 readlink ~/.config/fish
 ```
+
+</details>
