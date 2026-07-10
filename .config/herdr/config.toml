@@ -1,27 +1,73 @@
 onboarding = false
+agent_panel_sort = "priority"
+
 [terminal]
 default_shell = "zsh"
 
 [theme]
-name = "catppuccin"
-auto_switch = true
+auto_switch = false
+name = "catppuccin-latte"
 light_name = "catppuccin-latte"
 dark_name = "catppuccin"
-
-
-# +++ Mirror my tmux key bindings +++++++++
-[keys]
-prefix = "ctrl+s"
-
-split_vertical = "prefix+|" # split window right
-new_tab = "prefix+t"        # new tab with <prefix>
-
-rename_tab = "prefix+r"        # rename tab
-resize_mode = "prefix+shift+r" # resize mode
-# +++++++++++++++++++++++++++++++++++++++++
 
 [ui.toast]
 delivery = "herdr"
 
 [ui]
 show_agent_labels_on_pane_borders = true
+
+##### mirror my tmux key bindings #########
+[keys]
+prefix = "ctrl+s" # leader
+
+# panes
+split_vertical = "prefix+|"       # split window right
+split_horizontal = "prefix+minus" # split window bottom
+close_pane = "prefix+x"           # kill a pane
+toggle_sidebar = "prefix+b"       # toggle sidebar
+
+focus_pane_left = "prefix+h"  # switch pane left
+focus_pane_down = "prefix+j"  # switch pane down
+focus_pane_up = "prefix+k"    # switch pane up
+focus_pane_right = "prefix+l" # switch pane right
+
+# tabs
+new_tab = "prefix+t"           # new tab with <prefix>
+rename_tab = "prefix+r"        # rename tab
+resize_mode = "prefix+shift+r" # resize mode
+
+# workspaces
+navigate_workspace_up = "k"   # move up workspaces
+navigate_workspace_down = "j" # move down workspaces
+
+# sessions
+detach = "prefix+q" # detach from session
+
+###########################################
+# Open useful TUI apps right within Herdr
+###########################################
+
+# open lazygit
+[[keys.command]]
+key = "prefix+shift+g"
+type = "pane"
+command = "lazygit"
+description = "run lazygit"
+
+# open hunk diff
+[[keys.command]]
+key = "prefix+shift+h"
+type = "pane"
+command = "hunk diff"
+description = "show hunk diff"
+
+# open gh dash for pr reviews
+[[keys.command]]
+key = "prefix+shift+d"
+type = "pane"
+command = "gh dash"
+description = "show gh dash to review PRs"
+
+[experimental]
+switch_ascii_input_source_in_prefix = true
+pane_history = false
