@@ -94,7 +94,7 @@
   "buffer_font_size": 14.0,
   "theme": {
     "mode": "light",
-    "light": "Catppuccin Latte",
+    "light": "Everforest Light Medium (material)",
     "dark": "Catppuccin Macchiato",
   },
   // Indentation, rainbow indentation
