@@ -1,0 +1,31 @@
+[metadata]
+name = "herdr-sessions"
+description = "List, attach to, and manage herdr sessions"
+requirements = ["herdr", "jq"]
+
+[source]
+command = "herdr session list --json | jq -r '.sessions[] | [.name, (if .running then \"running\" else \"stopped\" end), .session_dir] | @tsv'"
+display = "{split:\t:0}  [{split:\t:1}]  {split:\t:2}"
+output = "{split:\t:0}"
+
+watch = 2.0
+
+[keybindings]
+enter = "actions:attach"
+ctrl-s = "actions:stop"
+ctrl-d = "actions:delete"
+
+[actions.attach]
+description = "Attach to the selected session"
+command = "herdr session attach '{split:\t:0}'"
+mode = "execute"
+
+[actions.stop]
+description = "Stop the selected session without deleting it"
+command = "herdr session stop '{split:\t:0}'"
+mode = "fork"
+
+[actions.delete]
+description = "Stop and permanently delete the selected session"
+command = "herdr session stop '{split:\t:0}' && herdr session delete '{split:\t:0}'"
+mode = "fork"
