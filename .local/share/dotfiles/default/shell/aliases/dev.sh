@@ -22,3 +22,4 @@ alias ur="uv run"
 # AI ---
 alias hrc="herdr server reload-config"
 alias oc="opencode"
+alias ocu="curl -fsSL https://opencode.ai/install | bash"

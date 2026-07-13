@@ -11,6 +11,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# atuin
+. "$HOME/.atuin/bin/env"
+
+
 # VI MODE START ---
 bindkey -v
 KEYTIMEOUT=1
@@ -28,7 +32,6 @@ zle -N zle-line-init
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi # WorkTrunk
 
-. "$HOME/.atuin/bin/env"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=("$HOME/.docker/completions" $fpath)
@@ -43,3 +46,6 @@ export PATH="$HOME/.local/share/mise/installs/node/26.4.0/bin:$PATH"
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# testing kickstarter.nvim
+alias ksnvim='NVIM_APPNAME="ksnvim" nvim'

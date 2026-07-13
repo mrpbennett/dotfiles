@@ -5,7 +5,7 @@ agent_panel_sort = "priority"
 default_shell = "zsh"
 
 [theme]
-auto_switch = false
+auto_switch = true
 name = "catppuccin-latte"
 light_name = "catppuccin-latte"
 dark_name = "catppuccin"
@@ -15,6 +15,7 @@ delivery = "herdr"
 
 [ui]
 show_agent_labels_on_pane_borders = true
+sidebar_collapsed_mode = "hidden"        # completely hides the sidebar (<prefix> + b) to open
 
 ##### mirror my tmux key bindings #########
 [keys]
