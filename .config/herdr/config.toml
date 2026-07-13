@@ -1,8 +1,9 @@
-
 agent_panel_sort = "priority"
 
 [terminal]
 default_shell = "zsh"
+shell_mode = "auto"
+new_cmd = "follow"
 
 [theme]
 auto_switch = true
@@ -10,19 +11,31 @@ name = "catppuccin-latte"
 light_name = "catppuccin-latte"
 dark_name = "catppuccin"
 
+[ui]
+show_agent_labels_on_pane_borders = true
+sidebar_collapsed_mode = "hidden"        # completely hides the sidebar (<prefix> + b) to open - v0.7.3
+confirm_close = false
+pane_gaps = false
+
 [ui.toast]
 delivery = "herdr"
 
-[ui]
-show_agent_labels_on_pane_borders = true
-sidebar_collapsed_mode = "hidden"        # completely hides the sidebar (<prefix> + b) to open
+[ui.toast.herdr]
+position = "top-right"
+
+[ui.toast.clipboard]
+enabled = true
+position = "top-right"
 
 ###########################################
-##### mirror my tmux key bindings #########
+# mirror my tmux key bindings
 ###########################################
 
 [keys]
 prefix = "ctrl+s" # leader
+
+# navigation
+goto = "prefix+g"
 
 # panes
 split_vertical = "prefix+|"       # split window right
@@ -41,8 +54,11 @@ rename_tab = "prefix+r"        # rename tab
 resize_mode = "prefix+shift+r" # resize mode
 
 # workspaces
-navigate_workspace_up = "k"   # move up workspaces
-navigate_workspace_down = "j" # move down workspaces
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+x"  # close workspace
+navigate_workspace_up = "k"         # move up workspaces
+navigate_workspace_down = "j"       # move down workspaces
 
 # sessions
 detach = "prefix+q" # detach from session
