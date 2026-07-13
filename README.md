@@ -20,7 +20,6 @@ I live in the terminal. Everything in this repo exists to make that true without
 
 ## Table of Contents
 
-- [Philosophy](#philosophy)
 - [What's in here](#whats-in-here)
 - [Directory structure](#directory-structure)
 - [Screenshots / demo](#screenshots--demo)
@@ -34,19 +33,6 @@ I live in the terminal. Everything in this repo exists to make that true without
 
 ---
 
-## Philosophy
-
-I'd rather run one extra `brew install` than carry a GUI app I can't diff, script, or put in git. A few choices that look arbitrary until you know the reasoning:
-
-- **Ghostty over iTerm2.** iTerm2's config lives in a plist edited through a preferences window with hundreds of panes — it's not diffable and it's not something I can hand to a fresh machine. Ghostty's entire config is one text file, it's GPU-accelerated, and it starts instantly. I lost nothing switching and gained a config I can actually version.
-- **LazyVim over vanilla Neovim.** I want modal editing and an instant-start terminal editor, not a slower VS Code. Hand-rolling LSP, treesitter, and completion wiring from scratch is a hobby in itself — LazyVim gives me sane, well-maintained defaults for all of it, and I only override what I actually disagree with. Less config to maintain, not more.
-- **mise over nvm/pyenv/rbenv.** I was tired of three different tools each doing per-project version shims their own way, with three different config file formats. `mise` is one binary, one `.mise.toml`, and it covers Node, Python, Ruby, and anything else with a runtime plugin. One mental model instead of three.
-- **tmux over Zellij.** I tried Zellij — there's a config still parked in `.config/zellij` from that evaluation — but tmux's plugin ecosystem (session persistence, Catppuccin theming, `sesh` integration) is more mature, and the client-server model means a session survives an SSH drop without a "reconnect" feature bolted on. Familiar keybindings I've had muscle memory for since college didn't hurt either.
-
-> **Nothing here is precious.** If a tool gets replaced, the old config gets deleted, not commented out. Git history is the changelog.
-
----
-
 ## What's in here
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
@@ -55,7 +41,7 @@ All configs live under `.config/` and are symlinked into `~/.config` via GNU Sto
 
 ### Color Scheme
 
-![catppuccin](assets/colorscheme.png)
+![catppuccin](assets/herdr-colorscheme.png)
 
 My setup consists of auto theme switching with catppuccin. Latte for light, and Macchiato for dark. For tmux this is done by setting up [hooks](https://github.com/catppuccin/tmux#for-tmux-versions-prior-to-36) and with LazyVim this is done with the plugin [auto-dark-mode](https://github.com/f-person/auto-dark-mode.nvim)
 
@@ -74,9 +60,9 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 
 | Config    | What it does                                                                                                                                                         | Why I use it                                                                                                         |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      | LSP, treesitter, and telescope pre-wired means I spend time editing, not configuring — see [Philosophy](#philosophy) |
-| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 | Config is a text file, not a preferences GUI — see [Philosophy](#philosophy) for why this replaced iTerm2            |
-| `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar | Sessions survive SSH drops and reboots — I want panes exactly where I left them                                      |
+| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      | LSP, treesitter, and telescope pre-wired means I spend time editing, not configuring                                |
+| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 | Config is a text file, not a preferences GUI — replaced iTerm2's undiffable plist                                    |
+| `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar | Sessions survive SSH drops and reboots — I want panes exactly where I left them. Currently trialing `herdr` as a possible replacement, nothing migrated yet |
 | `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         | One keystroke into any project's session instead of `tmux ls` and squinting at names                                 |
 | `zed`     | Fast native editor for when you want to stay out of the terminal                                                                                                     | The rare moment I want a mouse-driven multi-file diff view without leaving a native app                              |
 
@@ -97,7 +83,7 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 | Config                                         | What it does                                                                                         | Why I use it                                                                                                   |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `karabiner`                                    | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       | Home-row mods and layer switching need to live below the OS keybinding layer — nothing else gets this granular |
-| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` | One tool instead of three, see [Philosophy](#philosophy)                                                       |
+| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` | One tool instead of three                                                                                       |
 | `bat`                                          | `cat` with syntax highlighting, line numbers, and git diff markers                                   | Costs nothing and I run `cat` constantly — may as well see syntax and git gutters                              |
 | `btop`                                         | System monitor with a layout that actually uses your terminal width                                  | The only monitor I've used that doesn't waste half the terminal on padding                                     |
 | `gh`                                           | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         | PRs and issues without opening a browser tab I'll forget to close                                              |
@@ -115,9 +101,9 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 │   └── CLAUDE.md              # instructions for Claude Code when it works in this repo — see AI
 ├── .config/                   # stowed straight into ~/.config, one directory per tool
 │   ├── nvim/                  # LazyVim
-│   ├── tmux/
+│   ├── tmux/                  # currently trialing herdr as a possible replacement
 │   ├── ghostty/
-│   ├── zellij/                # parked from an evaluation — tmux won, see Philosophy
+│   ├── zellij/                # parked from an earlier evaluation — tmux won that round
 │   └── ...                    # one directory per tool in the tables above
 ├── .local/share/dotfiles/
 │   ├── default/shell/         # modules sourced by both zsh and fish

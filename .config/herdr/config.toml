@@ -1,4 +1,4 @@
-onboarding = false
+
 agent_panel_sort = "priority"
 
 [terminal]
@@ -17,7 +17,10 @@ delivery = "herdr"
 show_agent_labels_on_pane_borders = true
 sidebar_collapsed_mode = "hidden"        # completely hides the sidebar (<prefix> + b) to open
 
+###########################################
 ##### mirror my tmux key bindings #########
+###########################################
+
 [keys]
 prefix = "ctrl+s" # leader
 
@@ -68,7 +71,3 @@ key = "prefix+shift+d"
 type = "pane"
 command = "gh dash"
 description = "show gh dash to review PRs"
-
-[experimental]
-switch_ascii_input_source_in_prefix = true
-pane_history = false
