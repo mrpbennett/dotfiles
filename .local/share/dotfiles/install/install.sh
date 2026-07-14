@@ -5,6 +5,18 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
 BREWFILE="$SCRIPT_DIR/Brewfile"
 
+# Install some items just for Linux
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  sudo apt-get update
+  # install docker ---
+  curl -fsSL https://get.docker.com | sh
+  sudo usermod -aG docker $USER
+  sudo apt install docker-compose-plugin
+  # ---
+  sudo apt-get install -y gcc
+  sudo apt-get install -y zsh
+fi
+
 # Install Homebrew if not found
 echo "#######################################################################"
 echo "No Homebrew found installing..."
@@ -43,11 +55,6 @@ echo "#######################################################################"
 echo "Installing oh-my-zsh with plugings..."
 echo "#######################################################################"
 
-if [[ "$(uname -s)" != "Darwin" ]]; then
-  echo "Installing ZSH..."
-  sudo apt-get update && sudo apt-get install -y zsh
-fi
-
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
@@ -61,11 +68,6 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 [ -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 
 echo "#######################################################################"
-echo "Installing mise packages..."
-echo "#######################################################################"
-mise install
-
-echo "#######################################################################"
 echo "Installing TMP...(tmux plugin manager)"
 echo "#######################################################################"
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
@@ -74,6 +76,11 @@ echo "#######################################################################"
 echo "Installing Atuin..."
 echo "#######################################################################"
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+
+echo "#######################################################################"
+echo "Installing mise packages..."
+echo "#######################################################################"
+mise install
 
 echo "#######################################################################"
 echo "Setting up AI agents..."
