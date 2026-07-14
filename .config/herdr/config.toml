@@ -28,13 +28,13 @@ enabled = true
 position = "top-right"
 
 ###########################################
-# mirror my tmux key bindings
+# an attempt to mirror my tmux key bindings
 ###########################################
 
 [keys]
 prefix = "ctrl+s" # leader
 
-# navigation
+# navigating
 goto = "prefix+g"
 
 # panes

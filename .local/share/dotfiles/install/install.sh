@@ -38,6 +38,12 @@ stow --dir="$REPO_ROOT" --target="$HOME" .
 echo "#######################################################################"
 echo "Installing oh-my-zsh with plugings..."
 echo "#######################################################################"
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "Installing ZSH..."
+  sudo apt-get update && sudo apt-get install -y zsh
+fi
+
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
@@ -62,6 +68,13 @@ echo "#######################################################################"
 curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 
 echo "#######################################################################"
-echo "Setting up MacOS how I like it, will require a reboot..."
+echo "Setting up AI agents..."
 echo "#######################################################################"
-source "$SCRIPT_DIR/macos/defaults.sh"
+source $REPO_ROOT/.local/share/dotfiles/install/ai/agents.sh
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  echo "#######################################################################"
+  echo "Setting up MacOS how I like it, will require a reboot..."
+  echo "#######################################################################"
+  source "$REPO_ROOT/.local/share/dotfiles/install/macos/defaults.sh"
+fi
