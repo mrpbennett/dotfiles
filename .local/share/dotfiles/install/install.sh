@@ -18,11 +18,10 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
 fi
 
 # Install Homebrew if not found
-echo "#######################################################################"
-echo "No Homebrew found installing..."
-echo "#######################################################################"
 if ! command -v brew &>/dev/null; then
-  echo "Installing Homebrew..."
+  echo "#######################################################################"
+  echo "No Homebrew found installing..."
+  echo "#######################################################################"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   # The installer only prints the shellenv line for you to run later; without
   # this, the brew bundle call below fails with "command not found" here.

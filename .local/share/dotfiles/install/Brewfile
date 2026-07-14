@@ -13,7 +13,6 @@ brew "ripgrep"
 brew "sevenzip"
 brew "stow"
 brew "tree"
-brew "unzip"
 brew "wget"
 brew "zoxide"
 
