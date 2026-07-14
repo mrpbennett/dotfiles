@@ -1,3 +1,10 @@
+[settings.node]
+# GPG keyservers are unreliable/unreachable on fresh Linux boxes (containers
+# especially), causing "gpg: Can't check signature: No public key" and a
+# failed node install. Node's release tarball is still checked against its
+# published sha256sum regardless of this setting.
+gpg_verify = false
+
 [tools]
 argocd = "latest"
 aws-cli = { version = "latest", symlink_bins = "true" }
