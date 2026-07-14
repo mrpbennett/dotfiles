@@ -22,6 +22,10 @@ fi
 echo "#######################################################################"
 echo "Installing packages from $BREWFILE..."
 echo "#######################################################################"
+# unzip first and separately: brew bundle doesn't install in file order, so the
+# font casks below (which shell out to unzip) can run before unzip's own turn
+# comes up, failing with "unzip: No such file or directory".
+brew install unzip
 brew bundle --file="$BREWFILE"
 
 ###############################################################################
