@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
-BREWFILE="$SCRIPT_DIR/brew/Brewfile"
+BREWFILE="$SCRIPT_DIR/Brewfile"
 
 # Install Homebrew if not found
 echo "#######################################################################"
