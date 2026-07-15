@@ -4,7 +4,6 @@
 README\.md
 assets
 
-
 # herdr
 /.config/herdr/sock.log
 /.config/herdr/herdr-client.log
@@ -12,3 +11,5 @@ assets
 /.config/herdr/herdr-server.log
 /.config/herdr/release-notes.json
 /.config/herdr/session.json
+
+/.claude/skills/audit-urls

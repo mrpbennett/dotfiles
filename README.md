@@ -58,13 +58,13 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 
 ### Editor & Terminal
 
-| Config    | What it does                                                                                                                                                         | Why I use it                                                                                                         |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      | LSP, treesitter, and telescope pre-wired means I spend time editing, not configuring                                |
-| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 | Config is a text file, not a preferences GUI — replaced iTerm2's undiffable plist                                    |
+| Config    | What it does                                                                                                                                                         | Why I use it                                                                                                                                                |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      | LSP, treesitter, and telescope pre-wired means I spend time editing, not configuring                                                                        |
+| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 | Config is a text file, not a preferences GUI — replaced iTerm2's undiffable plist                                                                           |
 | `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar | Sessions survive SSH drops and reboots — I want panes exactly where I left them. Currently trialing `herdr` as a possible replacement, nothing migrated yet |
-| `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         | One keystroke into any project's session instead of `tmux ls` and squinting at names                                 |
-| `zed`     | Fast native editor for when you want to stay out of the terminal                                                                                                     | The rare moment I want a mouse-driven multi-file diff view without leaving a native app                              |
+| `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         | One keystroke into any project's session instead of `tmux ls` and squinting at names                                                                        |
+| `zed`     | Fast native editor for when you want to stay out of the terminal                                                                                                     | The rare moment I want a mouse-driven multi-file diff view without leaving a native app                                                                     |
 
 ### TUI Tools
 
@@ -83,7 +83,7 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 | Config                                         | What it does                                                                                         | Why I use it                                                                                                   |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `karabiner`                                    | Keyboard remapping at the driver level — complex modifications, home-row mods, layer switching       | Home-row mods and layer switching need to live below the OS keybinding layer — nothing else gets this granular |
-| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` | One tool instead of three                                                                                       |
+| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` | One tool instead of three                                                                                      |
 | `bat`                                          | `cat` with syntax highlighting, line numbers, and git diff markers                                   | Costs nothing and I run `cat` constantly — may as well see syntax and git gutters                              |
 | `btop`                                         | System monitor with a layout that actually uses your terminal width                                  | The only monitor I've used that doesn't waste half the terminal on padding                                     |
 | `gh`                                           | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         | PRs and issues without opening a browser tab I'll forget to close                                              |
@@ -307,6 +307,13 @@ A [`.claude/CLAUDE.md`](.claude/CLAUDE.md) file lives in this repo and instructs
 - **Verify before claiming done** — actually check the change worked (`readlink`, a dry-run stow, a re-sourced shell) rather than assuming a diff that looks right behaves right.
 
 Most dotfiles repos don't bother with this because most dotfiles repos aren't edited by an agent. Mine is, often, so the instructions are load-bearing rather than decorative.
+
+The accompanying [`.claude/skills/`](.claude/skills/) directory gives the agent focused workflows for common work:
+
+- **`changelog`** turns commits since the last release into a Keep a Changelog-formatted update.
+- **`context7-mcp`** fetches current library documentation before answering framework or API questions.
+- **`neovim-lua-expert`** guides precise Neovim Lua configuration and debugging work.
+- **`til`** records a new Today I Learned note in the separate TIL repository.
 
 ---
 
