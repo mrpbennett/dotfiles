@@ -21,7 +21,6 @@
 
 # ai skills to ignore
 .claude/skills/*
-/.claude/skills/neovim-lua-expert/.DS_Store
 
 # Keep these
 !.claude/skills/til/
