@@ -50,3 +50,10 @@ brew "yazi"
 
 # Postgres client (standalone, no server)
 brew "libpq"
+
+# MacOS packages - will be skipped on Ubuntu
+cask "font-jetbrains-mono"
+cask "font-symbols-only-nerd-font"
+cask "ghostty"
+cask "mitmproxy"
+cask "ngrok"

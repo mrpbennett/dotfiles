@@ -1,44 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export NONINTERACTIVE=1
+
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
 BREWFILE="$SCRIPT_DIR/Brewfile"
 
 # Install some items just for Linux
 if [[ "$(uname -s)" != "Darwin" ]]; then
-  # Real Ubuntu server images (unlike minimal container images) ship
-  # needrestart, which pops an interactive "restart these services?" dialog
-  # after apt upgrades unless the frontend is explicitly noninteractive.
   export DEBIAN_FRONTEND=noninteractive
-  sudo DEBIAN_FRONTEND=noninteractive apt-get update -y && sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+  sudo -E apt-get update -y && sudo -E apt-get upgrade -y
   # install docker ---
   curl -fsSL https://get.docker.com | sh
   sudo usermod -aG docker "$(id -un)"
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker-compose-plugin
+  sudo -E apt-get install -y docker-compose-plugin
   # ---
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gcc
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y zsh
+  sudo -E apt-get install -y gcc
+  sudo -E apt-get install -y zsh
+
   # sort .bashrc for homebrew to prevent failing ---
-  echo >> "$HOME/.bashrc"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> "$HOME/.bashrc"
-  # Homebrew isn't installed yet at this point in a fresh run, so this eval is
-  # a no-op the first time through; only run it if brew is already present.
+  echo >>"$HOME/.bashrc"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >>"$HOME/.bashrc"
   [ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+
   # change shell to zsh ---
-  # Plain `chsh` does its own PAM password auth even under passwordless sudo;
-  # running it via sudo lets root change the shell with no password prompt.
   sudo chsh -s "$(which zsh)" "$(id -un)"
 fi
 
 # Install Homebrew if not found
 if ! command -v brew &>/dev/null; then
-  echo "#######################################################################"
-  echo "No Homebrew found installing...Homebrew"
-  echo "#######################################################################"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # The installer only prints the shellenv line for you to run later; without
-  # this, the brew bundle call below fails with "command not found" here.
+
   if [[ "$(uname -s)" == "Darwin" ]]; then
     BREW_BIN=/opt/homebrew/bin/brew
     [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
@@ -48,18 +42,14 @@ if ! command -v brew &>/dev/null; then
   eval "$("$BREW_BIN" shellenv)"
 fi
 
-echo "#######################################################################"
-echo "Installing packages from $BREWFILE..."
-echo "#######################################################################"
-# unzip first and separately: brew bundle doesn't install in file order, so the
-# font casks below (which shell out to unzip) can run before unzip's own turn
-# comes up, failing with "unzip: No such file or directory".
 brew install unzip
-brew bundle --file="$BREWFILE"
 
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  brew bundle --file="$SCRIPT_DIR/Brewfile.mac"
+# Casks (fonts, ghostty, mitmproxy, ngrok) are macOS-only
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  export HOMEBREW_BUNDLE_CASK_SKIP="font-jetbrains-mono font-symbols-only-nerd-font ghostty mitmproxy ngrok"
 fi
+
+brew bundle --file="$BREWFILE"
 
 ###############################################################################
 # Stow (installed by the Brewfile above) before oh-my-zsh: on a fresh machine
@@ -72,47 +62,28 @@ echo "Now running STOW to generate symlinks..."
 stow --dir="$REPO_ROOT" --target="$HOME" .
 
 # Install oh-my-zsh
-echo "#######################################################################"
-echo "Installing oh-my-zsh with plugings..."
-echo "#######################################################################"
-
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   git clone --depth 1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
 fi
 
 # Install oh-my-zsh plugins
-# Note: ZSH_CUSTOM must default to a real path here, not "~" - tilde expansion
-# is suppressed inside the quoted `[ -d "..." ]` test, so a "~"-based default
-# would never match an existing directory and the guard would be a no-op.
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 [ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] || git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 [ -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] || git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 
-echo "#######################################################################"
-echo "Installing TMP...(tmux plugin manager)"
-echo "#######################################################################"
+# Install TPM with catppuccin
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 mkdir -p ~/.config/tmux/plugins/tmux
 [ -d "$HOME/.config/tmux/plugins/tmux/.git" ] || git clone https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/tmux"
 
-echo "#######################################################################"
-echo "Installing Atuin..."
-echo "#######################################################################"
-curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+# Install Atuin
+curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
 
-echo "#######################################################################"
-echo "Installing mise packages..."
-echo "#######################################################################"
+# install all mise packages from .config/mise/config.toml
 mise install
 
-echo "#######################################################################"
-echo "Setting up AI agents..."
-echo "#######################################################################"
 source $REPO_ROOT/.local/share/dotfiles/install/ai/agents.sh
 
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  echo "#######################################################################"
-  echo "Setting up MacOS how I like it, will require a reboot..."
-  echo "#######################################################################"
   source "$REPO_ROOT/.local/share/dotfiles/install/macos/defaults.sh"
 fi

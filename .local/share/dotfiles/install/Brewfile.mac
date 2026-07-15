@@ -1,8 +1,0 @@
-# Casks - macOS only (Homebrew Cask isn't supported on Linux for these:
-# ghostty and mitmproxy ship macOS-only binaries, and the fonts are for a
-# GUI environment this box doesn't have on Linux).
-cask "font-jetbrains-mono"
-cask "font-symbols-only-nerd-font"
-cask "ghostty"
-cask "mitmproxy"
-cask "ngrok"
