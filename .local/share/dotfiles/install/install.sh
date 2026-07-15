@@ -21,6 +21,8 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
   # change shell to zsh ---
   chsh -s $(which zsh)
+  # adding .local/bin to $PATH ---
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 fi
 
 # Install Homebrew if not found
