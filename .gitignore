@@ -20,4 +20,16 @@
 /.config/zed/prompts/
 
 # ai skills to ignore
-.claude/skills/audit-urls/
+.claude/skills/*
+
+# Keep these
+!.claude/skills/til/
+!.claude/skills/til/**
+!.claude/skills/changelog/
+!.claude/skills/changelog/**
+!.claude/skills/context7-mcp/
+!.claude/skills/context7-mcp/**
+!.claude/skills/neovim-lua-expert/
+!.claude/skills/neovim-lua-expert/**
+
+/.claude/skills/neovim-lua-expert/.DS_Store

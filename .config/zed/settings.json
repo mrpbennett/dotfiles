@@ -71,6 +71,9 @@
       },
     },
     "opencode": {
+      "default_config_options": {
+        "model": "openai/gpt-5.6-luna-pro"
+      },
       "type": "registry",
     },
   },
