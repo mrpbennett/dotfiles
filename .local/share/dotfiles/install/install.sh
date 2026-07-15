@@ -78,6 +78,8 @@ echo "#######################################################################"
 echo "Installing TMP...(tmux plugin manager)"
 echo "#######################################################################"
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+mkdir -p ~/.config/tmux/plugins/tmux
+git clone https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/tmux"
 
 echo "#######################################################################"
 echo "Installing Atuin..."
