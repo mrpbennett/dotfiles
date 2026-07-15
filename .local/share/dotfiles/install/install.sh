@@ -7,7 +7,7 @@ BREWFILE="$SCRIPT_DIR/Brewfile"
 
 # Install some items just for Linux
 if [[ "$(uname -s)" != "Darwin" ]]; then
-  sudo apt-get update
+  sudo apt-get update -y && sudo apt-get upgrade -y
   # install docker ---
   curl -fsSL https://get.docker.com | sh
   sudo usermod -aG docker $USER
