@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
-echo "#######################################################################"
-echo "Installing Claude Code"
-echo "#######################################################################"
+# Claude Code
 curl -fsSL https://claude.ai/install.sh | bash
 
-echo "#######################################################################"
-echo "Installing OpenCode"
-echo "#######################################################################"
+# OpenCode
 curl -fsSL https://opencode.ai/install | bash

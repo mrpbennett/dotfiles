@@ -1,3 +1,7 @@
+if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # INIT
 source ~/.local/share/dotfiles/default/shell/init.sh
 # ENV VARS
