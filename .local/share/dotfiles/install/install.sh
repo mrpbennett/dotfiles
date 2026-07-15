@@ -7,22 +7,28 @@ BREWFILE="$SCRIPT_DIR/Brewfile"
 
 # Install some items just for Linux
 if [[ "$(uname -s)" != "Darwin" ]]; then
-  sudo apt-get update -y && sudo apt-get upgrade -y
+  # Real Ubuntu server images (unlike minimal container images) ship
+  # needrestart, which pops an interactive "restart these services?" dialog
+  # after apt upgrades unless the frontend is explicitly noninteractive.
+  export DEBIAN_FRONTEND=noninteractive
+  sudo DEBIAN_FRONTEND=noninteractive apt-get update -y && sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
   # install docker ---
   curl -fsSL https://get.docker.com | sh
-  sudo usermod -aG docker $USER
-  sudo apt install docker-compose-plugin
+  sudo usermod -aG docker "$(id -un)"
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y docker-compose-plugin
   # ---
-  sudo apt-get install -y gcc
-  sudo apt-get install -y zsh
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y gcc
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y zsh
   # sort .bashrc for homebrew to prevent failing ---
-  echo >> "/home/$USER/.bashrc"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> "/home/$USER/.bashrc"
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+  echo >> "$HOME/.bashrc"
+  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> "$HOME/.bashrc"
+  # Homebrew isn't installed yet at this point in a fresh run, so this eval is
+  # a no-op the first time through; only run it if brew is already present.
+  [ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
   # change shell to zsh ---
-  chsh -s $(which zsh)
-  # adding .local/bin to $PATH ---
-  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+  # Plain `chsh` does its own PAM password auth even under passwordless sudo;
+  # running it via sudo lets root change the shell with no password prompt.
+  sudo chsh -s "$(which zsh)" "$(id -un)"
 fi
 
 # Install Homebrew if not found
@@ -33,8 +39,12 @@ if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   # The installer only prints the shellenv line for you to run later; without
   # this, the brew bundle call below fails with "command not found" here.
-  BREW_BIN=/opt/homebrew/bin/brew
-  [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    BREW_BIN=/opt/homebrew/bin/brew
+    [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
+  else
+    BREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
+  fi
   eval "$("$BREW_BIN" shellenv)"
 fi
 
@@ -46,6 +56,10 @@ echo "#######################################################################"
 # comes up, failing with "unzip: No such file or directory".
 brew install unzip
 brew bundle --file="$BREWFILE"
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  brew bundle --file="$SCRIPT_DIR/Brewfile.mac"
+fi
 
 ###############################################################################
 # Stow (installed by the Brewfile above) before oh-my-zsh: on a fresh machine
@@ -79,7 +93,7 @@ echo "Installing TMP...(tmux plugin manager)"
 echo "#######################################################################"
 [ -d "$HOME/.tmux/plugins/tpm" ] || git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 mkdir -p ~/.config/tmux/plugins/tmux
-git clone https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/tmux"
+[ -d "$HOME/.config/tmux/plugins/tmux/.git" ] || git clone https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/tmux"
 
 echo "#######################################################################"
 echo "Installing Atuin..."
