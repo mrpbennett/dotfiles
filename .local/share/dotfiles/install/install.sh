@@ -15,10 +15,12 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
   # ---
   sudo apt-get install -y gcc
   sudo apt-get install -y zsh
-  # ---
+  # sort .bashrc for homebrew to prevent failing ---
   echo >> "/home/$USER/.bashrc"
   echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> "/home/$USER/.bashrc"
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+  # change shell to zsh ---
+  chsh -s $(which zsh)
 fi
 
 # Install Homebrew if not found
