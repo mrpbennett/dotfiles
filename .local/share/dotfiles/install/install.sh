@@ -20,7 +20,7 @@ fi
 # Install Homebrew if not found
 if ! command -v brew &>/dev/null; then
   echo "#######################################################################"
-  echo "No Homebrew found installing..."
+  echo "No Homebrew found installing...Homebrew"
   echo "#######################################################################"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   # The installer only prints the shellenv line for you to run later; without

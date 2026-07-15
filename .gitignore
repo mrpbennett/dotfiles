@@ -15,3 +15,6 @@
 
 # tmux
 /.config/tmux/plugins
+
+# zed
+/.config/zed/prompts/
