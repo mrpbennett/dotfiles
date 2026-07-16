@@ -68,23 +68,38 @@ detach = "prefix+q" # detach from session
 # Open useful TUI apps right within Herdr
 ###########################################
 
+# opens a floating pane
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "exec \"${SHELL:-sh}\""
+description = "open scratch terminal"
+width = "80%"
+height = "80%"
+
 # open lazygit
 [[keys.command]]
 key = "prefix+shift+g"
-type = "pane"
+type = "popup"
 command = "lazygit"
 description = "run lazygit"
+width = "80%"
+height = "80%"
 
 # open hunk diff
 [[keys.command]]
 key = "prefix+shift+h"
-type = "pane"
+type = "popup"
 command = "hunk diff"
 description = "show hunk diff"
+width = "80%"
+height = "80%"
 
 # open gh dash for pr reviews
 [[keys.command]]
 key = "prefix+shift+d"
-type = "pane"
+type = "popup"
 command = "gh dash"
 description = "show gh dash to review PRs"
+width = "80%"
+height = "80%"

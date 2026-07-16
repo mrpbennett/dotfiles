@@ -19,10 +19,11 @@
 # zed
 /.config/zed/prompts/
 
-# ai skills to ignore
-.claude/skills/*
+# Claude Code 
+.claude/*
 
 # Keep these
+!.claude/CLAUDE.md
 !.claude/skills/til/
 !.claude/skills/til/**
 !.claude/skills/changelog/
@@ -32,4 +33,3 @@
 !.claude/skills/neovim-lua-expert/
 !.claude/skills/neovim-lua-expert/**
 
-/.claude/skills/neovim-lua-expert
