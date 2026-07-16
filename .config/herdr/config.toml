@@ -103,3 +103,12 @@ command = "gh dash"
 description = "show gh dash to review PRs"
 width = "80%"
 height = "80%"
+
+# open btop
+[[keys.command]]
+key = "prefix+shift+b"
+type = "popup"
+command = "btop"
+description = "run btop"
+width = "80%"
+height = "80%"
