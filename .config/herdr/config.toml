@@ -28,6 +28,14 @@ position = "top-right"
 enabled = true
 position = "top-right"
 
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [["state_icon", "workspace"], ["branch", "git_status"]]
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [["state_icon", "workspace"], ["tab", "agent"]]
+
 ###########################################
 # an attempt to mirror my tmux key bindings
 ###########################################
@@ -74,8 +82,8 @@ key = "prefix+f"
 type = "popup"
 command = "exec \"${SHELL:-sh}\""
 description = "open scratch terminal"
-width = "80%"
-height = "80%"
+width = "60%"
+height = "60%"
 
 # open lazygit
 [[keys.command]]
