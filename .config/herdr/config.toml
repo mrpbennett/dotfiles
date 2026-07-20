@@ -103,6 +103,15 @@ description = "show hunk diff"
 width = "80%"
 height = "80%"
 
+# open k9s
+[[keys.command]]
+key = "prefix+shift+k"
+type = "popup"
+command = "k9s"
+description = "Open k9s"
+width = "85%"
+height = "85%"
+
 # open gh dash for pr reviews
 [[keys.command]]
 key = "prefix+shift+d"

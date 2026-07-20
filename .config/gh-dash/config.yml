@@ -40,8 +40,9 @@ defaults:
   preview:
     open: false
     width: 0.70
+    position: right
   prsLimit: 20
-  prApproveComment: LGTM
+  prApproveComment: lgtm
   issuesLimit: 20
   notificationsLimit: 20
   view: prs
