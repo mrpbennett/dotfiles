@@ -17,7 +17,7 @@ update_check = true
 
 ## which search mode to use
 ## possible values: prefix, fulltext, fuzzy, skim
-search_mode = "fuzzy"
+search_mode = "daemon-fuzzy"
 
 ## which filter mode to use by default
 ## possible values: "global", "host", "session", "session-preload", "directory", "workspace"
@@ -276,6 +276,8 @@ records = true
 ## If you provide a custom theme file, it should be  called "NAME.toml" and the theme below
 ## should be the stem, i.e. `theme = "NAME"` for your chosen NAME.
 name = "marine"
+enabled = true
+autostart = true
 
 ## Whether the theme manager should output normal or extra information to help fix themes.
 ## Boolean, true or false. If unset, left up to the theme manager.
@@ -301,6 +303,9 @@ width = "80%"
 height = "60%"
 
 [ui]
+
+[ai]
+enabled = true
 ## Columns to display in the interactive search, from left to right.
 ## The selection indicator (" > ") is always shown first implicitly.
 ##

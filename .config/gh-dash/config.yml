@@ -89,6 +89,38 @@ keybindings:
 
 repoPaths: {}
 theme:
+  # catppuccin latte
+  colors:
+    text:
+      primary: "#4c4f69"
+      secondary: "#1e66f5"
+      inverted: "#dce0e8"
+      faint: "#5c5f77"
+      warning: "#df8e1d"
+      success: "#40a02b"
+      error: "#d20f39"
+    background:
+      selected: "#ccd0da"
+    border:
+      primary: "#1e66f5"
+      secondary: "#bcc0cc"
+      faint: "#ccd0da"
+  # catppuccin macchiato
+  # colors:
+  #   text:
+  #     primary: "#cad3f5"
+  #     secondary: "#8aadf4"
+  #     inverted: "#181926"
+  #     faint: "#b8c0e0"
+  #     warning: "#eed49f"
+  #     success: "#a6da95"
+  #     error: "#ed8796"
+  #   background:
+  #     selected: "#363a4f"
+  #   border:
+  #     primary: "#8aadf4"
+  #     secondary: "#494d64"
+  #     faint: "#363a4f"
   ui:
     sectionsShowCount: true
     table:
