@@ -87,7 +87,7 @@ height = "70%"
 
 # open lazygit
 [[keys.command]]
-key = "prefix+shift+l"
+key = "prefix+alt+g"
 type = "popup"
 command = "lazygit"
 description = "run lazygit"
@@ -96,7 +96,7 @@ height = "90%"
 
 # open hunk diff
 [[keys.command]]
-key = "prefix+shift+h"
+key = "prefix+alt+h"
 type = "popup"
 command = "hunk diff"
 description = "show hunk diff"
@@ -105,7 +105,7 @@ height = "90%"
 
 # open k9s
 [[keys.command]]
-key = "prefix+shift+k"
+key = "prefix+alt+k"
 type = "popup"
 command = "k9s"
 description = "Open k9s"
@@ -114,7 +114,7 @@ height = "90%"
 
 # open gh dash for pr reviews
 [[keys.command]]
-key = "prefix+shift+p"
+key = "prefix+alt+d"
 type = "popup"
 command = "gh dash"
 description = "show gh dash to review PRs"
@@ -123,15 +123,16 @@ height = "90%"
 
 # open btop
 [[keys.command]]
-key = "prefix+shift+b"
+key = "prefix+alt+b"
 type = "popup"
 command = "btop"
 description = "run btop"
 width = "90%"
 height = "90%"
 
+###########################################
 # Override herdr's built-in "new worktree" key (prefix+shift+g) with worktrunk's
-# default-branch switch/create picker:
+###########################################
 [[keys.command]]
 key = "prefix+shift+g"
 type = "plugin_action"
