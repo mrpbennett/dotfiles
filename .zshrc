@@ -49,3 +49,4 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 # testing kickstarter.nvim
 alias ksnvim='NVIM_APPNAME="ksnvim" nvim'
+

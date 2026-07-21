@@ -19,6 +19,7 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
   # ---
   sudo -E apt-get install -y gcc
   sudo -E apt-get install -y zsh
+  sudo -E apt-get install -y nginx
 
   # sort .bashrc for homebrew to prevent failing ---
   echo >>"$HOME/.bashrc"
