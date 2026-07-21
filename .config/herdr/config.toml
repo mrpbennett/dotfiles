@@ -82,17 +82,17 @@ key = "prefix+f"
 type = "popup"
 command = "exec \"${SHELL:-sh}\""
 description = "open scratch terminal"
-width = "60%"
-height = "60%"
+width = "80%"
+height = "70%"
 
 # open lazygit
 [[keys.command]]
-key = "prefix+shift+g"
+key = "prefix+shift+l"
 type = "popup"
 command = "lazygit"
 description = "run lazygit"
-width = "80%"
-height = "80%"
+width = "90%"
+height = "90%"
 
 # open hunk diff
 [[keys.command]]
@@ -100,8 +100,8 @@ key = "prefix+shift+h"
 type = "popup"
 command = "hunk diff"
 description = "show hunk diff"
-width = "80%"
-height = "80%"
+width = "90%"
+height = "90%"
 
 # open k9s
 [[keys.command]]
@@ -109,17 +109,17 @@ key = "prefix+shift+k"
 type = "popup"
 command = "k9s"
 description = "Open k9s"
-width = "85%"
-height = "85%"
+width = "90%"
+height = "90%"
 
 # open gh dash for pr reviews
 [[keys.command]]
-key = "prefix+shift+d"
+key = "prefix+shift+p"
 type = "popup"
 command = "gh dash"
 description = "show gh dash to review PRs"
-width = "80%"
-height = "80%"
+width = "90%"
+height = "90%"
 
 # open btop
 [[keys.command]]
@@ -127,5 +127,26 @@ key = "prefix+shift+b"
 type = "popup"
 command = "btop"
 description = "run btop"
-width = "80%"
-height = "80%"
+width = "90%"
+height = "90%"
+
+# Override herdr's built-in "new worktree" key (prefix+shift+g) with worktrunk's
+# default-branch switch/create picker:
+[[keys.command]]
+key = "prefix+shift+g"
+type = "plugin_action"
+command = "worktrunk.open"
+description = "Worktree: switch / create from default branch"
+
+# Optional: bind current-branch creation separately.
+[[keys.command]]
+key = "prefix+shift+c"
+type = "plugin_action"
+command = "worktrunk.open-current"
+description = "Worktree: switch / create from current branch"
+
+[[keys.command]]
+key = "prefix+shift+d"
+type = "plugin_action"
+command = "worktrunk.remove"
+description = "Worktree: remove"
