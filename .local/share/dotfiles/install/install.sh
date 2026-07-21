@@ -13,9 +13,11 @@ if [[ "$(uname -s)" != "Darwin" ]]; then
 
   sudo -E apt-get update -y && sudo -E apt-get upgrade -y
   # install docker ---
-  curl -fsSL https://get.docker.com | sh
-  sudo usermod -aG docker "$(id -un)"
-  sudo -E apt-get install -y docker-compose-plugin
+  if ! command -v docker &>/dev/null; then
+    curl -fsSL https://get.docker.com | sh
+    sudo usermod -aG docker "$(id -un)"
+    sudo -E apt-get install -y docker-compose-plugin
+  fi
   # ---
   sudo -E apt-get install -y gcc
   sudo -E apt-get install -y zsh
