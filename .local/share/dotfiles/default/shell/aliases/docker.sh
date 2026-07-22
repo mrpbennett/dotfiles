@@ -1,4 +1,5 @@
 # DOCKER ---
+alias d="docker"
 alias dc="docker compose"
 alias dps="docker ps"
 alias dpa="docker ps -a"

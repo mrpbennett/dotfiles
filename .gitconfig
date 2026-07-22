@@ -56,9 +56,10 @@
     br = branch
     cp = cherry-pick
     rb = rebase
+    df = diff
 
     # Logging
-    lg = log --oneline --graph --decorate --all
+    lg = log --graph --topo-order --pretty='%w(100,0,6)%C(yellow)%h%C(bold)%C(black)%d %C(cyan)%ar %C(green)%an%n%C(bold)%C(white)%s %N' --abbrev-commit
     ll = log --oneline --decorate -20
     last = log -1 HEAD --stat
 
@@ -69,3 +70,4 @@
 
     # Cleanup
     gone = "!git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D"
+	  tree = log --graph --oneline --decorate --all

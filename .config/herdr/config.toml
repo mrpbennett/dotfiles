@@ -1,10 +1,8 @@
 onboarding = false
-agent_panel_sort = "priority"
 
 [terminal]
 default_shell = "zsh"
 shell_mode = "auto"
-new_cmd = "follow"
 
 [theme]
 auto_switch = true

@@ -7,51 +7,16 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
 BREWFILE="$SCRIPT_DIR/Brewfile"
 
-# Install some items just for Linux
-if [[ "$(uname -s)" != "Darwin" ]]; then
-  export DEBIAN_FRONTEND=noninteractive
-
-  sudo -E apt-get update -y && sudo -E apt-get upgrade -y
-  # install docker ---
-  if ! command -v docker &>/dev/null; then
-    curl -fsSL https://get.docker.com | sh
-    sudo usermod -aG docker "$(id -un)"
-    sudo -E apt-get install -y docker-compose-plugin
-  fi
-  # ---
-  sudo -E apt-get install -y gcc
-  sudo -E apt-get install -y zsh
-  sudo -E apt-get install -y nginx
-
-  # sort .bashrc for homebrew to prevent failing ---
-  echo >>"$HOME/.bashrc"
-  echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >>"$HOME/.bashrc"
-  [ -x /home/linuxbrew/.linuxbrew/bin/brew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-
-  # change shell to zsh ---
-  sudo chsh -s "$(which zsh)" "$(id -un)"
-fi
-
 # Install Homebrew if not found
 if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  if [[ "$(uname -s)" == "Darwin" ]]; then
     BREW_BIN=/opt/homebrew/bin/brew
     [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
-  else
-    BREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
-  fi
-  eval "$("$BREW_BIN" shellenv)"
+    eval "$("$BREW_BIN" shellenv)"
 fi
 
 brew install unzip
-
-# Casks (fonts, ghostty, mitmproxy, ngrok) are macOS-only
-if [[ "$(uname -s)" != "Darwin" ]]; then
-  export HOMEBREW_BUNDLE_CASK_SKIP="font-jetbrains-mono font-symbols-only-nerd-font ghostty mitmproxy ngrok"
-fi
-
 brew bundle --file="$BREWFILE"
 
 ###############################################################################
@@ -86,7 +51,4 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-in
 mise install
 
 source $REPO_ROOT/.local/share/dotfiles/install/ai/agents.sh
-
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  source "$REPO_ROOT/.local/share/dotfiles/install/macos/defaults.sh"
-fi
+source "$REPO_ROOT/.local/share/dotfiles/install/macos/defaults.sh"
