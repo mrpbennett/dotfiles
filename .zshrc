@@ -39,7 +39,7 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-source ~/.local/share/dotfiles/default/shell/rc.sh
+source ~/.config/shell/rc.sh
 
 # Pi
 export PATH="$HOME/.local/share/mise/installs/node/26.4.0/bin:$PATH"
@@ -49,4 +49,3 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 # testing kickstarter.nvim
 alias ksnvim='NVIM_APPNAME="ksnvim" nvim'
-

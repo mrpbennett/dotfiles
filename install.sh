@@ -50,5 +50,4 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-in
 # install all mise packages from .config/mise/config.toml
 mise install
 
-source $REPO_ROOT/.local/share/dotfiles/install/ai/agents.sh
-source "$REPO_ROOT/.local/share/dotfiles/install/macos/defaults.sh"
+source "$REPO_ROOT/macos/defaults.sh"
