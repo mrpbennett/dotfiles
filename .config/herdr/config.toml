@@ -56,7 +56,8 @@ focus_pane_up = "prefix+k"    # switch pane up
 focus_pane_right = "prefix+l" # switch pane right
 
 # tabs
-new_tab = "prefix+t"           # new tab with <prefix>
+#new_tab = "prefix+t"           # new tab with <prefix>
+new_tab = "prefix+c"
 rename_tab = "prefix+r"        # rename tab
 resize_mode = "prefix+shift+r" # resize mode
 

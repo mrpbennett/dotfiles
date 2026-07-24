@@ -27,7 +27,7 @@ brew bundle --file="$BREWFILE"
 # leave it alone.
 ###############################################################################
 echo "Now running STOW to generate symlinks..."
-stow --dir="$REPO_ROOT" --target="$HOME" .
+stow --no-folding --dir="$REPO_ROOT" --target="$HOME" .
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
