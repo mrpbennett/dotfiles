@@ -30,6 +30,7 @@ I live in the terminal. Everything in this repo exists to make that true without
 - [Security](#security)
 - [AI](#ai)
 - [Quick cheatsheet](#quick-cheatsheet)
+- [Tmux keybindings](#tmux-keybindings)
 
 ---
 
@@ -338,5 +339,73 @@ stow --delete --target="$HOME" .
 # Verify a specific symlink
 readlink ~/.config/fish
 ```
+
+</details>
+
+---
+
+## Tmux keybindings
+
+<details>
+<summary>All custom keybindings — prefix is <code>Ctrl+s</code></summary>
+
+### Config
+
+| Key | Action |
+| --- | ------ |
+| `prefix + q` | Reload config |
+| `prefix + ?` | Show all keybindings (popup) |
+
+### Pane splits
+
+| Key | Action |
+| --- | ------ |
+| `prefix + \|` | Split right |
+| `prefix + -` | Split down |
+| `prefix + v` | Split right |
+| `prefix + x` | Kill pane |
+| `prefix + f` | Floating shell popup (80×60%) |
+| `Alt + Enter` | Split down (no prefix) |
+| `Alt + Shift + Enter` | Split right (no prefix) |
+| `Alt + Escape` | Kill pane (no prefix) |
+
+### Pane navigation
+
+| Key | Action |
+| --- | ------ |
+| `prefix + h/j/k/l` | Navigate panes (vim-style) |
+| `Ctrl + Alt + ←/→/↑/↓` | Navigate panes (no prefix) |
+
+### Pane resize
+
+| Key | Action |
+| --- | ------ |
+| `prefix + H/J/K/L` | Resize pane 5 cells |
+| `Ctrl + Alt + Shift + ←/→/↑/↓` | Resize pane 5 cells (no prefix) |
+
+### Windows
+
+| Key | Action |
+| --- | ------ |
+| `prefix + c` / `prefix + t` | New window |
+| `prefix + r` | Rename window |
+| `prefix + k` | Kill window |
+
+### Sessions
+
+| Key | Action |
+| --- | ------ |
+| `prefix + C` | New session |
+| `prefix + R` | Rename session |
+| `prefix + K` | Kill session |
+| `prefix + T` | Sesh session picker (fzf popup) |
+
+### Copy mode (vi)
+
+| Key | Action |
+| --- | ------ |
+| `prefix + [` | Enter copy mode |
+| `v` | Begin selection |
+| `y` | Copy selection and exit |
 
 </details>
