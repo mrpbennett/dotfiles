@@ -34,6 +34,14 @@ I live in the terminal. Everything in this repo exists to make that true without
 
 ---
 
+## Install
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/mrpbennett/dotfiles/main/install.sh | bash
+```
+
+Log out and back in after installation before using Docker without `sudo`.
+
 ## What's in here
 
 All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
@@ -351,61 +359,61 @@ readlink ~/.config/fish
 
 ### Config
 
-| Key | Action |
-| --- | ------ |
-| `prefix + q` | Reload config |
+| Key          | Action                       |
+| ------------ | ---------------------------- |
+| `prefix + q` | Reload config                |
 | `prefix + ?` | Show all keybindings (popup) |
 
 ### Pane splits
 
-| Key | Action |
-| --- | ------ |
-| `prefix + \|` | Split right |
-| `prefix + -` | Split down |
-| `prefix + v` | Split right |
-| `prefix + x` | Kill pane |
-| `prefix + f` | Floating shell popup (80×60%) |
-| `Alt + Enter` | Split down (no prefix) |
-| `Alt + Shift + Enter` | Split right (no prefix) |
-| `Alt + Escape` | Kill pane (no prefix) |
+| Key                   | Action                        |
+| --------------------- | ----------------------------- |
+| `prefix + \|`         | Split right                   |
+| `prefix + -`          | Split down                    |
+| `prefix + v`          | Split right                   |
+| `prefix + x`          | Kill pane                     |
+| `prefix + f`          | Floating shell popup (80×60%) |
+| `Alt + Enter`         | Split down (no prefix)        |
+| `Alt + Shift + Enter` | Split right (no prefix)       |
+| `Alt + Escape`        | Kill pane (no prefix)         |
 
 ### Pane navigation
 
-| Key | Action |
-| --- | ------ |
-| `prefix + h/j/k/l` | Navigate panes (vim-style) |
+| Key                    | Action                     |
+| ---------------------- | -------------------------- |
+| `prefix + h/j/k/l`     | Navigate panes (vim-style) |
 | `Ctrl + Alt + ←/→/↑/↓` | Navigate panes (no prefix) |
 
 ### Pane resize
 
-| Key | Action |
-| --- | ------ |
-| `prefix + H/J/K/L` | Resize pane 5 cells |
+| Key                            | Action                          |
+| ------------------------------ | ------------------------------- |
+| `prefix + H/J/K/L`             | Resize pane 5 cells             |
 | `Ctrl + Alt + Shift + ←/→/↑/↓` | Resize pane 5 cells (no prefix) |
 
 ### Windows
 
-| Key | Action |
-| --- | ------ |
-| `prefix + c` / `prefix + t` | New window |
-| `prefix + r` | Rename window |
-| `prefix + k` | Kill window |
+| Key                         | Action        |
+| --------------------------- | ------------- |
+| `prefix + c` / `prefix + t` | New window    |
+| `prefix + r`                | Rename window |
+| `prefix + k`                | Kill window   |
 
 ### Sessions
 
-| Key | Action |
-| --- | ------ |
-| `prefix + C` | New session |
-| `prefix + R` | Rename session |
-| `prefix + K` | Kill session |
+| Key          | Action                          |
+| ------------ | ------------------------------- |
+| `prefix + C` | New session                     |
+| `prefix + R` | Rename session                  |
+| `prefix + K` | Kill session                    |
 | `prefix + T` | Sesh session picker (fzf popup) |
 
 ### Copy mode (vi)
 
-| Key | Action |
-| --- | ------ |
-| `prefix + [` | Enter copy mode |
-| `v` | Begin selection |
-| `y` | Copy selection and exit |
+| Key          | Action                  |
+| ------------ | ----------------------- |
+| `prefix + [` | Enter copy mode         |
+| `v`          | Begin selection         |
+| `y`          | Copy selection and exit |
 
 </details>

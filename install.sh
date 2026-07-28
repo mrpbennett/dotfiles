@@ -1,19 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
+REPO_DIR="$HOME/.local/share/dotfiles"
 
 export NONINTERACTIVE=1
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" && pwd)"
-REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../.." && pwd)"
-BREWFILE="$SCRIPT_DIR/Brewfile"
+DOTFILES_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$REPO_DIR}")" 2>/dev/null && pwd || true)
+
+if [[ ! -d $DOTFILES_DIR/.git ]]; then
+  DOTFILES_DIR=$REPO_DIR
+  [[ -d $DOTFILES_DIR/.git ]] || git clone --depth 1 https://github.com/mrpbennett/dotfiles.git "$DOTFILES_DIR"
+fi
+
+BREWFILE="$DOTFILES_DIR/.local/share/dotfiles/Brewfile"
 
 # Install Homebrew if not found
 if ! command -v brew &>/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    BREW_BIN=/opt/homebrew/bin/brew
-    [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
-    eval "$("$BREW_BIN" shellenv)"
+  BREW_BIN=/opt/homebrew/bin/brew
+  [ -x "$BREW_BIN" ] || BREW_BIN=/usr/local/bin/brew
+  eval "$("$BREW_BIN" shellenv)"
 fi
 
 brew install unzip
@@ -27,7 +33,7 @@ brew bundle --file="$BREWFILE"
 # leave it alone.
 ###############################################################################
 echo "Now running STOW to generate symlinks..."
-stow --no-folding --dir="$REPO_ROOT" --target="$HOME" .
+stow --no-folding --dir="$DOTFILES_DIR" --target="$HOME" .
 
 # Install oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -50,4 +56,4 @@ curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-in
 # install all mise packages from .config/mise/config.toml
 mise install
 
-source "$REPO_ROOT/macos/defaults.sh"
+source "$DOTFILES_DIR/.local/share/dotfiles/macos/defaults.sh"
