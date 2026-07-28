@@ -36,9 +36,9 @@ detach = "prefix+d"
 copy_mode = "prefix+["
 
 # Panes
-split_vertical = ["prefix+|", "prefix+h","alt+enter"]
+split_vertical = ["prefix+|", "alt+enter"]
 split_horizontal = ["prefix+minus", "prefix+v","alt+shift+enter"]
-close_pane = ["prefix+x", "alt+esc"]
+close_pane = ["alt+esc"]
 toggle_sidebar = "prefix+b"
 
 focus_pane_left = ["prefix+h", "ctrl+alt+left"]
@@ -51,8 +51,8 @@ rename_pane = "prefix+shift+o"
 # Windows -> tabs
 new_tab = "prefix+c"
 rename_tab = "prefix+r"
-close_tab = "prefix+k"
-switch_tab = ["prefix+1...9","alt+1...9"]
+close_tab = "prefix+x"
+#switch_tab = ["prefix+1...9","alt+1...9"]
 previous_tab = ["prefix+p", "alt+left"]
 next_tab = ["prefix+n", "alt+right"]
 #resize_mode = "prefix+alt+r"
@@ -131,13 +131,6 @@ key = "prefix+shift+g"
 type = "plugin_action"
 command = "worktrunk.open"
 description = "Worktree: switch / create from default branch"
-
-# Optional: bind current-branch creation separately.
-[[keys.command]]
-key = "prefix+shift+c"
-type = "plugin_action"
-command = "worktrunk.open-current"
-description = "Worktree: switch / create from current branch"
 
 [[keys.command]]
 key = "prefix+shift+d"
