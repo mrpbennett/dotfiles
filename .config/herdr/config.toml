@@ -3,6 +3,7 @@ onboarding = false
 [terminal]
 default_shell = "zsh"
 shell_mode = "auto"
+new_cwd = "follow"
 
 [theme]
 auto_switch = true
@@ -15,6 +16,8 @@ show_agent_labels_on_pane_borders = true
 sidebar_collapsed_mode = "hidden"        # completely hides the sidebar (<prefix> + b) to open - v0.7.3
 confirm_close = false
 pane_gaps = false
+prompt_new_tab_name = false
+mouse_capture = true
 
 [ui.toast]
 delivery = "herdr"
@@ -22,17 +25,6 @@ delivery = "herdr"
 [ui.toast.herdr]
 position = "top-right"
 
-[ui.toast.clipboard]
-enabled = true
-position = "top-right"
-
-[ui.sidebar.spaces]
-row_gap = 1
-rows = [["state_icon", "workspace"], ["branch", "git_status"]]
-
-[ui.sidebar.agents]
-row_gap = 1
-rows = [["state_icon", "workspace"], ["tab", "agent"]]
 
 ###########################################
 # an attempt to mirror my tmux key bindings
@@ -41,35 +33,42 @@ rows = [["state_icon", "workspace"], ["tab", "agent"]]
 [keys]
 prefix = "ctrl+s" # leader
 
-# navigating
-goto = "prefix+g"
+reload_config = "prefix+q"
+help = "prefix+?"
+detach = "prefix+d"
 
-# panes
-split_vertical = "prefix+|"       # split window right
-split_horizontal = "prefix+minus" # split window bottom
-close_pane = "prefix+x"           # kill a pane
-toggle_sidebar = "prefix+b"       # toggle sidebar
+# Copy mode
+copy_mode = "prefix+["
 
-focus_pane_left = "prefix+h"  # switch pane left
-focus_pane_down = "prefix+j"  # switch pane down
-focus_pane_up = "prefix+k"    # switch pane up
-focus_pane_right = "prefix+l" # switch pane right
+# Panes
+split_vertical = ["prefix+|", "prefix+h","alt+enter"]
+split_horizontal = ["prefix+minus", "prefix+v","alt+shift+enter"]
+close_pane = ["prefix+x", "alt+esc"]
+toggle_sidebar = "prefix+b"
 
-# tabs
-#new_tab = "prefix+t"           # new tab with <prefix>
+focus_pane_left = ["prefix+h", "ctrl+alt+left"]
+focus_pane_down = ["prefix+j", "ctrl+alt+down"]
+focus_pane_up = ["prefix+k", "ctrl+alt+up"]
+focus_pane_right = ["prefix+l", "ctrl+alt+right"]
+
+rename_pane = "prefix+shift+o"
+
+# Windows -> tabs
 new_tab = "prefix+c"
-rename_tab = "prefix+r"        # rename tab
-resize_mode = "prefix+shift+r" # resize mode
+rename_tab = "prefix+r"
+close_tab = "prefix+k"
+switch_tab = ["prefix+1...9","alt+1...9"]
+previous_tab = ["prefix+p", "alt+left"]
+next_tab = ["prefix+n", "alt+right"]
+#resize_mode = "prefix+alt+r"
 
-# workspaces
-new_workspace = "prefix+shift+n"
-rename_workspace = "prefix+shift+w"
-close_workspace = "prefix+shift+x"  # close workspace
-navigate_workspace_up = "k"         # move up workspaces
-navigate_workspace_down = "j"       # move down workspaces
+# Sessions -> workspaces
+new_workspace = "prefix+shift+c"
+rename_workspace = "prefix+shift+r"
+close_workspace = "prefix+shift+k"
+previous_workspace = ["prefix+shift+p", "alt+up"]
+next_workspace = ["prefix+shift+n", "alt+down"]
 
-# sessions
-detach = "prefix+q" # detach from session
 
 ###########################################
 # Open useful TUI apps right within Herdr
