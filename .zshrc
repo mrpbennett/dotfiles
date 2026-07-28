@@ -41,11 +41,6 @@ compinit
 
 source ~/.config/shell/rc.sh
 
-# Pi
-export PATH="$HOME/.local/share/mise/installs/node/26.4.0/bin:$PATH"
-
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
-# testing kickstarter.nvim
-alias ksnvim='NVIM_APPNAME="ksnvim" nvim'

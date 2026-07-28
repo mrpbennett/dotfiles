@@ -25,11 +25,6 @@ delivery = "herdr"
 [ui.toast.herdr]
 position = "top-right"
 
-
-###########################################
-# an attempt to mirror my tmux key bindings
-###########################################
-
 [keys]
 prefix = "ctrl+s" # leader
 
