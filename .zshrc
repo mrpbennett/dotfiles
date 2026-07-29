@@ -14,7 +14,6 @@ source $ZSH/oh-my-zsh.sh
 # atuin
 . "$HOME/.atuin/bin/env"
 
-
 # VI MODE START ---
 bindkey -v
 KEYTIMEOUT=1
@@ -39,8 +38,7 @@ autoload -Uz compinit
 compinit
 # End of Docker CLI completions
 
-source ~/.config/shell/rc.sh
+source ~/.config/shell/all.sh
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
-

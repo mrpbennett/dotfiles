@@ -336,10 +336,10 @@ The accompanying [`.claude/skills/`](.claude/skills/) directory gives the agent 
 stow -nv --target="$HOME" .
 
 # Create / update symlinks
-stow --target="$HOME" .
+stow --no-folding --target="$HOME" .
 
 # Sync after adding or moving configs
-stow --restow --target="$HOME" .
+stow --restow --no-folding --target="$HOME" .
 
 # Remove all symlinks
 stow --delete --target="$HOME" .
