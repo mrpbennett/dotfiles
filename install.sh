@@ -50,9 +50,6 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 mkdir -p ~/.config/tmux/plugins/tmux
 [ -d "$HOME/.config/tmux/plugins/tmux/.git" ] || git clone https://github.com/catppuccin/tmux.git "$HOME/.config/tmux/plugins/tmux"
 
-# Install Atuin
-curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
-
 # install all mise packages from .config/mise/config.toml
 mise install
 

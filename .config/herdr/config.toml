@@ -13,7 +13,7 @@ dark_name = "catppuccin"
 
 [ui]
 show_agent_labels_on_pane_borders = true
-sidebar_collapsed_mode = "hidden"        # completely hides the sidebar (<prefix> + b) to open - v0.7.3
+sidebar_collapsed_mode = "hidden"
 confirm_close = false
 pane_gaps = false
 prompt_new_tab_name = false
@@ -36,15 +36,15 @@ detach = "prefix+d"
 copy_mode = "prefix+["
 
 # Panes
-split_vertical = ["prefix+|", "alt+enter"]
-split_horizontal = ["prefix+minus", "prefix+v","alt+shift+enter"]
+split_vertical = ["prefix+|", "prefix+h", "alt+enter"]
+split_horizontal = ["prefix+minus", "prefix+v", "alt+shift+enter"]
 close_pane = ["alt+esc"]
 toggle_sidebar = "prefix+b"
 
-focus_pane_left = ["prefix+h", "ctrl+alt+left"]
-focus_pane_down = ["prefix+j", "ctrl+alt+down"]
-focus_pane_up = ["prefix+k", "ctrl+alt+up"]
-focus_pane_right = ["prefix+l", "ctrl+alt+right"]
+focus_pane_left = ["ctrl+alt+h", "ctrl+alt+left"]
+focus_pane_down = ["ctrl+alt+j", "ctrl+alt+down"]
+focus_pane_up = ["ctrl+alt+k", "ctrl+alt+up"]
+focus_pane_right = ["ctrl+alt+l", "ctrl+alt+right"]
 
 rename_pane = "prefix+shift+o"
 
@@ -52,7 +52,7 @@ rename_pane = "prefix+shift+o"
 new_tab = "prefix+c"
 rename_tab = "prefix+r"
 close_tab = "prefix+x"
-#switch_tab = ["prefix+1...9","alt+1...9"]
+#switch_tab = ["prefix+1...9", "alt+1...9"]
 previous_tab = ["prefix+p", "alt+left"]
 next_tab = ["prefix+n", "alt+right"]
 #resize_mode = "prefix+alt+r"
