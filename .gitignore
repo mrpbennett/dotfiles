@@ -29,3 +29,4 @@
 !.claude/skills/neovim-lua-expert/
 !.claude/skills/neovim-lua-expert/**
 
+.config/gh/hosts.yml
