@@ -26,7 +26,7 @@ delivery = "herdr"
 position = "top-right"
 
 [keys]
-prefix = "ctrl+s" # leader
+prefix = "ctrl+space"
 
 reload_config = "prefix+q"
 help = "prefix+?"

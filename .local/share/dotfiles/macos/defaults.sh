@@ -10,3 +10,7 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -i
 defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool false
+
+# Disable input sources to allow for tmux / herdr prefix
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 "{ enabled = 0; }"
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 61 "{ enabled = 0; }"
