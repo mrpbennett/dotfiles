@@ -7,17 +7,20 @@ gpg_verify = false
 
 [tools]
 argocd = "latest"
+atuin = "latest"
 aws-cli = { version = "latest", symlink_bins = "true" }
-go = "latest"
 helm = "latest"
 java = "latest"
 k9s = "latest"
 krew = "latest"
 kubectl = "latest"
-node = "latest"
-python = "latest"
 terraform = "latest"
 ty = "latest"
 uv = "latest"
 vault = "latest"
-atuin = "latest"
+
+
+node = "latest"
+python = "latest"
+rust = "latest"
+go = "latest"

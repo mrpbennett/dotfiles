@@ -17,10 +17,10 @@ alias dev="cd ~/Developer"
 alias dt="cd ~/Desktop"
 
 # HELPERS ---
-alias e="exit"  # a swifter exit
-alias v="nvim"  # quicker nvim
-alias bt="btop" # better activity monitor
-alias t="tmux attach || tmux new -s Work"  # quicker tmux
+alias e="exit"                               # a swifter exit
+alias v="nvim"                               # quicker nvim
+alias bt="btop"                              # better activity monitor
+alias t="tmux attach || tmux new -s Session" # quicker tmux
 alias h="herdr"
 alias cat="bat"     # a better cat
 alias curl="curlie" # a better curl
