@@ -19,18 +19,24 @@ return {
       vim.g.everforest_better_performance = 1
     end,
   },
-  -- Auto dark/light mode switching based on macOS appearance
   {
-    "f-person/auto-dark-mode.nvim",
-    lazy = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     opts = {
-      set_dark_mode = function()
-        vim.cmd.colorscheme("catppuccin-macchiato")
-      end,
-      set_light_mode = function()
-        vim.cmd.colorscheme("catppuccin-latte")
-      end,
+      flavour = "auto",
+      background = {
+        light = "latte",
+        dark = "macchiato",
+      },
+      term_colors = true,
+    },
+  },
+
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin-nvim",
     },
   },
 }
