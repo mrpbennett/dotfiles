@@ -1,55 +1,43 @@
-
-# CLI tools
 brew "atuin"
 brew "bat"
 brew "btop"
 brew "carapace"
 brew "curlie"
 brew "eza"
-brew "fd"
-brew "fzf"
-brew "jq"
-brew "ripgrep"
-brew "sevenzip"
-brew "stow"
-brew "tree"
-brew "wget"
-brew "zoxide"
-
-# Shells & Prompts
-brew "fish"
-brew "nushell"
-brew "starship"
-
-# Dev tools
-brew "gh"
-brew "lazygit"
-brew "neovim"
-brew "sqruff"
-brew "vercel-cli"
-brew "worktrunk"
-brew "lazydocker"
-brew "k9s"
-brew "hunk"
-brew "mise"
-
-# Media
 brew "ffmpeg-full"
+brew "fd"
+brew "fish"
+brew "fzf"
+brew "gh"
+brew "glow"
+brew "herdr"
+brew "hunk"
 brew "imagemagick-full"
+brew "jq"
+brew "k9s"
+brew "lazygit"
+brew "lazydocker"
+brew "libpq"
+brew "mise"
+brew "neovim"
+brew "nushell"
 brew "poppler"
 brew "resvg"
-
-# Multiplexers
+brew "ripgrep"
 brew "sesh"
-brew "tmux"
-brew "herdr"
-
-# TUI apps
+brew "sevenzip"
+brew "sqruff"
+brew "starship"
+brew "stow"
 brew "television"
+brew "tmux"
+brew "tree"
+brew "vercel-cli"
 brew "yazi"
-
-# Postgres client (standalone, no server)
-brew "libpq"
+brew "wget"
+brew "worktrunk"
+brew "yq"
+brew "zoxide"
 
 # MacOS packages - will be skipped on Ubuntu
 cask "font-jetbrains-mono"
