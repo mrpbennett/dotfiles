@@ -9,7 +9,7 @@ new_cwd = "follow"
 auto_switch = true
 name = "catppuccin-latte"
 light_name = "catppuccin-latte"
-dark_name = "catppuccin"
+dark_name = "catppuccin-macchiato"
 
 [ui]
 show_agent_labels_on_pane_borders = true
@@ -52,9 +52,9 @@ rename_pane = "prefix+shift+o"
 new_tab = "prefix+c"
 rename_tab = "prefix+r"
 close_tab = "prefix+x"
-#switch_tab = ["prefix+1...9", "alt+1...9"]
-previous_tab = ["prefix+p", "alt+left"]
-next_tab = ["prefix+n", "alt+right"]
+switch_tab = ["prefix+1..9", "alt+1..9"]
+previous_tab = ["prefix+p", "alt+left", "ctrl+alt+["]
+next_tab = ["prefix+n", "alt+right", "ctrl+alt+]"]
 #resize_mode = "prefix+alt+r"
 
 # Sessions -> workspaces
