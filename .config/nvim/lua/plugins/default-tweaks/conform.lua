@@ -17,13 +17,26 @@ return {
     formatters = {
       sqruff = {
         -- sqruff fix emits an extra trailing newline on stdout; strip trailing blank lines via sed.
+        -- Dialect is inferred from the filename prefix (bq_/pg_/trino_) since sqruff
+        -- doesn't merge a project-local .sqruff with this shared config.
         command = "sh",
-        args = {
-          "-c",
-          "sqruff fix --config "
-            .. vim.fn.expand("~/.config/sqruff/.sqruff")
-            .. " - | sed -e :a -e '/^$/{$d;N;ba' -e '}'",
-        },
+        args = function(_, ctx)
+          local name = vim.fn.fnamemodify(ctx.filename, ":t"):lower()
+          local dialect = "trino"
+          if name:match("^bq[_%.]") then
+            dialect = "bigquery"
+          elseif name:match("^pg[_%.]") or name:match("^postgres[_%.]") then
+            dialect = "postgres"
+          end
+          return {
+            "-c",
+            "sqruff fix --config "
+              .. vim.fn.expand("~/.config/sqruff/.sqruff")
+              .. " --dialect "
+              .. dialect
+              .. " - | sed -e :a -e '/^$/{$d;N;ba' -e '}'",
+          }
+        end,
         stdin = true,
       },
       yamlfmt = {

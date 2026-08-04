@@ -22,7 +22,7 @@ enabled = true
 autostart = true
 
 [theme]
-name = "catppuccin-latte-blue"
+name = "catppuccin-macchiato-blue"
 
 [ai]
 enabled = true

@@ -255,8 +255,8 @@ git:
   #
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   # for more information.
-  pagers:
-    - pager: hunk pager --mode split
+  diffRenderers:
+    - command: hunk pager --mode split
   # Config relating to committing
   commit:
     # If true, pass '--signoff' flag when committing
@@ -499,7 +499,7 @@ keybinding:
     prevTab: '['
     nextScreenMode: +
     prevScreenMode: _
-    cyclePagers: '|'
+    cycleDiffRenderers: '|'
     undo: z
     redo: Z
     filteringMenu: <ctrl+s>
