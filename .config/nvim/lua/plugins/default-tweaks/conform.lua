@@ -17,7 +17,7 @@ return {
     formatters = {
       sqruff = {
         -- sqruff fix emits an extra trailing newline on stdout; strip trailing blank lines via sed.
-        -- Dialect is inferred from the filename prefix (bq_/pg_/trino_) since sqruff
+        -- Dialect is inferred from the filename prefix (bq_/pg_/trino_/vert_) since sqruff
         -- doesn't merge a project-local .sqruff with this shared config.
         command = "sh",
         args = function(_, ctx)
@@ -27,6 +27,8 @@ return {
             dialect = "bigquery"
           elseif name:match("^pg[_%.]") or name:match("^postgres[_%.]") then
             dialect = "postgres"
+          elseif name:match("^vert[_%.]") then
+            dialect = "vertica"
           end
           return {
             "-c",
