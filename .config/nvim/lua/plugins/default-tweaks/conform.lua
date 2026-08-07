@@ -23,7 +23,9 @@ return {
         args = function(_, ctx)
           local name = vim.fn.fnamemodify(ctx.filename, ":t"):lower()
           local dialect = "trino"
-          if name:match("^bq[_%.]") then
+          if name:match("^tr[_%.]") then
+            dialect = "trino"
+          elseif name:match("^bq[_%.]") then
             dialect = "bigquery"
           elseif name:match("^pg[_%.]") or name:match("^postgres[_%.]") then
             dialect = "postgres"

@@ -42,3 +42,6 @@ source ~/.config/shell/all.sh
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# Pi
+export PATH="/Users/pbennett/.local/share/mise/installs/node/26.6.0/bin:$PATH"
