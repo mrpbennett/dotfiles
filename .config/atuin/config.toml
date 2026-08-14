@@ -1,6 +1,6 @@
-db_path = "~/.history.db"
-key_path = "~/.key"
-session_path = "~/.session"
+db_path = "~/.atuin/.history.db"
+key_path = "~/.atuin/.key"
+session_path = "~/.atuin/.session"
 dialect = "uk"
 auto_sync = true
 update_check = true
@@ -26,6 +26,10 @@ name = "catppuccin-macchiato-blue"
 
 [ai]
 enabled = true
+model = "fast"
 
 [sync]
+enabled = true
+
+[dotfiles]
 enabled = true

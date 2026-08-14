@@ -1,15 +1,16 @@
+-- https://github.com/neovim/nvim-lspconfig
+-- lsp config
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
+        --
+        bashls = {},
+        --
         yamlls = {
           settings = {
             yaml = {
-              schemaStore = {
-                enable = true,
-                url = "https://www.schemastore.org/api/json/catalog.json",
-              },
               schemas = {
                 kubernetes = {
                   "*/k8s/**/*.yaml",
@@ -20,6 +21,7 @@ return {
             },
           },
         },
+        --
       },
     },
   },

@@ -4,8 +4,8 @@
 
 -- Enabling the mouse
 vim.opt.mouse = "a"
--- Disable Swap
 vim.opt.swapfile = false
+vim.opt.autoread = true
 
 -- Stop auto comments
 vim.opt.formatoptions:remove({ "c", "r", "o" })

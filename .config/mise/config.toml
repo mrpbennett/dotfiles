@@ -15,11 +15,12 @@ k9s = "latest"
 krew = "latest"
 kubectl = "latest"
 terraform = "latest"
+ruff = "latest"
 ty = "latest"
 uv = "latest"
 vault = "latest"
 
-
+lua = "latest"
 node = "latest"
 python = "latest"
 rust = "latest"

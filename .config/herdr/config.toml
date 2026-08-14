@@ -18,6 +18,7 @@ confirm_close = false
 pane_gaps = false
 prompt_new_tab_name = false
 mouse_capture = true
+tab_bar_right = [{ type = "zoom" }, { type = "hostname" }]
 
 [ui.toast]
 delivery = "herdr"
@@ -36,8 +37,8 @@ detach = "prefix+d"
 copy_mode = "prefix+["
 
 # Panes
-split_vertical = ["prefix+|", "prefix+h", "alt+enter"]
-split_horizontal = ["prefix+minus", "prefix+v", "alt+shift+enter"]
+split_vertical = ["prefix+|", "prefix+v", "alt+enter"]
+split_horizontal = ["prefix+minus", "prefix+h", "alt+shift+enter"]
 close_pane = ["alt+esc"]
 toggle_sidebar = "prefix+b"
 
@@ -62,7 +63,7 @@ new_workspace = "prefix+shift+c"
 rename_workspace = "prefix+shift+r"
 close_workspace = "prefix+shift+k"
 previous_workspace = ["prefix+shift+p", "alt+up", "alt+k"]
-next_workspace = ["prefix+shift+n", "alt+down","alt+j"]
+next_workspace = ["prefix+shift+n", "alt+down", "alt+j"]
 
 
 ###########################################

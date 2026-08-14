@@ -4,4 +4,4 @@
 \.gitignore
 README\.md
 assets
-
+^/\.config/herdr/(?!config\.toml$|plugins\.json$).*
