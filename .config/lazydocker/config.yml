@@ -50,6 +50,11 @@ commandTemplates:
   dockerComposeConfig: '{{ .DockerCompose }} config'
   checkDockerComposeConfig: '{{ .DockerCompose }} config --quiet'
   serviceTop: '{{ .DockerCompose }} top {{ .Service.Name }}'
+customCommands:
+  images:
+    - name: run image
+      command: docker run -it {{ .Image.Name }}:{{ .Image.Tag }}
+      attach: true
 oS:
   openCommand: open {{filename}}
   openLinkCommand: open {{link}}
