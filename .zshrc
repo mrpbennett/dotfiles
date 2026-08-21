@@ -11,9 +11,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# atuin
-. "$HOME/.atuin/bin/env"
-
 # VI MODE START ---
 bindkey -v
 KEYTIMEOUT=1
@@ -45,3 +42,4 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 # Pi
 export PATH="/Users/pbennett/.local/share/mise/installs/node/26.6.0/bin:$PATH"
+eval "$(atuin init zsh)"

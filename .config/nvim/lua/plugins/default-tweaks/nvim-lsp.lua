@@ -8,6 +8,16 @@ return {
         --
         bashls = {},
         --
+        ty = {
+          cmd = function(dispatchers, config)
+            return vim.lsp.rpc.start({ "ty", "server" }, dispatchers, {
+              cwd = config.root_dir,
+              env = config.cmd_env,
+              detached = config.detached,
+            })
+          end,
+        },
+        --
         yamlls = {
           settings = {
             yaml = {

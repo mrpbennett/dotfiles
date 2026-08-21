@@ -7,6 +7,8 @@ return {
       sh = { "bash" },
       bash = { "bash" },
       --
+      python = { "ruff" },
+      --
       sql = { "sqruff" },
       --
       yaml = { "yamllint" },
@@ -27,7 +29,7 @@ return {
         vim.fn.expand("~/.config/sqruff/.sqruff"),
         "--dialect",
         function()
-          return require("util.sqruff").dialect(vim.api.nvim_buf_get_name(0))
+          return require("utils.sqruff").dialect(vim.api.nvim_buf_get_name(0))
         end,
         "-",
       }

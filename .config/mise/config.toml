@@ -25,3 +25,6 @@ node = "latest"
 python = "latest"
 rust = "latest"
 go = "latest"
+
+# bucky install --
+"go:github.com/mrpbennett/bucky/cmd/bucky" = "latest"

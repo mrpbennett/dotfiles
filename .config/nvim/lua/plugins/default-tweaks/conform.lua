@@ -36,7 +36,7 @@ return {
           -- doesn't merge a project-local .sqruff with this shared config.
           command = "sh",
           args = function(_, ctx)
-            local dialect = require("util.sqruff").dialect(ctx.filename)
+            local dialect = require("utils.sqruff").dialect(ctx.filename)
             return {
               "-c",
               "sqruff fix --format none --config "
