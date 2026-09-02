@@ -4,7 +4,6 @@ export EDITOR=nvim
 export SUDO_EDITOR=nvim
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml" # Starship Prompt
 export POETRY_VIRTUALENVS_IN_PROJECT=true
-export GITHUB_TOKEN="$(gh auth token)"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH=$HOME/.opencode/bin:$PATH
