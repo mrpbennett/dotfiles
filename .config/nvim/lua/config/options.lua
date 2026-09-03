@@ -13,9 +13,9 @@ vim.opt.shell = "/bin/zsh"
 -- Stop auto comments
 vim.opt.formatoptions:remove({ "c", "r", "o" })
 
--- Python
+-- python lazyvim
+-- this set by lang.python -> vim.g.lazyvim_python_ruff = "ruff"
 vim.g.lazyvim_python_lsp = "ty"
-vim.g.lazyvim_python_ruff = "ruff"
 
 -- Disable the option to require a Prettier config file
 vim.g.lazyvim_prettier_needs_config = false

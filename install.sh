@@ -54,3 +54,4 @@ mkdir -p ~/.config/tmux/plugins/tmux
 mise install
 
 source "$DOTFILES_DIR/.local/share/dotfiles/macos/defaults.sh"
+# testing....

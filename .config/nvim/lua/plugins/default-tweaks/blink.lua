@@ -8,6 +8,12 @@ return {
     ---@type blink.cmp.Config
 
     opts = {
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "orbit" },
+        providers = {
+          orbit = { name = "orbit", module = "orbit.blink" },
+        },
+      },
       keymap = {
         preset = "super-tab",
       },
