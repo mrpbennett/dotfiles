@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-REPO_DIR="$HOME/.local/share/dotfiles"
+REPO_DIR="$HOME/.dotfiles"
 
 export NONINTERACTIVE=1
 
