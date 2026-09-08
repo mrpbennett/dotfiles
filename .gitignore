@@ -20,6 +20,8 @@
 
 # Keep these
 !.claude/CLAUDE.md
+!.claude/settings.json
+!.claude/statusline.sh
 !.claude/skills/til/
 !.claude/skills/til/**
 !.claude/skills/changelog/

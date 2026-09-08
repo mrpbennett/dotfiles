@@ -26,5 +26,8 @@ python = "latest"
 rust = "latest"
 go = "latest"
 
+claude = "latest"
+opencode = "latest"
+
 # bucky install --
 "go:github.com/mrpbennett/bucky/cmd/bucky" = "latest"

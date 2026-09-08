@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*)",
+      "WebFetch",
+      "Read"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/secrets/*)",
+      "Read(**/*credential*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf .)",
+      "Bash(rm -f)",
+      "Bash(rm -rf)",
+      "Bash(> /)",
+      "Bash(dd if=/dev/zero)",
+      "Bash(dd if=/dev/null)",
+      "Bash(mkfs)",
+      "Bash(fdisk)",
+      "Bash(kill -9 1)",
+      "Bash(chmod -R 777 /)",
+      "Bash(chown -R)",
+      "Bash(git reset --hard)",
+      "Bash(git push --force)",
+      "Bash(git push -f)",
+      "Bash(git clean -fd)",
+      "Bash(git clean -fdx)",
+      "Bash(git clean -fx)",
+      "Bash(git checkout -- .)",
+      "Bash(git restore .)",
+      "Bash(git branch -D)",
+      "Bash(git push origin --delete)",
+      "Bash(git stash clear)",
+      "Bash(git reflog expire)",
+      "Bash(git gc --prune=now)"
+    ]
+  },
+  "model": "sonnet",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  },
+  "enabledPlugins": {
+    "mattpocock-skills@claude-plugins-official": true
+  },
+  "effortLevel": "medium",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "custom:omarchy",
+  "editorMode": "vim"
+}
