@@ -6,6 +6,7 @@
 vim.opt.mouse = "a"
 vim.opt.swapfile = false
 vim.opt.autoread = true
+vim.opt.inccommand = "split" -- better search window
 
 -- make zsh default shell
 vim.opt.shell = "/bin/zsh"

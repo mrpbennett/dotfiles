@@ -11,6 +11,12 @@ return {
       picker = {
         provider = "snacks",
       },
+      codelens = {
+        enabled = false
+      },
+      watch = {
+        enabled = false
+      }
     },
   },
 }

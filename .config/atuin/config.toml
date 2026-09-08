@@ -1,6 +1,3 @@
-db_path = "~/.atuin/.history.db"
-key_path = "~/.atuin/.key"
-session_path = "~/.atuin/.session"
 dialect = "uk"
 auto_sync = true
 update_check = true
