@@ -11,6 +11,11 @@ error_symbol = '[➜](bold red) '
 vimcmd_symbol = '[N](bold blue) '
 vimcmd_visual_symbol = '[V](bold yellow)'
 
+[hostname]
+ssh_only = false
+format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
+disabled = false
+
 [directory]
 truncation_length = 2
 truncation_symbol = ".../"

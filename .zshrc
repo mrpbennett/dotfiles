@@ -40,6 +40,11 @@ source ~/.config/shell/all.sh
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
+dotfiles(){
+  cd "$HOME/.dotfiles" || return
+  nvim .
+}
+
 # Pi
 export PATH="/Users/pbennett/.local/share/mise/installs/node/26.6.0/bin:$PATH"
 eval "$(atuin init zsh)"

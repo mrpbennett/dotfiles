@@ -13,7 +13,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-alias dev="cd ~/Developer"
+alias dev="cd ~/Projects/"
+alias devp="cd ~/Work/"
 alias dt="cd ~/Desktop"
 
 # HELPERS ---

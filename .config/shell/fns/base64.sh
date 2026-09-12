@@ -1,11 +1,9 @@
-b64e() {
-  printf "%s" "$*" | base64
+# encodes a string and copies to clipboard
+function b64e() {
+  echo -n "$1" | base64 | pbcopy
 }
 
-b64d() {
-  if base64 --help >/dev/null 2>&1; then
-    base64 --decode
-  else
-    base64 -D
-  fi
+# decodes a string and copies to clipboard
+function b64d() {
+  echo -n "$1" | base64 -d | pbcopy
 }

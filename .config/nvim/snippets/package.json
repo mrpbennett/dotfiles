@@ -16,6 +16,10 @@
       {
         "language": "yaml",
         "path": "./kubernetes.json"
+      },
+      {
+        "language": "sql",
+        "path": "./sql.json"
       }
     ]
   }
