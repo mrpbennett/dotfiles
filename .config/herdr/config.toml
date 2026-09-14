@@ -9,7 +9,7 @@ new_cwd = "follow"
 auto_switch = true
 name = "catppuccin-latte"
 light_name = "catppuccin-latte"
-dark_name = "catppuccin-macchiato"
+dark_name = "catppuccin-mocha"
 
 [ui]
 show_agent_labels_on_pane_borders = true
@@ -27,7 +27,7 @@ delivery = "herdr"
 position = "top-right"
 
 [keys]
-prefix = "ctrl+space"
+prefix = "ctrl+s"
 
 reload_config = "prefix+q"
 help = "prefix+?"

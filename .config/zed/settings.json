@@ -8,7 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "soft_wrap": "editor_width",
-  "icon_theme": "Catppuccin Latte",
+  "icon_theme": "Catppuccin Mocha",
   "buffer_font_family": "JetBrains Mono",
   "terminal": {
     "font_family": "JetBrains Mono",
@@ -97,9 +97,9 @@
   "ui_font_size": 16.0,
   "buffer_font_size": 14.0,
   "theme": {
-    "mode": "light",
+    "mode": "dark",
     "light": "Catppuccin Latte",
-    "dark": "Catppuccin Macchiato",
+    "dark": "Catppuccin Mocha - No Italics",
   },
   // Indentation, rainbow indentation
   "indent_guides": {
