@@ -11,6 +11,7 @@
   "icon_theme": "Catppuccin Mocha",
   "buffer_font_family": "JetBrains Mono",
   "terminal": {
+    "font_size": 10.0,
     "font_family": "JetBrains Mono",
   },
   "project_panel": {
@@ -73,7 +74,7 @@
     },
     "opencode": {
       "default_config_options": {
-        "model": "openai/gpt-5.6-luna-pro"
+        "model": "openai/gpt-5.6-luna-pro",
       },
       "type": "registry",
     },

@@ -32,15 +32,16 @@ return {
         --
         sqruff = {
           -- sqruff fix emits an extra trailing newline on stdout; strip trailing blank lines via sed.
-          -- Dialect is inferred from the filename prefix (bq_/pg_/trino_/vert_) since sqruff
+          -- Dialect is inferred from the filename prefix (bq_/pg_/trino_/tsql_/vert_) since sqruff
           -- doesn't merge a project-local .sqruff with this shared config.
           command = "sh",
           args = function(_, ctx)
-            local dialect = require("utils.sqruff").dialect(ctx.filename)
+            local sqruff = require("util.sqruff")
+            local dialect = sqruff.dialect(ctx.filename)
             return {
               "-c",
               "sqruff fix --format none --config "
-                .. vim.fn.expand("~/.config/sqruff/.sqruff")
+                .. sqruff.config(dialect)
                 .. " --dialect "
                 .. dialect
                 .. " - | sed -e :a -e '/^$/{$d;N;ba' -e '}'",

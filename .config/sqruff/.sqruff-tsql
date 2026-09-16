@@ -1,0 +1,36 @@
+[sqruff]
+dialect = tsql
+rules = core,LT09
+output_line_length = 120
+max_line_length = 120
+exclude_rules = LT01,LT05,LT12,AM06,CP02
+
+[sqruff:indentation]
+tab_space_size = 4
+indent_unit = space
+implicit_indents = allow
+indented_then = false
+indented_using_on = false
+
+[sqruff:layout:type:alias_expression]
+spacing_before = align
+align_within = select_clause
+align_scope = bracketed
+
+[sqruff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.functions]
+extended_capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.literals]
+extended_capitalisation_policy = lower
+
+[sqruff:rules:capitalisation.types]
+extended_capitalisation_policy = lower
+
+[sqruff:rules:references.keywords]
+ignore_words = "domain"
+
+[sqruff:rules:structure.subquery]
+forbid_subquery_in = "both"

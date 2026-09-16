@@ -28,10 +28,13 @@ return {
         "lint",
         "--format=json",
         "--config",
-        vim.fn.expand("~/.config/sqruff/.sqruff"),
+        function()
+          local sqruff = require("util.sqruff")
+          return sqruff.config(sqruff.dialect(vim.api.nvim_buf_get_name(0)))
+        end,
         "--dialect",
         function()
-          return require("utils.sqruff").dialect(vim.api.nvim_buf_get_name(0))
+          return require("util.sqruff").dialect(vim.api.nvim_buf_get_name(0))
         end,
         "-",
       }
