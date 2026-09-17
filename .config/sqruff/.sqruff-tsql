@@ -1,9 +1,9 @@
 [sqruff]
 dialect = tsql
-rules = core,LT09
+rules = core,LT03,LT09
 output_line_length = 120
 max_line_length = 120
-exclude_rules = LT01,LT05,LT12,AM06,CP02
+exclude_rules = LT05,LT12,AM06,CP02
 
 [sqruff:indentation]
 tab_space_size = 4
@@ -16,6 +16,9 @@ indented_using_on = false
 spacing_before = align
 align_within = select_clause
 align_scope = bracketed
+
+[sqruff:layout:type:binary_operator]
+line_position = leading:strict
 
 [sqruff:rules:capitalisation.keywords]
 capitalisation_policy = lower

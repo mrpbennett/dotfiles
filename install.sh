@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 REPO_DIR="$HOME/.dotfiles"
 
@@ -54,4 +55,3 @@ mkdir -p ~/.config/tmux/plugins/tmux
 mise install
 
 source "$DOTFILES_DIR/.local/share/dotfiles/macos/defaults.sh"
-# testing....
