@@ -1,23 +1,4 @@
--- https://github.com/catppuccin/nvim
--- https://github.com/booberrytheme/boo-berry.nvim
--- https://github.com/Mofiqul/dracula.nvim
 return {
-  -- dracula
-  { "Mofiqul/dracula.nvim", lazy = true },
-  -- boo-berry
-  { "mrpbennett/boo-berry.nvim", lazy = true },
-  -- gruvbox
-  { "ellisonleao/gruvbox.nvim", lazy = true },
-  -- vault
-  { "mrpbennett/vault", lazy = true },
-  -- everforest
-  {
-    "sainnhe/everforest",
-    lazy = true,
-    config = function()
-      -- do something
-    end,
-  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -26,7 +7,7 @@ return {
       flavour = "auto",
       background = {
         light = "latte",
-        dark = "macchiato",
+        dark = "mocha",
       },
       term_colors = true,
     },

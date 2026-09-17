@@ -19,6 +19,7 @@ ruff = "latest"
 ty = "latest"
 uv = "latest"
 vault = "latest"
+yamllint = "latest"
 
 lua = "latest"
 node = "latest"

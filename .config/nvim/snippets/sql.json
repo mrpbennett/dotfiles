@@ -81,5 +81,14 @@
       "end as token_name"
     ],
     "description": "OUS Medscape Tokens"
+  },
+  "requests-bids-paidimps": {
+    "prefix": "requestsbidspaidimps",
+    "body": [
+      "    sum(serverimpression) as requests,",
+      "    sum(case when deflevelid = 23 then serverimpression else 0 end) as bidsmade,",
+      "    sum(case when deflevelid = 8 then impressions else 0 end) as paidimps"
+    ],
+    "description": "requests / bid / paidimps"
   }
 }

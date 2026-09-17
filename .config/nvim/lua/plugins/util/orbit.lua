@@ -1,11 +1,24 @@
 return {
-  --"mrpbennett/orbit.nvim",
-  dir = "/Users/pb/Projects/orbit.nvim",
-  opts = {
-    saved_query_dirs = {
-      { work = "~/Work/pbennett-monorepo/sql" },
-    },
-    schema_width = 40,
-    winbar = true,
+  {
+    "mrpbennett/orbit.nvim",
+    --dir = "/home/pb/Projects/orbit.nvim",
+    config = function()
+      require("orbit").setup({
+        winbar = false,
+        schema_width = 40,
+        saved_query_dirs = {
+          { work = "/home/pb/Work/pulsepoint/pbennett-monorepo/sql" },
+        },
+
+        -- keymaps
+        keymaps = {
+          workspace = "<leader>D",
+          execute = "<leader>E",
+          cancel = "<leader>X",
+          select_profile = "<leader>P",
+          browse = "<leader>B",
+        },
+      })
+    end,
   },
 }
