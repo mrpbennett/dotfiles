@@ -27,7 +27,30 @@ require("snacks").setup({
         enabled = true,
         timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+        enabled = true,
+        sources = {
+            -- aerial.nvim provides symbol hierarchy; use it for lsp symbol pickers
+            lsp_symbols = {
+                finder = "lsp_symbols",
+                format = "lsp_symbol",
+                hierarchy = true,
+                tree = true,
+                filter = {
+                    default = {
+                        "Class", "Constructor", "Enum", "Field", "Function", "Interface",
+                        "Method", "Module", "Namespace", "Package", "Property", "Struct", "Trait",
+                    },
+                    markdown = { "Module" },
+                    help = { "Module" },
+                    lua = { "Class", "Constructor", "Enum", "Field", "Function", "Interface", "Method", "Module" },
+                },
+            },
+            lsp_workspace_symbols = {
+                format = "lsp_symbol",
+            },
+        },
+    },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },

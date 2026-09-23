@@ -4,10 +4,12 @@ vim.pack.add({
 
 require("tiny-inline-diagnostic").setup({
 	preset = "powerline",
-	add_messages = {
-		display_count = true,
-	},
-	multilines = {
-		enabled = true,
+	options = {
+		add_messages = {
+			display_count = true,
+		},
+		multilines = {
+			enabled = true,
+		},
 	},
 })
