@@ -4,6 +4,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+
+      -- in favour of tiny-inline-diagnostics
+      diagnostics = { virtual_text = false },
+
       servers = {
         -- disable
         pyright = { autostart = false },
@@ -41,6 +45,35 @@ return {
           },
         },
         --
+      },
+    },
+  },
+
+  -- Just make sure I maintain a list of tools
+  -- I user on the regular.
+
+  {
+    "mason-org/mason.nvim",
+    opts = {
+      ensure_installed = {
+
+        -- go
+        "gopls",
+        "goimports",
+        "gofumpt",
+        "gomodifytags",
+        "impl",
+        "golangci-lint",
+        -- python
+        "ty",
+        "ruff",
+        -- sql
+        "sqruff",
+        "sqls",
+        -- yaml: these aren't handled by lazyvim
+        -- installed via mise:
+        -- "yamllint",
+        -- "yamlfmt",
       },
     },
   },

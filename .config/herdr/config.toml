@@ -6,10 +6,10 @@ shell_mode = "auto"
 new_cwd = "follow"
 
 [theme]
-auto_switch = true
-name = "catppuccin-latte"
-light_name = "catppuccin-latte"
-dark_name = "catppuccin-mocha"
+auto_switch = false
+name = "dracula"
+light_name = "gruvbox-light"
+dark_name = "gruvbox"
 
 [ui]
 show_agent_labels_on_pane_borders = true

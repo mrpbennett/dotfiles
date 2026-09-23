@@ -1,6 +1,7 @@
 [user]
     name = Paul Bennett
     email = pbennett.uk@outlook.com
+    signingkey = ~/.ssh/macbookpro.pub
 
 [core]
     editor = nvim

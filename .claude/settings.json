@@ -46,7 +46,8 @@
     "command": "bash ~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "mattpocock-skills@claude-plugins-official": true
+    "mattpocock-skills@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true,

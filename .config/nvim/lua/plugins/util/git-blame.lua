@@ -9,4 +9,7 @@ return {
     date_format = "%r",
     virtual_text_column = 10,
   },
+  keys = {
+    { "<leader>gb", "<CMD>GitBlameToggle<CR>", desc = "Toggle GitBlame" },
+  },
 }

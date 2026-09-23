@@ -20,6 +20,7 @@ ty = "latest"
 uv = "latest"
 vault = "latest"
 yamllint = "latest"
+yamlfmt = "latest"
 
 lua = "latest"
 node = "latest"
@@ -31,4 +32,4 @@ claude = "latest"
 opencode = "latest"
 
 # bucky install --
-"go:github.com/mrpbennett/bucky/cmd/bucky" = "latest"
+"go:github.com/mrpbennett/bucky/cmd/bucky" = "v0.1.7"

@@ -21,6 +21,8 @@ alias dt="cd ~/Desktop"
 alias e="exit" # a swifter exit
 alias v="nvim" # quicker nvim
 alias nn='NVIM_APPNAME="nvim-native" nvim'
+alias tn='NVIM_APPNAME="nvim-test" nvim'
+alias nl='NVIM_APPNAME="nvim-lean" nvim'
 alias bt="btop"                              # better activity monitor
 alias t="tmux attach || tmux new -s Session" # quicker tmux
 alias h="herdr"
