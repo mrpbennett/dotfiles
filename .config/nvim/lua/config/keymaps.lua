@@ -7,4 +7,10 @@ local map = vim.keymap.set
 map("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- hunk diff
-map("n", "<leader>gH", function() Snacks.terminal("hunk diff") end, { desc = "Hunk Diff" })
+map("n", "<leader>ohd", function()
+  Snacks.terminal("hunk diff")
+end, { desc = "Hunk Diff" })
+
+map("n", "<leader>ohm", function()
+  Snacks.terminal("hunk diff origin/main")
+end, { desc = "Hunk Diff - origin/main" })
