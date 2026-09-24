@@ -1,24 +1,24 @@
 vim.pack.add({
-    { src = "https://github.com/akinsho/bufferline.nvim" },
+  { src = "https://github.com/akinsho/bufferline.nvim" },
 })
 
 require("bufferline").setup({
-    options = {
-        diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
+  options = {
+    diagnostics = "nvim_lsp",
+    always_show_bufferline = false,
 
-        offsets = {
-            {
-                filetype = "neo-tree",
-                text = "Neo-tree",
-                highlight = "Directory",
-                text_align = "left",
-            },
-            {
-                filetype = "snacks_layout_box",
-            },
-        },
+    offsets = {
+      {
+        filetype = "neo-tree",
+        text = "Neo-tree",
+        highlight = "Directory",
+        text_align = "left",
+      },
+      {
+        filetype = "snacks_layout_box",
+      },
     },
+  },
 })
 
 local map = vim.keymap.set

@@ -4,33 +4,42 @@
 -- Add any additional autocmds here
 -- with `vim.api.nvim_create_autocmd`
 --
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "python",
+--   callback = function(args)
+--     vim.b[args.buf].autoformat = false
+--   end,
+-- })
+
+
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 --
 --
 -- Stop return on commented lines creating commented lines
 vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    vim.opt.formatoptions:remove({ "r", "o" })
-  end,
+    callback = function()
+        vim.opt.formatoptions:remove({ "r", "o" })
+    end,
 })
 
 -- Match sqruff's 4-space indentation for SQL buffers (see ~/.config/sqruff/.sqruff)
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "sql" },
-  callback = function()
-    vim.opt_local.expandtab = true
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.softtabstop = 4
-    vim.opt_local.tabstop = 4
-  end,
+    pattern = { "sql" },
+    callback = function()
+        vim.opt_local.expandtab = true
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.softtabstop = 4
+        vim.opt_local.tabstop = 4
+    end,
 })
 
 
 -- Trim trailing whitespave on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    vim.cmd([[%s/\s\+$//e]])
-  end,
+    pattern = "*",
+    callback = function()
+        vim.cmd([[%s/\s\+$//e]])
+    end,
 })

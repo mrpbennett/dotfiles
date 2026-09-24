@@ -1,65 +1,69 @@
 vim.pack.add({
-    "https://github.com/folke/snacks.nvim",
+  "https://github.com/folke/snacks.nvim",
 })
 
 require("snacks").setup({
-    bigfile = { enabled = true },
-    dashboard = {
-        enabled = true,
-        preset = {
-            header = [[
- __   __     __   __   __     __    __
-/\ "-.\ \   /\ \ / /  /\ \   /\ "-./  \
-\ \ \-.  \  \ \ \'/   \ \ \  \ \ \-./\ \
- \ \_\\"\_\  \ \__|    \ \_\  \ \_\ \ \_\
-  \/_/ \/_/   \/_/      \/_/   \/_/  \/_/
-]],
-        },
-        sections = {
-            { section = "header" },
-            { section = "keys",  gap = 1, padding = 1 },
-        },
+  bigfile = { enabled = true },
+  dashboard = {
+    enabled = true,
+    preset = {
+      header = [[
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
     },
-    explorer = { enabled = true },
-    indent = { enabled = true },
-    input = { enabled = true },
-    notifier = {
-        enabled = true,
-        timeout = 3000,
+    sections = {
+      { section = "header" },
+      { section = "keys",  gap = 1, padding = 1 },
     },
-    picker = {
-        enabled = true,
-        sources = {
-            -- aerial.nvim provides symbol hierarchy; use it for lsp symbol pickers
-            lsp_symbols = {
-                finder = "lsp_symbols",
-                format = "lsp_symbol",
-                hierarchy = true,
-                tree = true,
-                filter = {
-                    default = {
-                        "Class", "Constructor", "Enum", "Field", "Function", "Interface",
-                        "Method", "Module", "Namespace", "Package", "Property", "Struct", "Trait",
-                    },
-                    markdown = { "Module" },
-                    help = { "Module" },
-                    lua = { "Class", "Constructor", "Enum", "Field", "Function", "Interface", "Method", "Module" },
-                },
-            },
-            lsp_workspace_symbols = {
-                format = "lsp_symbol",
-            },
+  },
+  explorer = { enabled = true },
+  indent = { enabled = true },
+  input = { enabled = true },
+  notifier = {
+    enabled = true,
+    timeout = 3000,
+  },
+  picker = {
+    enabled = true,
+    sources = {
+      explorer = {
+        ignored = true,
+        hidden = true,
+      },
+      -- aerial.nvim provides symbol hierarchy; use it for lsp symbol pickers
+      lsp_symbols = {
+        finder = "lsp_symbols",
+        format = "lsp_symbol",
+        hierarchy = true,
+        tree = true,
+        filter = {
+          default = {
+            "Class", "Constructor", "Enum", "Field", "Function", "Interface",
+            "Method", "Module", "Namespace", "Package", "Property", "Struct", "Trait",
+          },
+          markdown = { "Module" },
+          help = { "Module" },
+          lua = { "Class", "Constructor", "Enum", "Field", "Function", "Interface", "Method", "Module" },
         },
+      },
+      lsp_workspace_symbols = {
+        format = "lsp_symbol",
+      },
     },
-    quickfile = { enabled = true },
-    scope = { enabled = true },
-    scroll = { enabled = true },
-    statuscolumn = { enabled = true },
-    words = { enabled = true },
+  },
+  quickfile = { enabled = true },
+  scope = { enabled = true },
+  scroll = { enabled = true },
+  statuscolumn = { enabled = true },
+  words = { enabled = true },
 })
 
 local function map(mode, lhs, rhs, desc, opts)
-    vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", { desc = desc }, opts or {}))
+  vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", { desc = desc }, opts or {}))
 end
 
 -- Top Pickers & Explorer
@@ -67,7 +71,6 @@ map("n", "<leader><space>", function() Snacks.picker.smart() end, "Smart Find Fi
 map("n", "<leader>,", function() Snacks.picker.buffers() end, "Buffers")
 map("n", "<leader>/", function() Snacks.picker.grep() end, "Grep")
 map("n", "<leader>:", function() Snacks.picker.command_history() end, "Command History")
-map("n", "<leader>n", function() Snacks.picker.notifications() end, "Notification History")
 map("n", "<leader>e", function() Snacks.explorer() end, "File Explorer")
 
 -- find
@@ -94,7 +97,6 @@ map("n", "<leader>gp", function() Snacks.picker.gh_pr() end, "GitHub Pull Reques
 map("n", "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, "GitHub Pull Requests (all)")
 
 -- Grep
-map("n", "<leader>sb", function() Snacks.picker.lines() end, "Buffer Lines")
 map("n", "<leader>sB", function() Snacks.picker.grep_buffers() end, "Grep Open Buffers")
 map("n", "<leader>sg", function() Snacks.picker.grep() end, "Grep")
 map({ "n", "x" }, "<leader>sw", function() Snacks.picker.grep_word() end, "Visual selection or word")
@@ -116,7 +118,6 @@ map("n", "<leader>sk", function() Snacks.picker.keymaps() end, "Keymaps")
 map("n", "<leader>sl", function() Snacks.picker.loclist() end, "Location List")
 map("n", "<leader>sm", function() Snacks.picker.marks() end, "Marks")
 map("n", "<leader>sM", function() Snacks.picker.man() end, "Man Pages")
-map("n", "<leader>sp", function() Snacks.picker.lazy() end, "Search for Plugin Spec")
 map("n", "<leader>sq", function() Snacks.picker.qflist() end, "Quickfix List")
 map("n", "<leader>sR", function() Snacks.picker.resume() end, "Resume")
 map("n", "<leader>su", function() Snacks.picker.undo() end, "Undo History")
@@ -149,35 +150,35 @@ map("n", "<c-_>", function() Snacks.terminal() end, "which_key_ignore")
 map({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, "Next Reference")
 map({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, "Prev Reference")
 map("n", "<leader>N", function()
-    Snacks.win({
-        file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-        width = 0.6,
-        height = 0.6,
-        wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
-            conceallevel = 3,
-        },
-    })
+  Snacks.win({
+    file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
+    width = 0.6,
+    height = 0.6,
+    wo = {
+      spell = false,
+      wrap = false,
+      signcolumn = "yes",
+      statuscolumn = " ",
+      conceallevel = 3,
+    },
+  })
 end, "Neovim News")
 
 -- Debug globals
 _G.dd = function(...)
-    Snacks.debug.inspect(...)
+  Snacks.debug.inspect(...)
 end
 _G.bt = function()
-    Snacks.debug.backtrace()
+  Snacks.debug.backtrace()
 end
 
 -- Override print to use snacks for `:=` command
 if vim.fn.has("nvim-0.11") == 1 then
-    vim._print = function(_, ...)
-        dd(...)
-    end
+  vim._print = function(_, ...)
+    dd(...)
+  end
 else
-    vim.print = _G.dd
+  vim.print = _G.dd
 end
 
 -- Toggle mappings
@@ -187,7 +188,7 @@ Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leade
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.line_number():map("<leader>ul")
 Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-    "<leader>uc")
+  "<leader>uc")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 Snacks.toggle.inlay_hints():map("<leader>uh")

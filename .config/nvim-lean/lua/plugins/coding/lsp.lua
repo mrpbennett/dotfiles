@@ -4,13 +4,14 @@ vim.pack.add({
     { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 })
 
--- in favour of tiny-inline-diagnostic
-vim.diagnostic.config({ virtual_text = false })
-
 require("mason").setup()
 
 require("mason-tool-installer").setup({
     ensure_installed = {
+
+        -- copilot
+        "copilot-language-server",
+
         -- lua
         "lua-language-server",
 
@@ -75,6 +76,7 @@ vim.lsp.config("gopls", {
 
 -- Python
 vim.lsp.config("ty", {
+    root_markers = { ".venv", "ty.toml", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
     settings = {
         ty = {
             inlayHints = {
@@ -82,25 +84,18 @@ vim.lsp.config("ty", {
             },
         },
     },
-    cmd = function(dispatchers, config)
-        return vim.lsp.rpc.start({ "ty", "server" }, dispatchers, {
-            cwd = config.root_dir,
-            env = config.cmd_env,
-            detached = config.detached,
-        })
-    end,
 })
 
 vim.lsp.enable({
+
+    -- copilot lsp
+    "copilot-language-server",
+
     -- lua
-    "lua-language-server",
+    "lua_ls",
 
     -- go
     "gopls",
-    "goimports",
-    "gofumpt",
-    "gomodifytags",
-    "impl",
 
     -- python
     "ty",
@@ -110,7 +105,5 @@ vim.lsp.enable({
     "sqruff",
 
     -- yaml
-    "yaml-language-server",
-    "yamllint",
-    "yamlfmt",
+    "yamlls",
 })

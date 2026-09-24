@@ -1,11 +1,11 @@
 local opt = vim.opt
-local api = vim.api
 
 -- map leader as space
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
-vim.g.autoformat = true -- auto format
+vim.g.autoformat = true   -- auto format
+vim.g.editorconfig = true -- enable EditorConfig files
 
 --[[
 	general options
@@ -19,12 +19,12 @@ opt.confirm = true                                             -- Confirm to sav
 opt.cursorline = true                                          -- Enable highlighting of the current line
 opt.expandtab = true                                           -- Use spaces instead of tabs
 opt.fillchars = {
-    foldopen = "",
-    foldclose = "",
-    fold = " ",
-    foldsep = " ",
-    diff = "╱",
-    eob = " ",
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 }
 opt.foldlevel = 99
 opt.foldmethod = "indent"
