@@ -8,8 +8,8 @@ sync-dotfiles() {
   if echo "$dry" | grep -q "existing target is neither a link nor a directory"; then
     echo "$dry"
     echo "--- conflicts found: real files exist at target, adopting them into the repo ---"
-    ad-dotfiles
+    stow --restow --target="$HOME" --no-folding --adopt .
   else
-    re-dotfiles
+    stow --restow --target="$HOME" --no-folding .
   fi
 }
