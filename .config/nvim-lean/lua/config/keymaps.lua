@@ -121,3 +121,34 @@ map("n", "<leader>xq", function()
         vim.notify(err, vim.log.levels.ERROR)
     end
 end, { desc = "Quickfix List" })
+
+-- Autoformat toggles (global / buffer), ported from LazyVim.format
+local function autoformat_enabled()
+    local b = vim.b.autoformat
+    if b ~= nil then
+        return b
+    end
+    return vim.g.autoformat == nil or vim.g.autoformat
+end
+
+-- Snacks.toggle gives the LazyVim-style "Enabled/Disabled" notification.
+local autoformat_toggles = {
+    global = {
+        id = "autoformat_global",
+        name = "Auto Format (Global)",
+        get = function() return vim.g.autoformat == nil or vim.g.autoformat end,
+        set = function(state)
+            vim.g.autoformat = state
+            vim.b.autoformat = nil -- clear buffer override so the global value applies
+        end,
+    },
+    buffer = {
+        id = "autoformat_buffer",
+        name = "Auto Format (Buffer)",
+        get = autoformat_enabled,
+        set = function(state) vim.b.autoformat = state end,
+    },
+}
+
+map("n", "<leader>uf", function() Snacks.toggle.new(autoformat_toggles.global):toggle() end, { desc = "Toggle Auto Format (Global)" })
+map("n", "<leader>uF", function() Snacks.toggle.new(autoformat_toggles.buffer):toggle() end, { desc = "Toggle Auto Format (Buffer)" })

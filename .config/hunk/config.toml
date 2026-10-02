@@ -1,6 +1,6 @@
 #theme = "catppuccin-macchiato" # light:catppuccin-latte / dark:catppuccin-macchiato
-theme = "catppuccin-latte"
-mode = "split"                 # auto, split, stack
+theme = "catppuccin-mocha"
+mode = "split"
 vcs = "git"                    # git, jj, sl
 watch = false
 exclude_untracked = false
@@ -8,3 +8,7 @@ line_numbers = true
 wrap_lines = false
 agent_notes = false
 transparent_background = false
+hunk_headers = true
+menu_bar = true
+copy_decorations = false
+cursor_line = "row"
