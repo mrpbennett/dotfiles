@@ -71,3 +71,17 @@ opt.virtualedit = "block"          -- Allow cursor to move where there is no tex
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5                -- Minimum window width
 opt.wrap = false                   -- Disable line wrap
+
+-- ignore editorconfig end_of_line so existing files keep their line endings
+require("editorconfig").properties.end_of_line = nil
+
+-- disable format-on-save for shared work repos, except my own (toggle per buffer with <leader>uF)
+-- lives here, not autocmds.lua, so it also applies to the file passed on the command line
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+  pattern = vim.fn.expand("~") .. "/Work/*",
+  callback = function(args)
+    if not args.match:find("/pbennett-monorepo/", 1, true) then
+      vim.b[args.buf].autoformat = false
+    end
+  end,
+})

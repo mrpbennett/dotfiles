@@ -81,6 +81,7 @@ alias kcns='k config set-context --current --namespace'
 alias kw-token="cat ~/.kube/cache/oidc-login/lga-dm-dev/* | jq -r '.id_token'"
 alias kc='k config'
 alias kctx='tv k8s-contexts'
+alias tctl="talosctl"
 
 kdelp() {
   if [ -z "$1" ]; then
