@@ -232,6 +232,12 @@ gui:
   switchTabsWithPanelJumpKeys: false
 # Config relating to git
 git:
+  diffRenderers:
+    - colorArg: always
+      command: hunk pager --mode split --line-numbers
+      name: hunk
+    - type: rawGit
+      name: default
   # Array of pagers. Each entry has the following format:
   #
   #   # Value of the --color arg in the git diff command. Some pagers want
@@ -255,8 +261,6 @@ git:
   #
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
   # for more information.
-  diffRenderers:
-    - command: hunk pager --mode split
   # Config relating to committing
   commit:
     # If true, pass '--signoff' flag when committing
