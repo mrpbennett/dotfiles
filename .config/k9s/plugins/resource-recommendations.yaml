@@ -1,0 +1,62 @@
+plugins:
+  # Author: Daniel Rubin
+  # Get recommendations for CPU/Memory requests and limits using Robusta KRR
+  # Requires Prometheus in the Cluster and Robusta KRR (https://github.com/robusta-dev/krr) on your system
+  # Open K9s in deployments/daemonsets/statefulsets view, then:
+  # Shift-K to get recommendations
+  #
+  # Prometheus is reached via a temporary kubectl port-forward and passed to krr with -p,
+  # because krr's auto-detected API-server proxy URL returns 401 Unauthorized.
+  # Override the service with PROM_NS / PROM_SVC / PROM_PORT env vars if needed.
+  krr:
+    shortCut: Shift-K
+    description: Get krr
+    scopes:
+      - deployments
+      - daemonsets
+      - statefulsets
+      - cronjobs
+    command: bash
+    background: false
+    confirm: false
+    args:
+      - -c
+      - |
+        LABELS=$(kubectl get $RESOURCE_NAME $NAME -n $NAMESPACE --context $CONTEXT --show-labels | awk '{print $NF}' | awk '{if(NR>1)print}')
+        LPORT=$((20000 + RANDOM % 10000))
+        kubectl port-forward --context $CONTEXT -n "${PROM_NS:-monitoring}" "svc/${PROM_SVC:-kube-prometheus-stack-prometheus}" $LPORT:"${PROM_PORT:-9090}" >/dev/null 2>&1 &
+        PF=$!
+        trap 'kill $PF 2>/dev/null' EXIT
+        sleep 2
+        krr simple --cluster $CONTEXT -p http://localhost:$LPORT --selector "$LABELS"
+        echo "Press 'q' to exit"
+        while : ; do
+        read -n 1 k <&1
+        if [[ $k = q ]] ; then
+        break
+        fi
+        done
+  krr-ns:
+    shortCut: Shift-K
+    description: Get krr
+    scopes:
+      - namespaces
+    command: bash
+    background: false
+    confirm: false
+    args:
+      - -c
+      - |
+        LPORT=$((20000 + RANDOM % 10000))
+        kubectl port-forward --context $CONTEXT -n "${PROM_NS:-monitoring}" "svc/${PROM_SVC:-kube-prometheus-stack-prometheus}" $LPORT:"${PROM_PORT:-9090}" >/dev/null 2>&1 &
+        PF=$!
+        trap 'kill $PF 2>/dev/null' EXIT
+        sleep 2
+        krr simple --cluster $CONTEXT -p http://localhost:$LPORT -n $RESOURCE_NAME
+        echo "Press 'q' to exit"
+        while : ; do
+        read -n 1 k <&1
+        if [[ $k = q ]] ; then
+        break
+        fi
+        done
