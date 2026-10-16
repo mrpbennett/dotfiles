@@ -9,8 +9,9 @@ Keyboard remapping below the OS: home row mods with quick-tap, caps as Esc/Ctrl,
 | caps | esc | ctrl (immediately, if another key is pressed) |
 | a s d f | letter | ctrl opt cmd shift |
 | j k l ; | letter | shift cmd opt ctrl |
-| fn | — | cmd |
-| left cmd | — | nav layer |
+| right cmd | — | cmd |
+| left cmd | — | nav layer (every other key sends cmd+key, so cmd+c / cmd+v still work) |
+| fn | fn | fn |
 | cmd + bspc | opt + bspc (delete word) | |
 
 Nav layer, while left cmd is held:

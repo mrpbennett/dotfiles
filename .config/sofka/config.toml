@@ -1,0 +1,60 @@
+default_namespace = "kube-system"
+default_resource = "pods"
+readonly = false
+favorite_namespaces = ["kube-system", "monitoring"]
+
+[aliases]
+dp = "deployments"
+po = "pods"
+sec = "v1/secrets"
+jo = "jobs"
+cr = "clusterroles"
+crb = "clusterrolebindings"
+ro = "roles"
+rb = "rolebindings"
+np = "networkpolicies"
+apps = "argoproj.io/v1alpha1/applications argocd"
+crash = "v1/pods all /crash|backoff|error|pending|oom|failed|evicted|terminating|creating|init:"
+
+# Keybindings
+[keys.table]
+delete = "alt-d"
+
+[keys.navigation]
+half_page_up = "ctrl-u"
+half_page_down = "ctrl-d"
+
+[skin]
+name = "catppuccin-mocha"
+background = false
+
+[views."*"]
+
+[views."v1/pods"]
+replace = true
+columns = [
+  { name = "NAME", builtin = "NAME" },
+  { name = "READY", builtin = "READY" },
+  { name = "STATUS", builtin = "STATUS" },
+  { name = "RESTARTS", builtin = "RESTARTS" },
+  { name = "IMGV", path = "/spec/containers/0/image", format = "image-tag"},
+  { name = "CPU", metric = "cpu" },
+  { name = "CPU/R", metric = "cpu-request" },
+  { name = "%CPU/R", metric = "cpu-request-utilization" },
+  { name = "%CPU/L", metric = "cpu-limit-utilization", wide = true },
+  { name = "MEM", metric = "memory" },
+  { name = "%MEM/R", metric = "memory-request-utilization" },
+  { name = "%MEM/L", metric = "memory-limit-utilization", wide = true },
+  { name = "AGE", builtin = "AGE" },
+]
+
+[[plugins]]
+key = "shift-n"
+name = "talos-dashboard"
+command = "bash"
+args = [
+  "-c",
+  '''ip=$(kubectl --context "$CONTEXT" get node "$NAME" -o jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}'); talosctl --context "$CONTEXT" -n "$ip" dashboard''',
+]
+scopes = ["nodes"]
+mutating = false

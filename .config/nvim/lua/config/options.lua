@@ -1,6 +1,4 @@
 -- Options are automatically loaded before lazy.nvim startup.
-require("config.remote_clipboard").setup()
-
 vim.opt.mouse = "a"
 vim.opt.swapfile = false
 vim.opt.autoread = true

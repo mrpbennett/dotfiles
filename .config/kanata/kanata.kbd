@@ -10,9 +10,12 @@
 )
 
 (defsrc
-  bspc
-  caps a    s    d    f    h    j    k    l    ;
-  fn   lmet
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+       z    x    c    v    b    n    m    ,    .    /
+  spc  left rght up   down
+  fn   rmet lmet
 )
 
 (defvar
@@ -24,16 +27,17 @@
 )
 
 (defalias
-  cap (tap-hold 200 200 esc lctl)
+  ;; esc must be forgiving: a slow tap (>200ms) became ctrl, so nvim stayed in insert mode
+  cap (tap-hold 300 300 esc lctl)
 
   ;; home row mods: ctrl opt cmd shift | shift cmd opt ctrl
   a (tap-hold-release $tap $hold a lctl)
-  s (tap-hold-release $tap $hold s lalt)
+  s (tap-hold-release $tap $hold s (multi lalt (layer-while-held alt)))
   d (tap-hold-release $tap $hold d lmet)
   f (tap-hold-release $tap $hold f lsft)
   j (tap-hold-release $tap $hold j rsft)
   k (tap-hold-release $tap $hold k rmet)
-  l (tap-hold-release $tap $hold l ralt)
+  l (tap-hold-release $tap $hold l (multi ralt (layer-while-held alt)))
   ; (tap-hold-release $tap $hold ; rctl)
 
   ;; cmd+bspc → opt+bspc (delete word)
@@ -51,13 +55,31 @@
 )
 
 (deflayer base
-  @bs
-  @cap @a  @s   @d   @f   h    @j   @k   @l   @;
-  lmet @nav
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    @bs
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @cap @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
+       z    x    c    v    b    n    m    ,    .    /
+  spc  left rght up   down
+  fn   lmet @nav
 )
 
+;; nav layer is on physical left cmd, so every key except hjkl/bspc sends cmd+key (cmd+c, cmd+v, ...)
 (deflayer nav
-  @nbs
-  _    _    _    _    _    @nh  @nj  @nk  @nl  _
-  _    _
+  M-grv M-1  M-2  M-3  M-4  M-5  M-6  M-7  M-8  M-9  M-0  M--  M-=  @nbs
+  M-tab M-q  M-w  M-e  M-r  M-t  M-y  M-u  M-i  M-o  M-p  M-[  M-]  M-\
+  _     M-a  M-s  M-d  M-f  M-g  @nh  @nj  @nk  @nl  M-;  M-'  M-ret
+        M-z  M-x  M-c  M-v  M-b  M-n  M-m  M-,  M-.  M-/
+  M-spc M-left M-rght M-up M-down
+  _     _    _
+)
+
+;; while s/l (opt) is held, j/k are plain keys so opt+j / opt+k (move line) fire immediately
+;; instead of waiting on their own home-row-mod tap-hold
+(deflayer alt
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ j k _ _ _ _
+    _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _
+  _ _ _
 )
