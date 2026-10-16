@@ -54,6 +54,15 @@ gomod() {
   go mod init "github.com/mrpbennett/$1"
 }
 
+# PIPE SHORTCUTS --
+alias -g H='| head'
+alias -g L='| less'
+alias -g C='| cat'
+alias -g G='| rg'
+alias -g AS='| awk "NR>1"'
+alias -g TS='| tspin | spacer'
+alias -g NUL="2>&1 >/dev/null"
+
 # DOCKER ---
 alias d="docker"
 alias dc="docker compose"
@@ -66,6 +75,9 @@ alias dspa="docker system prune -a --volumes -f"
 # KUBERNETES ---
 export KUBECONFIG=$HOME/.kube/config/home.yaml
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+source <(kubectl completion zsh)
+zstyle ':completion:*' menu select # arrow keys / repeated Tab to pick from the list
 
 alias k="kubectl"
 alias ka="k apply -f"
@@ -80,8 +92,10 @@ alias ke="k exec -it"
 alias kcns='k config set-context --current --namespace'
 alias kw-token="cat ~/.kube/cache/oidc-login/lga-dm-dev/* | jq -r '.id_token'"
 alias kc='k config'
-alias kctx='tv k8s-contexts'
 alias tctl="talosctl"
+
+alias kctx='kubectx'
+alias kns="kubens"
 
 kdelp() {
   if [ -z "$1" ]; then

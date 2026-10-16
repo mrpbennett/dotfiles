@@ -29,11 +29,6 @@ zle -N zle-line-init
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi # WorkTrunk
 
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=("$HOME/.docker/completions" $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
 
 source ~/.config/shell/all.sh
 

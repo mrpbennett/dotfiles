@@ -9,24 +9,107 @@
 {
   "soft_wrap": "editor_width",
   "icon_theme": "Catppuccin Mocha",
+  "ui_font_family": "JetBrains Mono",
   "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 13.0,
+  "ui_font_size": 15.0,
+  "format_on_save": "on",
+  "autosave": "on_focus_change",
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Latte",
+    "dark": "Everforest Dark Hard (material)",
+  },
+
+  // vim settings ---
+  "vim_mode": true,
+  "cursor_blink": false,
+  "relative_line_numbers": "enabled",
+  "scroll_beyond_last_line": "off",
+  "scrollbar": {
+    "show": "never",
+  },
+  // vim settings end ---
+
   "terminal": {
-    "font_size": 10.0,
+    "button": true,
+    "font_size": 13.0,
     "font_family": "JetBrains Mono",
   },
+
+  // UI --
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_project_items": false,
+    "show_branch_name": false,
+    "show_user_menu": false,
+  },
+  "tab_bar": {
+    "show": false,
+  },
+  "toolbar": {
+    "quick_actions": false,
+  },
+  "status_bar": {
+    "experimental.show": true,
+  },
   "project_panel": {
+    "button": false,
     "dock": "left",
+    "default_width": 350,
+    "hide_root": true,
+    "auto_fold_dirs": false,
+    "starts_open": false,
+    "sticky_scroll": false,
+    "indent_guides": {
+      "show": "never",
+    },
+    "scrollbar": {
+      "show": "never",
+    },
   },
   "outline_panel": {
     "dock": "left",
-  },
-  "collaboration_panel": {
-    "dock": "left",
+    "button": false,
+    "default_width": 300,
+    "indent_guides": {
+      "show": "never",
+    },
   },
   "git_panel": {
     "dock": "left",
+    "button": false,
   },
-  "autosave": "on_focus_change",
+  "collaboration_panel": {
+    "dock": "left",
+    "button": false,
+  },
+  "search": {
+    "button": false,
+  },
+  "global_lsp_settings": {
+    "button": false,
+  },
+  "debugger": {
+    "button": false,
+  },
+  "file_finder": {
+    "modal_max_width": "small",
+  },
+  "gutter": {
+    "min_line_number_digits": 0,
+    "folds": false,
+    "runnables": false,
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "centered_layout": {
+    "left_padding": 0.15,
+    "right_padding": 0.15,
+  },
   "context_servers": {
     "mcp-server-github": {
       "enabled": true,
@@ -54,6 +137,8 @@
   "show_edit_predictions": false,
   "agent": {
     "dock": "right",
+    "button": false,
+    "default_width": 350,
     "tool_permissions": {
       "default": "allow",
     },
@@ -80,6 +165,7 @@
     },
   },
   "diagnostics": {
+    "button": false,
     "inline": {
       "enabled": true,
     },
@@ -87,28 +173,8 @@
   "inlay_hints": {
     "enabled": true,
   },
-  "ui_font_family": ".ZedSans",
-  // vim settings ---
-  "vim_mode": true,
-  "cursor_blink": false,
-  "relative_line_numbers": "enabled",
-  "scroll_beyond_last_line": "off",
-  "scrollbar": { "show": "never" },
-  // vim settings end ---
-  "ui_font_size": 16.0,
-  "buffer_font_size": 14.0,
-  "theme": {
-    "mode": "dark",
-    "light": "Catppuccin Latte",
-    "dark": "Everforest Dark Hard (material)",
-  },
-  // Indentation, rainbow indentation
-  "indent_guides": {
-    "background_coloring": "disabled",
-    "enabled": true,
-    "coloring": "indent_aware",
-  },
-  "format_on_save": "on",
+
+  //
   // Indivdual language settings :::
   "languages": {
     "Python": {
@@ -159,9 +225,16 @@
           "validate": true,
           "completion": true,
           "hover": true,
-          "editor": { "tabSize": 2 },
-          "format": { "enable": true, "singleQuote": true },
-          "schemaStore": { "enable": true },
+          "editor": {
+            "tabSize": 2,
+          },
+          "format": {
+            "enable": true,
+            "singleQuote": true,
+          },
+          "schemaStore": {
+            "enable": true,
+          },
           "schemas": {
             "kubernetes": "**/*.yaml",
           },

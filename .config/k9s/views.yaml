@@ -1,0 +1,69 @@
+views:
+  v1/pods:
+    sortColumn: NAME:asc
+    columns:
+      - AGE
+      - NAME
+      - STATUS
+      - READY
+      - NAMESPACE
+      - IMGVer:.spec.containers[0].image|split(":")|.[-1]
+  apps/v1/deployments:
+    sortColumn: NAME:asc
+    columns:
+      - NAMESPACE
+      - NAME
+      - READY
+      - UP-TO-DATE
+      - AVAILABLE
+      - IMG:.spec.template.spec.containers[0].image|split(":")|.[0]
+      - VERSION:.spec.template.spec.containers[0].image|split(":")|.[-1]
+      - AGE
+  v1/nodes:
+    sortColumn: NAME:asc
+    columns:
+      - NAME
+      - STATUS
+      - ROLE
+      - VERSION
+      - OS-IMAGE|S
+      - INTERNAL-IP|S
+      - PODS
+      - '%CPU'
+      - '%MEM'
+      - ZONE:.metadata.labels.topology\.kubernetes\.io/zone
+      - TYPE:.metadata.labels.node\.kubernetes\.io/instance-type
+      - AGE
+  v1/persistentvolumeclaims:
+    sortColumn: NAMESPACE:asc
+    columns:
+      - NAMESPACE
+      - NAME
+      - STATUS
+      - CAPACITY
+      - STORAGECLASS
+      - VOLUME|W
+      - AGE
+  argoproj.io/v1alpha1/applications:
+    sortColumn: NAME:asc
+    columns:
+      - NAME
+      - SYNC STATUS
+      - HEALTH STATUS
+      - OPERATION:.status.operationState.phase
+      - DEST:.spec.destination.namespace
+      # jq needs 2+ pipes or k9s parses the column as jsonpath
+      - SOURCE:. | [.spec.source // empty, .spec.sources[]?] | map(.chart // .path // .repoURL) | join(",")
+      - REV:. | [.status.sync.revision // empty, .status.sync.revisions[]?] | map(.[0:12]) | join(",")
+      - AGE:.metadata.creationTimestamp|T
+  cert-manager.io/v1/certificates:
+    sortColumn: NOT-AFTER:asc
+    columns:
+      - NAMESPACE
+      - NAME
+      - READY
+      - SECRET
+      - ISSUER|S
+      - NOT-AFTER:.status.notAfter
+      - RENEWAL:.status.renewalTime
+      - AGE
