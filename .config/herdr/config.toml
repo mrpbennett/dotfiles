@@ -13,6 +13,7 @@ dark_name = "gruvbox"
 
 [ui]
 show_agent_labels_on_pane_borders = true
+sidebar_start_collapsed = true
 sidebar_collapsed_mode = "hidden"
 confirm_close = false
 pane_gaps = false

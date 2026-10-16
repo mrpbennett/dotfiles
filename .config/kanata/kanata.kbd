@@ -1,0 +1,63 @@
+;; kanata — home row mods + nav layer (replaces karabiner.json)
+;; Reload: sudo launchctl kickstart -k system/dev.kanata.kanata
+;; Emergency exit while running in foreground: lctl+spc+esc
+
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+  ;; a key typed <150ms after another key is always a tap — no mod misfires mid-word
+  tap-hold-require-prior-idle 150
+)
+
+(defsrc
+  bspc
+  caps a    s    d    f    h    j    k    l    ;
+  fn   lmet
+)
+
+(defvar
+  ;; tap-repress window: tap a key, then press+hold it again within this → the letter repeats
+  ;; (hold j to scroll in vim = tap j, then hold j)
+  tap  200
+  ;; hold this long to get the modifier
+  hold 200
+)
+
+(defalias
+  cap (tap-hold 200 200 esc lctl)
+
+  ;; home row mods: ctrl opt cmd shift | shift cmd opt ctrl
+  a (tap-hold-release $tap $hold a lctl)
+  s (tap-hold-release $tap $hold s lalt)
+  d (tap-hold-release $tap $hold d lmet)
+  f (tap-hold-release $tap $hold f lsft)
+  j (tap-hold-release $tap $hold j rsft)
+  k (tap-hold-release $tap $hold k rmet)
+  l (tap-hold-release $tap $hold l ralt)
+  ; (tap-hold-release $tap $hold ; rctl)
+
+  ;; cmd+bspc → opt+bspc (delete word)
+  bs (fork bspc (unmod (lmet rmet) lalt bspc) (lmet rmet))
+
+  nav (layer-while-held nav)
+
+  ;; nav layer: arrows; +opt passes through; +cmd h/l → opt+arrow; +ctrl → ctrl+fn+arrow
+  nh (fork (fork left (unmod (lmet rmet) lalt left) (lmet rmet)) (multi fn left) (lctl rctl))
+  nj (fork down (multi fn down) (lctl rctl))
+  nk (fork up (multi fn up) (lctl rctl))
+  nl (fork (fork right (unmod (lmet rmet) lalt right) (lmet rmet)) (multi fn right) (lctl rctl))
+  ;; nav+bspc → forward delete; nav+cmd+bspc → ctrl+forward delete
+  nbs (fork del (unmod (lmet rmet) lctl del) (lmet rmet))
+)
+
+(deflayer base
+  @bs
+  @cap @a  @s   @d   @f   h    @j   @k   @l   @;
+  lmet @nav
+)
+
+(deflayer nav
+  @nbs
+  _    _    _    _    _    @nh  @nj  @nk  @nl  _
+  _    _
+)

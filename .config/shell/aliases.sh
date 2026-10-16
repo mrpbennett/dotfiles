@@ -97,6 +97,8 @@ alias tctl="talosctl"
 alias kctx='kubectx'
 alias kns="kubens"
 
+alias sof="sofka"
+
 kdelp() {
   if [ -z "$1" ]; then
     echo "Usage: kdelp <namespace>"
