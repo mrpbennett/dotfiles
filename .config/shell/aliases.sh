@@ -80,18 +80,14 @@ source <(kubectl completion zsh)
 zstyle ':completion:*' menu select # arrow keys / repeated Tab to pick from the list
 
 alias k="kubectl"
-alias ka="k apply -f"
-alias kg="k get"
-alias kd="k describe"
-alias kdel="k delete"
-alias kgpo="k get pod"
-alias kl='k logs -f'
-alias kgd="k get deployments"
-alias kns="kubens"
-alias ke="k exec -it"
-alias kcns='k config set-context --current --namespace'
-alias kw-token="cat ~/.kube/cache/oidc-login/lga-dm-dev/* | jq -r '.id_token'"
-alias kc='k config'
+alias kg="kubectl get"
+alias kgp="kubectl get pods"
+alias kgpa="kubectl get pods -A"
+alias kd='kubectl describe'
+alias kl='kubectl logs'
+alias kx='kubectl exec -it'
+alias kt="kubectl tree"
+
 alias tctl="talosctl"
 
 alias kctx='kubectx'

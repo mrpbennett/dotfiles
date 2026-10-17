@@ -1,25 +1,39 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$directory\
+$fill\
+$kubernetes \
+$git_branch\
+$git_status\
+$line_break\
+$character\
+"""
+right_format = """
+$cmd_duration\
+$status\
+"""
 add_newline = true
-command_timeout = 200
-format = "[$directory$git_branch$git_status]($style)$line_break$character"
 
 [character]
-success_symbol = '[x](bold green) '
-error_symbol = '[➜](bold red) '
+success_symbol = '[➜](bold green) '
+error_symbol = '[x](bold red) '
 
 vimcmd_symbol = '[N](bold blue) '
 vimcmd_visual_symbol = '[V](bold yellow)'
 
-[hostname]
-ssh_only = false
-format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
-disabled = false
-
 [directory]
 truncation_length = 2
-truncation_symbol = ".../"
+truncation_symbol = "../"
 repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+truncate_to_repo = false
+
+[cmd_duration]
+format = " [$duration]($style) "
+
+[git_branch]
+format = " [$symbol$branch]($style) "
 
 [git_status]
 format = '[$all_status]($style)'
@@ -34,3 +48,10 @@ stashed = ""
 staged = ""
 renamed = ""
 deleted = ""
+
+[status]
+symbol = "󰀧 "
+disabled = false
+
+[kubernetes]
+disabled = false
