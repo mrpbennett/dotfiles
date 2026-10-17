@@ -16,21 +16,27 @@
 
 ---
 
-I live in the terminal. Everything in this repo exists to make that true without friction: one shell config that behaves the same on every machine, one theme that follows macOS between light and dark automatically, and every tool's config tracked in git instead of scattered across `~/.config` and hoped-for memory. It's stowed rather than copied, so editing a config here _is_ editing it live — no sync step, no drift.
+I live in the terminal. Everything in this repo exists to make that true without friction: one shell setup, one theme family (Catppuccin) that follows macOS between light and dark, a keyboard remapped below the OS, and every tool's config tracked in git instead of scattered across `~/.config`. It's stowed rather than copied, so editing a config here _is_ editing it live — no sync step, no drift.
+
+If you're here for the first time, the short version:
+
+- **Terminal:** Ghostty running zsh, with [herdr](https://herdr.dev) as the multiplexer / agent workspace (it replaced tmux).
+- **Editor:** Neovim with LazyVim (`nvim/`), plus a from-scratch experiment in `nvim-lean/`.
+- **Keyboard:** [kanata](https://github.com/jtroo/kanata) for home-row mods and a nav layer (it replaced Karabiner-Elements).
+- **Tooling:** everything installs from one Brewfile and one `mise` config.
 
 ## Table of Contents
 
+- [Install](#install)
 - [What's in here](#whats-in-here)
 - [Directory structure](#directory-structure)
-- [Screenshots / demo](#screenshots--demo)
 - [Fresh machine setup](#fresh-machine-setup)
 - [Stow reference](#stow-reference)
 - [Day-to-day workflows](#day-to-day-workflows)
 - [Recovering from conflicts](#recovering-from-conflicts)
 - [Security](#security)
 - [AI](#ai)
-- [Quick cheatsheet](#quick-cheatsheet)
-- [Tmux keybindings](#tmux-keybindings)
+- [Herdr keybindings](#herdr-keybindings)
 
 ---
 
@@ -40,19 +46,23 @@ I live in the terminal. Everything in this repo exists to make that true without
 curl -fsSL https://raw.githubusercontent.com/mrpbennett/dotfiles/main/install.sh | bash
 ```
 
-Log out and back in after installation before using Docker without `sudo`.
+This clones the repo to `~/.dotfiles` (if it isn't already there) and runs the bootstrap described in [Fresh machine setup](#fresh-machine-setup). Read `install.sh` before piping anything to `bash` — it's short.
+
+kanata is **not** installed by this script; see [kanata setup](#kanata-setup).
 
 ## What's in here
 
-All configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
+All app configs live under `.config/` and are symlinked into `~/.config` via GNU Stow. The repo root mirrors your home directory — stow creates the links, git tracks the content.
 
-`.local/share/dotfiles/install/` holds machine bootstrap scripts (install flow, Brewfile, and macOS defaults), while `.local/share/dotfiles/default/` contains shared shell modules sourced by both zsh and fish.
+Machine bootstrap pieces live in `.local/share/dotfiles/` (the `Brewfile` and `macos/defaults.sh`). Shell modules shared by zsh and fish live in `.config/shell/`.
 
 ### Color Scheme
 
 ![catppuccin](assets/herdr-colorscheme.png)
 
-My setup consists of auto theme switching with catppuccin. Latte for light, and Macchiato for dark. For tmux this is done by setting up [hooks](https://github.com/catppuccin/tmux#for-tmux-versions-prior-to-36) and with LazyVim this is done with the plugin [auto-dark-mode](https://github.com/f-person/auto-dark-mode.nvim)
+Catppuccin everywhere it's available: **Latte** for light, **Mocha** for dark. Ghostty follows macOS appearance on its own (`theme = light:Catppuccin Latte, dark:Catppuccin Mocha`), and the btop, atuin, k9s and yazi configs ship Catppuccin themes alongside them. Herdr's theme is set separately in `.config/herdr/config.toml`.
+
+`.local/bin/catppuccinify` recolors any image to the Catppuccin Mocha palette — that's how the wallpapers in `backgrounds/` are made.
 
 > **Why bother automating this?** Because I switch environments (bright office, dark room) more often than I remember to run a theme command. If it's not automatic, it doesn't happen.
 
@@ -60,46 +70,49 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 
 | Config     | What it does                                                                                 | Why I use it                                                                                       |
 | ---------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `zsh`      | Primary shell — functions, completions, abbreviations, and `$PATH` setup all live here       | It's the macOS default and what most completion scripts target — no reason to fight it             |
-| `fish`     | Friendly interactive shell config with `conf.d` hooks for atuin and toolchain env setup      | Sane defaults out of the box, no config required — good for pairing sessions on someone else's box |
-| `starship` | Cross-shell prompt that shows only what's relevant: git state, language versions, exit codes | One binary and one TOML file renders identically in zsh and fish — I stopped hand-rolling `PROMPT` |
-| `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           | Ctrl+R across every terminal I've ever opened, synced across machines — I stopped losing commands  |
+| `zsh`      | Primary shell (`.zshrc`) — oh-my-zsh, vi mode, and a hook that loads `~/.config/shell/all.sh` | It's the macOS default and what most completion scripts target — no reason to fight it             |
+| `shell`    | Shared modules (`envs`, `init`, `functions`, `aliases`) sourced by zsh and fish              | One place for aliases and tool init instead of two diverging copies                                |
+| `fish`     | Secondary shell with `conf.d` hooks for atuin and rustup                                     | Sane defaults out of the box — good for pairing sessions on someone else's box                     |
+| `starship` | Cross-shell prompt showing only what's relevant: git state, language versions, exit codes    | One binary and one TOML file renders identically in zsh and fish                                   |
+| `atuin`    | Replaces shell history with a searchable, syncable SQLite database                           | Ctrl+R across every terminal I've ever opened, synced across machines                              |
 
 ### Editor & Terminal
 
-| Config    | What it does                                                                                                                                                         | Why I use it                                                                                                                                                |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `nvim`    | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                                                                                      | LSP, treesitter, and telescope pre-wired means I spend time editing, not configuring                                                                        |
-| `ghostty` | GPU-accelerated terminal with a sane default config and zero latency                                                                                                 | Config is a text file, not a preferences GUI — replaced iTerm2's undiffable plist                                                                           |
-| `tmux`    | Session persistence and window management; auto theme switching between Catppuccin Latte/Macchiato on macOS appearance change, with battery status in the status bar | Sessions survive SSH drops and reboots — I want panes exactly where I left them. Currently trialing `herdr` as a possible replacement, nothing migrated yet |
-| `sesh`    | Smart tmux session manager with zoxide integration; `dotfiles` session pre-configured to open nvim on attach                                                         | One keystroke into any project's session instead of `tmux ls` and squinting at names                                                                        |
-| `zed`     | Fast native editor for when you want to stay out of the terminal                                                                                                     | The rare moment I want a mouse-driven multi-file diff view without leaving a native app                                                                     |
+| Config      | What it does                                                                                    | Why I use it                                                                              |
+| ----------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `nvim`      | [LazyVim](https://www.lazyvim.org) — a full IDE setup without the config sprawl                 | LSP, treesitter, and pickers pre-wired means I spend time editing, not configuring        |
+| `nvim-lean` | An experimental minimal Neovim config built on `vim.pack` (no plugin manager)                   | Seeing how little config I actually need. Run it with `NVIM_APPNAME=nvim-lean nvim`       |
+| `ghostty`   | GPU-accelerated terminal; config is one text file, including split keybinds that suit home-row mods | Replaced iTerm2's undiffable plist                                                    |
+| `herdr`     | Terminal workspace manager for running several coding agents side by side, with a worktrunk plugin | Replaced tmux — one window to watch all my agents, not N tabs                          |
+| `sesh`      | Session picker with zoxide integration                                                          | Still configured for tmux sessions; tmux remains installed but its config is gone         |
+| `zed`       | Native editor for when I want a mouse-driven multi-file diff view                               | The occasional visual workflow. Includes LazyVim-style keybinds (see `.config/zed/docs/`) |
 
 ### TUI Tools
 
-| Config       | What it does                                                                               | Why I use it                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| `lazygit`    | Git operations without memorizing flags — branches, rebases, and diffs in a single view    | I know git's plumbing but I'm not typing `git rebase -i HEAD~6` from memory every time      |
-| `hunk`       | Patch review and staging TUI, great for checking diffs                                     | Reviewing hunk-by-hunk in a TUI beats scrolling one giant unified diff                      |
-| `herdr`      | Your coding agents from one terminal                                                       | Running several coding agents at once, I needed one window to watch all of them, not N tabs |
-| `k9s`        | Kubernetes cluster management from the terminal; essential when `kubectl get` isn't enough | `kubectl get` in a `watch` loop is not a debugging strategy                                 |
-| `yazi`       | Terminal file manager with previews, bulk operations, and plugin support                   | Image and archive previews without shelling out to `open` keeps me from breaking flow       |
-| `lazydocker` | Container and image management TUI that replaces most `docker` invocations                 | `docker ps` piped through `less` was never a real workflow                                  |
-| `television` | Fuzzy finder built for speed — a ripgrep-powered `fzf` alternative                         | Same job as fzf, noticeably snappier on large file trees since it's Rust end to end         |
+| Config       | What it does                                                                               | Why I use it                                                                           |
+| ------------ | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| `lazygit`    | Branches, rebases, and diffs in a single view                                              | I know git's plumbing but I'm not typing `git rebase -i HEAD~6` from memory every time |
+| `hunk`       | Patch review and staging TUI                                                               | Reviewing hunk-by-hunk beats scrolling one giant unified diff                          |
+| `worktrunk`  | Git worktree manager (`wt`), with AI-generated commit messages                             | Parallel agents each need their own worktree                                           |
+| `k9s`        | Kubernetes cluster management, with plugins for argocd, cert-manager, cloudnative-pg, talos | `kubectl get` in a `watch` loop is not a debugging strategy                           |
+| `sofka`      | Kubernetes TUI config (default namespace, resource aliases)                                | A second take on cluster browsing alongside k9s                                        |
+| `yazi`       | Terminal file manager with previews and Catppuccin flavors                                 | Image and archive previews without shelling out to `open`                              |
+| `lazydocker` | Container and image management TUI                                                         | `docker ps` piped through `less` was never a real workflow                             |
+| `television` | Fuzzy finder with custom channels (git worktrees, herdr sessions, k8s contexts, AWS, …)    | Same job as fzf, but each channel is a tiny TOML file in `cable/`                      |
+| `visidata`   | Terminal spreadsheet for poking at CSV/JSON                                                | Faster than loading data into a notebook                                               |
 
 ### System & Productivity
 
-| Config                                         | What it does                                                                                         | Why I use it                                                                                                   |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `kanata`                                       | Keyboard remapping at the driver level — home-row mods with quick-tap, caps esc/ctrl, nav layer      | Home-row mods and layer switching need to live below the OS keybinding layer, and kanata's tap-hold beats Karabiner's — see `.config/kanata/docs/README.md` |
-| `karabiner`                                    | Minimal config: ignores all keyboards so Karabiner only provides the virtual HID driver kanata needs | kanata can't share the keyboard with Karabiner's grabber                                                      |
-| `mise`                                         | Runtime version manager for Node, Python, Ruby, and anything else — replaces `nvm`, `rbenv`, `pyenv` | One tool instead of three                                                                                      |
-| `bat`                                          | `cat` with syntax highlighting, line numbers, and git diff markers                                   | Costs nothing and I run `cat` constantly — may as well see syntax and git gutters                              |
-| `btop`                                         | System monitor with a layout that actually uses your terminal width                                  | The only monitor I've used that doesn't waste half the terminal on padding                                     |
-| `gh`                                           | Official GitHub CLI — PRs, issues, workflows, and releases from the terminal                         | PRs and issues without opening a browser tab I'll forget to close                                              |
-| `gh-dash`                                      | Dashboard TUI for `gh` — all your open PRs and issues in one view                                    | Better triage than GitHub's notification page, refreshed on keypress                                           |
-| `sqruff`                                       | SQL linter and formatter config                                                                      | Consistent SQL formatting so PR review isn't an opinion war over comma placement                               |
-| [`bucky`](https://github.com/mrpbennett/bucky) | A personal S3/FTP TUI for managing object storage                                                    | Wrote it myself — nothing else gave me a fast TUI for poking at buckets                                        |
+| Config                                         | What it does                                                                                    | Why I use it                                                                          |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `kanata`                                       | Keyboard remapping — home-row mods with quick-tap, caps as esc/ctrl, nav layer. See [`.config/kanata/docs/README.md`](.config/kanata/docs/README.md) | Home-row mods need to live below the OS keybinding layer; kanata's tap-hold beats Karabiner's |
+| `aerospace`                                    | Tiling window manager config                                                                    | Keyboard-driven window layout                                                         |
+| `mise`                                         | Runtime and CLI version manager — Node, Python, Go, Rust, kubectl, terraform, claude, and more  | One tool instead of nvm + pyenv + rbenv + a pile of curl-installed binaries           |
+| `bat`                                          | `cat` with syntax highlighting and git gutters                                                  | Costs nothing and I run `cat` constantly                                              |
+| `btop`                                         | System monitor                                                                                  | Uses the whole terminal width                                                         |
+| `gh` / `gh-dash`                               | GitHub CLI and a PR/issue dashboard TUI                                                         | PRs and issues without a browser tab I'll forget to close                             |
+| `sqruff`                                       | SQL linter and formatter config                                                                 | Consistent SQL formatting so PR review isn't an opinion war                           |
+| [`bucky`](https://github.com/mrpbennett/bucky) | A personal S3/FTP TUI (installed via `mise`; `config.toml` is git-ignored, only an example is tracked) | Wrote it myself — nothing else gave me a fast TUI for poking at buckets         |
 
 ---
 
@@ -107,69 +120,73 @@ My setup consists of auto theme switching with catppuccin. Latte for light, and 
 
 ```text
 .
-├── .claude/
-│   └── CLAUDE.md              # instructions for Claude Code when it works in this repo — see AI
-├── .config/                   # stowed straight into ~/.config, one directory per tool
-│   ├── nvim/                  # LazyVim
-│   ├── tmux/                  # currently trialing herdr as a possible replacement
-│   ├── ghostty/
-│   ├── zellij/                # parked from an earlier evaluation — tmux won that round
+├── install.sh                 # curl-able bootstrap; excluded from stow
+├── .zshrc  .gitconfig  .vimrc  .ideavimrc  .hushlogin
+├── .claude/                   # CLAUDE.md, settings, statusline, skills — see AI
+├── .config/                   # stowed into ~/.config, one directory per tool
+│   ├── shell/                 # aliases.sh, envs.sh, init.sh, functions.sh, fns/ — sourced via all.sh
+│   ├── nvim/  nvim-lean/      # LazyVim, and the minimal vim.pack experiment
+│   ├── herdr/                 # only config.toml and plugins.json are tracked
+│   ├── kanata/                # kanata.kbd, launchd plist, docs/
 │   └── ...                    # one directory per tool in the tables above
-├── .local/share/dotfiles/
-│   ├── default/shell/         # modules sourced by both zsh and fish
-│   │   ├── aliases
-│   │   ├── envs.sh
-│   │   ├── fns
-│   │   ├── init.sh            # `eval $(... init)` hooks: atuin, television, starship, zoxide, mise
-│   │   ├── rc.sh
-│   │   └── rc.fish
-│   └── install/
-│       ├── install.sh         # the one script that bootstraps a fresh machine
-│       ├── brew/Brewfile      # every formula and cask this setup depends on
-│       └── macos/defaults.sh  # `defaults write` tweaks — trackpad speed, key repeat, etc.
-├── assets/                    # README images — excluded from stow, see .stow-local-ignore
-├── .zshrc
-├── .ideavimrc
-├── .hushlogin
+├── .local/
+│   ├── bin/catppuccinify      # recolor an image to Catppuccin Mocha (uv script)
+│   └── share/dotfiles/
+│       ├── Brewfile           # every formula and cask this setup depends on
+│       └── macos/defaults.sh  # `defaults write` tweaks — pointer speed, key repeat, etc.
+├── backgrounds/               # light/ and dark/ wallpapers
+├── assets/                    # README images
 └── README.md
 ```
 
+Files matching `.stow-local-ignore` (`install.sh`, `README.md`, `assets/`, git metadata, untracked herdr state) are not symlinked into `$HOME`.
+
 ## Fresh machine setup
 
-**Assumes:** macOS 26 (Tahoe) or later, Apple Silicon. Nothing here is version-pinned to a specific macOS release — the `defaults write` keys in `macos/defaults.sh` have been stable since Big Sur — but this is what I've actually tested against.
+**Assumes:** macOS on Apple Silicon. The `defaults write` keys in `macos/defaults.sh` have been stable since Big Sur.
 
 ### 0. Command Line Tools
 
 ```sh
-# Installs git, among other things stow/homebrew need later
+# Installs git, which the installer needs
 xcode-select --install
 ```
 
-### 1. Clone the repo
+### 1. Run the installer
+
+Either use the [one-liner above](#install), or clone and run it yourself:
 
 ```sh
-git clone <repo-url> ~/Developer/personal/dotfiles
+git clone https://github.com/mrpbennett/dotfiles.git ~/.dotfiles
+~/.dotfiles/install.sh
 ```
 
-### 2. Run the installer
+The repo is expected at `~/.dotfiles` — `sync-dotfiles` and the `dotfiles` shell function both assume that path.
 
-```sh
-~/Developer/personal/dotfiles/.local/share/dotfiles/install/install.sh
-```
+`install.sh` does this, in order:
 
-`install.sh` does exactly this, in order:
-
-1. **Installs Homebrew** if `brew` isn't already on `$PATH` (same one-liner as [brew.sh](https://brew.sh): `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`).
-2. **Runs `brew bundle`** against `brew/Brewfile` — CLI tools, shells, dev tools, and a handful of casks (Ghostty, JetBrains Mono Nerd Font, mitmproxy, ngrok).
-3. **Stows the repo** _before_ installing oh-my-zsh, deliberately — see the note below.
+1. **Installs Homebrew** if `brew` isn't on `$PATH`.
+2. **Runs `brew bundle`** against `.local/share/dotfiles/Brewfile` — CLI tools (including `herdr`, `stow`, `mise`, `neovim`, `worktrunk`), plus casks for Ghostty, fonts, mitmproxy and ngrok.
+3. **Stows the repo** with `--no-folding` _before_ installing oh-my-zsh — see the note below.
 4. **Installs oh-my-zsh** plus the `zsh-autosuggestions` and `zsh-syntax-highlighting` plugins.
-5. **Runs `mise install`** to pull every pinned language runtime.
-6. **Clones `tpm`** (tmux plugin manager) so `prefix + I` inside tmux can install the rest.
-7. **Applies macOS defaults** from `macos/defaults.sh` — trackpad tracking speed, disabling press-and-hold accent popups (it fights vim's key repeat), and a few Finder/Dock tweaks. Requires a logout or reboot to fully apply.
+5. **Runs `mise install`** to pull every runtime and CLI pinned in `.config/mise/config.toml`.
+6. **Applies macOS defaults** from `macos/defaults.sh` — pointer speed, no press-and-hold accent popup (it fights vim's key repeat), bottom-right-corner secondary click, and freeing the input-source shortcuts so `ctrl+s`-style prefixes aren't swallowed. Needs a logout or reboot to fully apply.
 
-> **Why stow before oh-my-zsh?** A fresh machine has no `~/.zshrc`. If oh-my-zsh installs first, it writes its own template there, and stow later refuses to symlink over a real file. Stowing first means oh-my-zsh finds our `.zshrc` already in place and leaves it alone.
+> **Why stow before oh-my-zsh?** A fresh machine has no `~/.zshrc`. If oh-my-zsh installs first, it writes its own template there, and stow later refuses to symlink over a real file. Stowing first means oh-my-zsh finds our `.zshrc` already in place.
 
-> **Verify it worked:** `readlink ~/.config/tmux` should print `../Developer/personal/dotfiles/.config/tmux`
+> **Why `--no-folding`?** It makes stow link individual files instead of whole directories, so apps that write extra state into `~/.config/<app>/` (herdr, k9s, zed) don't dump it into the repo.
+
+> **Verify it worked:** `readlink ~/.config/herdr/config.toml` should point into `~/.dotfiles/.config/herdr/`.
+
+### kanata setup
+
+kanata needs a driver and root, so it's set up by hand:
+
+1. Install Karabiner-Elements — only for its VirtualHIDDevice driver. Its own keyboard grabbing stays disabled (the old `karabiner.json` was removed from this repo; add Karabiner's "ignore all devices" setting yourself, or kanata can't get exclusive access).
+2. Install a kanata build that matches the driver version (the notes in [`.config/kanata/tasks/todo.md`](.config/kanata/tasks/todo.md) explain why brew's release isn't enough).
+3. Load `.config/kanata/dev.kanata.kanata.plist` as a root launchd daemon. The plist hard-codes paths for my user and `/usr/local/bin/kanata` — edit them first.
+
+Full keymap and timing rules: [`.config/kanata/docs/README.md`](.config/kanata/docs/README.md).
 
 ---
 
@@ -180,50 +197,44 @@ git clone <repo-url> ~/Developer/personal/dotfiles
 
 ### The mental model
 
-This repo's root is laid out to **mirror your home directory** — `.config/tmux` in the repo corresponds to `~/.config/tmux`, `.zshrc` in the repo corresponds to `~/.zshrc`. Stow's only job is walking that tree and creating a symlink at each real-world path pointing back into the repo. Nothing is copied; editing `~/.config/tmux/tmux.conf` _is_ editing the file in git, because it's the same inode reached through a different path.
+This repo's root is laid out to **mirror your home directory** — `.config/herdr` in the repo corresponds to `~/.config/herdr`, `.zshrc` in the repo corresponds to `~/.zshrc`. Stow's only job is walking that tree and creating a symlink at each real-world path pointing back into the repo. Nothing is copied; editing `~/.config/herdr/config.toml` _is_ editing the file in git.
 
 That's also why conflicts happen: if a real file already sits where a symlink needs to go, stow won't silently replace it — it errors and asks you to move it out of the way first.
+
+### The shortcut
+
+```sh
+sync-dotfiles
+```
+
+A shell function (`.config/shell/fns/stow.sh`) that dry-runs a restow, adopts any real files that are in the way, and restows. Convenient, but it uses `--adopt`, so read [Recovering from conflicts](#recovering-from-conflicts) first.
 
 ### Dry run — preview without touching anything
 
 ```sh
 # Always run this first on an unfamiliar machine
-stow -nv --target="$HOME" .
+stow -nv --no-folding --target="$HOME" .
 ```
-
-Prints every link that _would_ be created or removed. Nothing is changed.
 
 ### Stow — create symlinks
 
 ```sh
-stow --target="$HOME" .
+stow --no-folding --target="$HOME" .
 ```
 
-Idempotent. Already-correct symlinks are left alone — safe to re-run anytime.
+Idempotent. Already-correct symlinks are left alone.
 
 ### Restow — sync after changes
 
 ```sh
-# Run after adding a new tool config, renaming a directory, or pulling someone else's changes
-stow --restow --target="$HOME" .
+# After adding a new tool config, renaming a directory, or pulling changes
+stow --restow --no-folding --target="$HOME" .
 ```
-
-Unstow + stow in a single step.
 
 ### Unstow — remove all symlinks
 
 ```sh
 stow --delete --target="$HOME" .
-```
-
-Removes every symlink stow created. Your `.bak` directories (if you made any) are untouched — rename them back to restore the originals.
-
-### Verbose output
-
-```sh
-stow --verbose --target="$HOME" .
-# combine with dry run:
-stow -nv --target="$HOME" .
 ```
 
 </details>
@@ -232,29 +243,31 @@ stow -nv --target="$HOME" .
 
 ## Day-to-day workflows
 
+### Editing a config
+
+Just edit it. `nvim ~/.config/herdr/config.toml` is editing the repo. Type `dotfiles` in zsh to open the whole repo in Neovim.
+
 ### Adding a new app's config
 
 Move the existing config into the repo, then restow:
 
 ```sh
-mv ~/.config/newapp ~/Developer/personal/dotfiles/.config/newapp
-cd ~/Developer/personal/dotfiles
-stow --restow --target="$HOME" .
+mv ~/.config/newapp ~/.dotfiles/.config/newapp
+sync-dotfiles   # or: cd ~/.dotfiles && stow --restow --no-folding --target="$HOME" .
 ```
 
-Then commit the new directory. The symlink is live immediately — no restart needed.
+Then commit the new directory. The symlink is live immediately. If the app writes state or secrets into its config directory, add them to `.gitignore` (see the herdr and hunk entries for examples).
 
-### Removing an app from stow
+### Adding a package
+
+Add a `brew "name"` or `cask "name"` line to `.local/share/dotfiles/Brewfile`, or a tool to `.config/mise/config.toml`. Then `brew bundle --file=~/.dotfiles/.local/share/dotfiles/Brewfile` or `mise install`.
+
+### Removing an app
 
 ```sh
-# Remove from repo
-rm -rf ~/Developer/personal/dotfiles/.config/oldapp
-
-# Clean up the now-dead symlink
-stow --restow --target="$HOME" .
+rm -rf ~/.dotfiles/.config/oldapp
+stow --restow --no-folding --target="$HOME" .   # cleans up the dead symlinks
 ```
-
-The app will recreate `~/.config/oldapp` fresh on next launch using its own defaults.
 
 ---
 
@@ -265,17 +278,16 @@ If stow exits with a `conflicts` error, a real file (not a symlink) exists at th
 ```sh
 # Option 1: back it up and re-run
 mv ~/.config/problem-app ~/.config/problem-app.bak
-stow --target="$HOME" .
+stow --no-folding --target="$HOME" .
 ```
 
 ```sh
 # Option 2: adopt it — stow moves the file INTO the repo and links back
-# Use this only if you want to pull the existing file into your dotfiles
-stow --adopt --target="$HOME" .
-git diff  # always review before committing — adopt can be destructive
+stow --adopt --no-folding --target="$HOME" .
+git diff  # always review before committing
 ```
 
-> **Note on `--adopt`:** This flag rewrites the file _in your repo_ to match what's on disk. If the on-disk version is worse than what you had committed, you'll overwrite your config. Check `git diff` before you `git add` anything.
+> **Note on `--adopt`:** This rewrites the file _in your repo_ to match what's on disk. If the on-disk version is worse than what you had committed, you'll overwrite your config. Check `git diff` before you `git add` anything, and `git checkout -- <file>` to undo.
 
 ---
 
@@ -283,138 +295,90 @@ git diff  # always review before committing — adopt can be destructive
 
 **Never commit credentials to this repo.**
 
-API keys, tokens, session cookies, and passwords do not belong here. The right pattern is a machine-local file that's sourced but never tracked:
+API keys, tokens, and passwords belong in a machine-local file that's sourced but never tracked. `.config/shell/all.sh` already sources `~/pulsepoint.sh` if it exists (work-only scripts live there), and the same pattern works for secrets:
 
 ```sh
-# ~/.config/fish/local.fish — gitignored, sourced from conf.d, never leaves this machine
-set -gx GITHUB_TOKEN "ghp_..."
-set -gx OPENAI_API_KEY "sk-..."
-```
-
-```sh
-# equivalent for zsh — ~/.env.local, sourced from the end of .zshrc
+# ~/.env.local — outside the repo, sourced from your shell
 export GITHUB_TOKEN="ghp_..."
-export OPENAI_API_KEY="sk-..."
 ```
 
-Both live outside the repo entirely (or inside it but git-ignored) — either way, `git status` should never be able to see them. A few rules that follow from that:
+- Machine-specific secrets live outside this repo's tracked files, or are listed in `.gitignore` (not `.stow-local-ignore`, which only controls what stow skips, not what git tracks). Examples already ignored: `.config/bucky/config.toml`, `.config/gh/hosts.yml`.
+- Long-term secrets belong in a password manager or secrets manager, not in any dotfile.
+- If you accidentally commit a secret, treat it as compromised immediately — git history is public.
 
-- Machine-specific secrets live in a file sourced _outside_ this repo's tracked files (e.g. `~/.config/fish/local.fish`, added to `.gitignore` — not `.stow-local-ignore`, which only controls what stow skips, not what git tracks)
-- Long-term secrets belong in a password manager or secrets manager, not in any dotfile
-- If you accidentally commit a secret, treat it as compromised immediately — git history is public
-
-> **Before every commit:** run `git diff --staged` and actually read it. A one-line "just adding a new alias" commit is exactly the kind of diff where a pasted token hides in plain sight.
+> **Before every commit:** run `git diff --staged` and actually read it. A one-line "just adding a new alias" commit is exactly where a pasted token hides.
 
 ---
 
 ## AI
 
-A [`.claude/CLAUDE.md`](.claude/CLAUDE.md) file lives in this repo and instructs [Claude Code](https://claude.ai/code) how to behave when it works here. It's not boilerplate — it encodes the same caution I'd want from a human collaborator touching my personal environment:
+A [`.claude/CLAUDE.md`](.claude/CLAUDE.md) file lives in this repo and tells [Claude Code](https://claude.ai/code) how to behave. It encodes the same caution I'd want from a human collaborator touching my personal environment:
 
-- **Read-only GitHub access** — no PRs, commits, or pushes on my behalf. This repo is mine to review before anything leaves my machine.
-- **Extend, don't replace** — when editing an existing config or keybinding, preserve what's already there instead of regenerating it from scratch. My tmux/nvim keymaps have years of muscle memory baked in; a clean-slate rewrite breaks that even when the result is "better."
-- **Plan before touching config** — non-trivial changes get a written plan first, since a bad symlink or a botched `stow --adopt` can quietly eat a config I care about.
-- **Verify before claiming done** — actually check the change worked (`readlink`, a dry-run stow, a re-sourced shell) rather than assuming a diff that looks right behaves right.
+- **Read-only GitHub access** — no PRs, commits, or pushes on my behalf.
+- **Extend, don't replace** — when editing an existing config or keybinding, preserve what's there instead of regenerating it.
+- **Plan before touching config** — non-trivial changes get a written plan first, since a botched `stow --adopt` can quietly eat a config I care about.
+- **Verify before claiming done** — check the change actually works rather than assuming a plausible diff behaves.
 
-Most dotfiles repos don't bother with this because most dotfiles repos aren't edited by an agent. Mine is, often, so the instructions are load-bearing rather than decorative.
-
-The accompanying [`.claude/skills/`](.claude/skills/) directory gives the agent focused workflows for common work:
+`.claude/` also holds `settings.json` and `statusline.sh`, and the [`skills/`](.claude/skills/) directory gives the agent focused workflows:
 
 - **`changelog`** turns commits since the last release into a Keep a Changelog-formatted update.
 - **`context7-mcp`** fetches current library documentation before answering framework or API questions.
-- **`neovim-lua-expert`** guides precise Neovim Lua configuration and debugging work.
-- **`til`** records a new Today I Learned note in the separate TIL repository.
+- **`til`** records a Today I Learned note in a separate TIL repository.
+
+The same ideas apply to herdr: it's how I run several agents in parallel, each in its own `worktrunk` worktree.
 
 ---
 
-## Quick cheatsheet
+## Herdr keybindings
 
 <details>
-<summary>Every stow command you'll actually need, in one block</summary>
+<summary>Custom keybindings — prefix is <code>Ctrl+s</code>. Source of truth: <code>.config/herdr/config.toml</code></summary>
 
-```sh
-# Preview what stow will do (always run first)
-stow -nv --target="$HOME" .
+Reload with `prefix + q` (or the `hrc` alias); `prefix + ?` shows help.
 
-# Create / update symlinks
-stow --no-folding --target="$HOME" .
+### Panes
 
-# Sync after adding or moving configs
-stow --restow --no-folding --target="$HOME" .
+| Key                                     | Action                       |
+| --------------------------------------- | ---------------------------- |
+| `prefix + \|` / `prefix + v` / `Alt + Enter`       | Split vertically   |
+| `prefix + -` / `prefix + h` / `Alt + Shift + Enter` | Split horizontally |
+| `Alt + Esc`                             | Close pane                   |
+| `Ctrl + Alt + h/j/k/l` (or arrows)      | Focus pane left/down/up/right |
+| `prefix + Shift + o`                    | Rename pane                  |
+| `prefix + b`                            | Toggle sidebar               |
+| `prefix + [`                            | Copy mode                    |
 
-# Remove all symlinks
-stow --delete --target="$HOME" .
+### Tabs (tmux "windows")
 
-# Verify a specific symlink
-readlink ~/.config/fish
-```
+| Key                                | Action        |
+| ---------------------------------- | ------------- |
+| `prefix + c`                       | New tab       |
+| `prefix + r`                       | Rename tab    |
+| `prefix + x`                       | Close tab     |
+| `prefix + 1..9` / `Alt + 1..9`     | Switch to tab |
+| `prefix + p` / `prefix + n`        | Previous / next tab |
 
-</details>
+### Workspaces (tmux "sessions")
 
----
+| Key                                  | Action                  |
+| ------------------------------------ | ----------------------- |
+| `prefix + Shift + c`                 | New workspace           |
+| `prefix + Shift + r`                 | Rename workspace        |
+| `prefix + Shift + k`                 | Close workspace         |
+| `prefix + Shift + p/n` / `Alt + ↑/↓` | Previous / next workspace |
+| `prefix + d`                         | Detach                  |
 
-## Tmux keybindings
+### Popups and plugins
 
-<details>
-<summary>All custom keybindings — prefix is <code>Ctrl+s</code></summary>
-
-### Config
-
-| Key          | Action                       |
-| ------------ | ---------------------------- |
-| `prefix + q` | Reload config                |
-| `prefix + ?` | Show all keybindings (popup) |
-
-### Pane splits
-
-| Key                   | Action                        |
-| --------------------- | ----------------------------- |
-| `prefix + \|`         | Split right                   |
-| `prefix + -`          | Split down                    |
-| `prefix + v`          | Split right                   |
-| `prefix + x`          | Kill pane                     |
-| `prefix + f`          | Floating shell popup (80×60%) |
-| `Alt + Enter`         | Split down (no prefix)        |
-| `Alt + Shift + Enter` | Split right (no prefix)       |
-| `Alt + Escape`        | Kill pane (no prefix)         |
-
-### Pane navigation
-
-| Key                    | Action                     |
-| ---------------------- | -------------------------- |
-| `prefix + h/j/k/l`     | Navigate panes (vim-style) |
-| `Ctrl + Alt + ←/→/↑/↓` | Navigate panes (no prefix) |
-
-### Pane resize
-
-| Key                            | Action                          |
-| ------------------------------ | ------------------------------- |
-| `prefix + H/J/K/L`             | Resize pane 5 cells             |
-| `Ctrl + Alt + Shift + ←/→/↑/↓` | Resize pane 5 cells (no prefix) |
-
-### Windows
-
-| Key                         | Action        |
-| --------------------------- | ------------- |
-| `prefix + c` / `prefix + t` | New window    |
-| `prefix + r`                | Rename window |
-| `prefix + k`                | Kill window   |
-
-### Sessions
-
-| Key          | Action                          |
-| ------------ | ------------------------------- |
-| `prefix + C` | New session                     |
-| `prefix + R` | Rename session                  |
-| `prefix + K` | Kill session                    |
-| `prefix + T` | Sesh session picker (fzf popup) |
-
-### Copy mode (vi)
-
-| Key          | Action                  |
-| ------------ | ----------------------- |
-| `prefix + [` | Enter copy mode         |
-| `v`          | Begin selection         |
-| `y`          | Copy selection and exit |
+| Key                  | Action                                                     |
+| -------------------- | ---------------------------------------------------------- |
+| `prefix + f`         | Scratch terminal                                           |
+| `prefix + Alt + g`   | lazygit                                                    |
+| `prefix + Alt + h`   | hunk diff                                                  |
+| `prefix + Alt + k`   | k9s                                                        |
+| `prefix + Alt + d`   | gh dash                                                    |
+| `prefix + Alt + b`   | btop                                                       |
+| `prefix + Shift + g` | Worktrunk: switch / create a worktree from the default branch |
+| `prefix + Shift + d` | Worktrunk: remove a worktree                               |
 
 </details>
