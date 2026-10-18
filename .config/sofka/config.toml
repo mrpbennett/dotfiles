@@ -28,6 +28,11 @@ half_page_down = "ctrl-d"
 name = "catppuccin-mocha"
 background = false
 
+[logs]
+tail = 100
+buffer = 5000
+json_view = "pretty"
+
 [views."*"]
 
 [views."v1/pods"]
@@ -37,7 +42,7 @@ columns = [
   { name = "READY", builtin = "READY" },
   { name = "STATUS", builtin = "STATUS" },
   { name = "RESTARTS", builtin = "RESTARTS" },
-  { name = "IMGV", path = "/spec/containers/0/image", format = "image-tag"},
+  { name = "IMGV", path = "/spec/containers/0/image", format = "image-tag" },
   { name = "CPU", metric = "cpu" },
   { name = "CPU/R", metric = "cpu-request" },
   { name = "%CPU/R", metric = "cpu-request-utilization" },

@@ -55,3 +55,8 @@ disabled = false
 
 [kubernetes]
 disabled = false
+
+[[kubernetes.contexts]]
+context_pattern = "portland"
+symbol = "🏠 "
+style = "blue"
