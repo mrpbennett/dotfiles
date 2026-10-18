@@ -10,6 +10,9 @@
 )
 
 (defsrc
+  ;; function row — macOS: required, or the media keys (brightness/volume/etc) are swallowed
+  ;; Linux: can be dropped; process-unmapped-keys passes them through
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   caps a    s    d    f    g    h    j    k    l    ;    '    ret
@@ -55,6 +58,10 @@
 )
 
 (deflayer base
+  ;; function row — macOS: F1-F12 map to media keys (brightness, mission ctrl, launchpad, prev/play/next, mute, vol)
+  brdn brup mctl lpad f5   f6   prev pp   next mute vold volu
+  ;; function row — Linux/plain F-keys alternative (swap in for the line above):
+  ;; f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    @bs
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   @cap @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
@@ -65,6 +72,8 @@
 
 ;; nav layer is on physical left cmd, so every key except hjkl/bspc sends cmd+key (cmd+c, cmd+v, ...)
 (deflayer nav
+  ;; function row — passthrough (same on macOS and Linux)
+  _    _    _    _    _    _    _    _    _    _    _    _
   M-grv M-1  M-2  M-3  M-4  M-5  M-6  M-7  M-8  M-9  M-0  M--  M-=  @nbs
   M-tab M-q  M-w  M-e  M-r  M-t  M-y  M-u  M-i  M-o  M-p  M-[  M-]  M-\
   _     M-a  M-s  M-d  M-f  M-g  @nh  @nj  @nk  @nl  M-;  M-'  M-ret
@@ -76,6 +85,8 @@
 ;; while s/l (opt) is held, j/k are plain keys so opt+j / opt+k (move line) fire immediately
 ;; instead of waiting on their own home-row-mod tap-hold
 (deflayer alt
+  ;; function row — passthrough (same on macOS and Linux)
+  _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ _ _ _ _ _ _ _
   _ _ _ _ _ _ _ j k _ _ _ _
