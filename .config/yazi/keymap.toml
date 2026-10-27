@@ -39,5 +39,7 @@ prepend_keymap = [
   ], run = "find --smart", desc = "Filter" },
 ]
 
-[input]
-prepend_keymap = [{ on = ["<Esc>"], run = "close", desc = "Cancel input" }]
+[[input.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel input"

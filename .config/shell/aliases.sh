@@ -79,6 +79,10 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion zsh)
 zstyle ':completion:*' menu select # arrow keys / repeated Tab to pick from the list
 
+alias k9s="k9s --context portland"
+alias sof="sofka"
+alias tctl="talosctl"
+
 alias k="kubectl"
 alias kg="kubectl get"
 alias kgp="kubectl get pods"
@@ -87,13 +91,9 @@ alias kd='kubectl describe'
 alias kl='kubectl logs'
 alias kx='kubectl exec -it'
 alias kt="kubectl tree"
-
-alias tctl="talosctl"
-
 alias kctx='kubectx'
 alias kns="kubens"
-
-alias sof="sofka"
+alias virt="k virt"
 
 kdelp() {
   if [ -z "$1" ]; then
@@ -120,6 +120,12 @@ kshpod() {
   kubectl exec -it -n "$ns" "$pod" -- /bin/bash
 }
 
+# ARGOCD ---
+alias arg="argocd"
+alias argl="arg list"
+alias arga="arg app"
+alias argli="arg login argocd.70ld.dev --grpc-web"
+
 # HELM ---
 alias hrl="helm repo list"
 alias hru="helm repo update"
@@ -127,6 +133,11 @@ alias hsr="helm search repo ''"
 hsv() {
   helm show values "$@" | bat -l yaml
 }
+
+# GCLOUD
+source ~/.local/share/mise/installs/gcloud/latest/completion.zsh.inc
+alias gc="gcloud"
+
 zd() {
   if [ $# -eq 0 ]; then
     builtin cd ~ && return

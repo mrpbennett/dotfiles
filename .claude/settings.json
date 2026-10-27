@@ -52,5 +52,6 @@
   "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true,
   "theme": "auto",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "hooks": {"SessionStart":[{"matcher":"^(startup|resume|clear|compact|fork)$","hooks":[{"type":"command","command":"bash '/Users/pb/.claude/hooks/herdr-agent-state.sh' session","timeout":10}]}]}
 }

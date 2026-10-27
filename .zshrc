@@ -28,8 +28,6 @@ zle -N zle-line-init
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi # WorkTrunk
 
-
-
 source ~/.config/shell/all.sh
 
 # opencode
@@ -39,6 +37,8 @@ dotfiles(){
   cd "$HOME/.dotfiles" || return
   nvim .
 }
+
+alias remotepi="herdr --remote node-pi-3"
 
 # Pi
 export PATH="/Users/pbennett/.local/share/mise/installs/node/26.6.0/bin:$PATH"

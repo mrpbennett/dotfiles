@@ -1,62 +1,90 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
+$username\
+$hostname\
 $directory\
-$fill\
-$kubernetes \
 $git_branch\
+$git_state\
 $git_status\
+$git_commit\
+$sudo\
+$container\
+$docker_context\
+$python\
+$golang\
+$terraform\
+$helm\
+$fill\
+$kubernetes\
+$gcloud\
+$status\
 $line_break\
-$character\
-"""
+$character"""
+
 right_format = """
 $cmd_duration\
-$status\
 """
-add_newline = true
 
 [character]
-success_symbol = '[➜](bold green) '
-error_symbol = '[x](bold red) '
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
 
-vimcmd_symbol = '[N](bold blue) '
-vimcmd_visual_symbol = '[V](bold yellow)'
+[fill]
+symbol = " "
+
+# -- NERDFONT --
+[container]
+symbol = " "
 
 [directory]
+style = "blue"
+read_only = " 󰌾"
 truncation_length = 2
 truncation_symbol = "../"
-repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
-truncate_to_repo = false
 
-[cmd_duration]
-format = " [$duration]($style) "
+[docker_context]
+symbol = " "
+
+[gcloud]
+disabled = true
+format = '[$symbol$account $active]($style) '
+style = 'bold yellow'
 
 [git_branch]
-format = " [$symbol$branch]($style) "
+symbol = " "
 
-[git_status]
-format = '[$all_status]($style)'
-ahead = "+${count} "
-diverged = "+-${ahead_count}/${behind_count} "
-behind = "-${count} "
-conflicted = "x "
-up_to_date = "✓ "
-untracked = "? "
-modified = "* "
-stashed = ""
-staged = ""
-renamed = ""
-deleted = ""
+[git_commit]
+tag_symbol = '  '
 
-[status]
-symbol = "󰀧 "
-disabled = false
+[golang]
+symbol = " "
+
+[helm]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
 
 [kubernetes]
+symbol = "󱃾 "
 disabled = false
+format = "[$symbol$context( in $namespace ns)]($style) "
 
 [[kubernetes.contexts]]
 context_pattern = "portland"
 symbol = "🏠 "
 style = "blue"
+
+[[kubernetes.contexts]]
+context_pattern = "tailscale-.*"
+symbol = "✈️ "
+style = "blue"
+context_alias = "tailscale"
+
+[python]
+symbol = " "
+
+[terraform]
+symbol = " "

@@ -1,5 +1,119 @@
 [
   {
+    "plugin_id": "furkankly.zoetrope",
+    "name": "zoetrope",
+    "version": "0.1.0",
+    "min_herdr_version": "0.8.2",
+    "description": "Watch the focused agent's session as a live flow graph.",
+    "manifest_path": "/Users/pb/.config/herdr/plugins/github-installations/furkankly.zoetrope-452e176858b2/70845-0/checkout/herdr-plugin/herdr-plugin.toml",
+    "plugin_root": "/Users/pb/.config/herdr/plugins/github-installations/furkankly.zoetrope-452e176858b2/70845-0/checkout/herdr-plugin",
+    "enabled": true,
+    "platforms": [
+      "macos",
+      "linux"
+    ],
+    "build": [
+      {
+        "command": [
+          "bash",
+          "herdr/ensure-zoe.sh"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "open",
+        "title": "zoetrope: session graph (overlay)",
+        "description": "Open the focused agent's session as a flow graph, over the focused pane. Closing it restores your layout. This is what the default key does.",
+        "contexts": [
+          "pane",
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "herdr/pane.sh",
+          "open"
+        ]
+      },
+      {
+        "id": "open-split",
+        "title": "zoetrope: session graph (split)",
+        "description": "Open the focused agent's session as a flow graph, split beside the focused pane. Stays until you close it.",
+        "contexts": [
+          "pane",
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "herdr/pane.sh",
+          "open",
+          "split"
+        ]
+      },
+      {
+        "id": "open-tab",
+        "title": "zoetrope: session graph (tab)",
+        "description": "Open the focused agent's session as a flow graph in its own tab. Full size, one tab switch from the agent.",
+        "contexts": [
+          "pane",
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "herdr/pane.sh",
+          "open",
+          "tab"
+        ]
+      },
+      {
+        "id": "remove-keys",
+        "title": "zoetrope: remove the default keybinding",
+        "description": "Delete the block setup-keys wrote.",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "herdr/keys.sh",
+          "remove"
+        ]
+      },
+      {
+        "id": "setup-keys",
+        "title": "zoetrope: install the default keybinding",
+        "description": "Bind prefix+shift+z to the overlay, and write the split and tab placements beside it as comments. One block in your Herdr config, backed up first.",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "herdr/keys.sh",
+          "setup"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "graph",
+        "title": "zoetrope",
+        "placement": "overlay",
+        "command": [
+          "bash",
+          "herdr/open.sh"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "furkankly",
+      "repo": "zoetrope",
+      "subdir": "herdr-plugin",
+      "resolved_commit": "b1f31dd26bd4e9e513885e39edb78d0850a5d1fe",
+      "managed_path": "/Users/pb/.config/herdr/plugins/github-installations/furkankly.zoetrope-452e176858b2/70845-0/checkout",
+      "installed_unix_ms": 1792964115585
+    }
+  },
+  {
     "plugin_id": "worktrunk",
     "name": "Worktrunk",
     "version": "0.1.0",

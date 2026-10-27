@@ -26,6 +26,10 @@ window-decoration = "auto"
 split-divider-color = "#A6E3A1"
 unfocused-split-opacity = 0.80
 
+font-feature = -dlig
+font-feature = -liga
+font-feature = -calt
+
 # ============================================================================
 # KEYBINDINGS - Taking advantage of Home Row Mods
 #
