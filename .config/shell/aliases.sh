@@ -78,11 +78,13 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 source <(kubectl completion zsh)
 zstyle ':completion:*' menu select # arrow keys / repeated Tab to pick from the list
+compdef kubecolor=kubectl
 
 alias k9s="k9s --context portland"
 alias sof="sofka"
 alias tctl="talosctl"
 
+alias kubectl="kubecolor"
 alias k="kubectl"
 alias kg="kubectl get"
 alias kgp="kubectl get pods"
@@ -91,6 +93,7 @@ alias kd='kubectl describe'
 alias kl='kubectl logs'
 alias kx='kubectl exec -it'
 alias kt="kubectl tree"
+alias kpf="kubectl port-forward"
 alias kctx='kubectx'
 alias kns="kubens"
 alias virt="k virt"

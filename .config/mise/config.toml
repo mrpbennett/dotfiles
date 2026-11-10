@@ -42,3 +42,4 @@ opencode = "latest"
 # bucky install --
 "go:github.com/mrpbennett/bucky/cmd/bucky" = "v0.1.7"
 gcloud = "latest"
+kubecolor = "latest"

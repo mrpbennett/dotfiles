@@ -3,6 +3,7 @@ vim.opt.mouse = "a"
 vim.opt.swapfile = false
 vim.opt.autoread = true
 vim.opt.inccommand = "split" -- better search window
+vim.o.background = "dark"
 
 -- set terminal to use zsh
 vim.opt.shell = vim.fn.exepath("zsh")

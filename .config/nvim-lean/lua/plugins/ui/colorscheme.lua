@@ -1,5 +1,7 @@
 vim.pack.add { { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } }
 
+vim.o.background = "dark"
+
 require("catppuccin").setup({
   flavour = "auto",   -- latte, frappe, macchiato, mocha
   background = {      -- :h background
