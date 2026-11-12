@@ -9,10 +9,12 @@ Keyboard remapping below the OS: home row mods with quick-tap, caps as Esc/Ctrl,
 | caps | esc | ctrl (immediately, if another key is pressed) |
 | a s d f | letter | ctrl opt cmd shift |
 | j k l ; | letter | shift cmd opt ctrl |
-| right cmd | — | cmd |
+| right cmd | — | cmd (plain right cmd, same as stock macOS) |
 | left cmd | — | nav layer (every other key sends cmd+key, so cmd+c / cmd+v still work) |
 | fn | fn | fn |
 | cmd + bspc | opt + bspc (delete word) | |
+
+Function row (base layer): F1 brightness down, F2 brightness up, F3 Mission Control, F4 Launchpad, F5 and F6 plain F5/F6, F7 prev, F8 play/pause, F9 next, F10 mute, F11 volume down, F12 volume up. This is spelled out because macOS needs the media keys listed in `defsrc`, or kanata swallows them. F4 (Launchpad vs Spotlight) and F5/F6 (plain vs dictation/DND) differ from newer macOS defaults.
 
 Nav layer, while left cmd is held:
 
@@ -21,6 +23,11 @@ Nav layer, while left cmd is held:
 - with cmd, h/l → opt + left/right
 - with ctrl → ctrl + fn + arrow
 - bspc → forward delete; with cmd → ctrl + forward delete
+- This replaces cmd+h (hide app) and cmd+l, since those keys become arrows.
+
+Alt layer, while s or l (opt) is held: j and k are plain keys, so opt+j / opt+k fire immediately instead of waiting on their own home row tap-hold.
+
+Unmapped, so stock macOS: left ctrl, left opt, right opt, and every other key not listed above.
 
 Timing rules:
 

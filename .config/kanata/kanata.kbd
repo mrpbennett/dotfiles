@@ -67,7 +67,7 @@
   @cap @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    ret
        z    x    c    v    b    n    m    ,    .    /
   spc  left rght up   down
-  fn   lmet @nav
+  fn   rmet @nav
 )
 
 ;; nav layer is on physical left cmd, so every key except hjkl/bspc sends cmd+key (cmd+c, cmd+v, ...)

@@ -12,6 +12,9 @@
 # tmux
 /.config/tmux/plugins
 
+# omivm
+/.config/omniwm/shell
+
 # zed
 /.config/zed/prompts/
 
