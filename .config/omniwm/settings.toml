@@ -558,19 +558,19 @@ binding = "Unassigned"
 id = "switchWorkspace.previous"
 
 [[hotkeys]]
-binding = "Option+Left Arrow"
+binding = "Option+H"
 id = "focus.left"
 
 [[hotkeys]]
-binding = "Option+Down Arrow"
+binding = "Option+J"
 id = "focus.down"
 
 [[hotkeys]]
-binding = "Option+Up Arrow"
+binding = "Option+K"
 id = "focus.up"
 
 [[hotkeys]]
-binding = "Option+Right Arrow"
+binding = "Option+L"
 id = "focus.right"
 
 [[hotkeys]]
@@ -982,19 +982,19 @@ binding = "Option+Shift+L"
 id = "swapSplit"
 
 [[hotkeys]]
-binding = "Option+H"
+binding = "Option+Left Arrow"
 id = "resizeGrow.horizontal"
 
 [[hotkeys]]
-binding = "Option+K"
+binding = "Option+Down Arrow"
 id = "resizeGrow.vertical"
 
 [[hotkeys]]
-binding = "Option+L"
+binding = "Option+Right Arrow"
 id = "resizeShrink.horizontal"
 
 [[hotkeys]]
-binding = "Option+J"
+binding = "Option+Up Arrow"
 id = "resizeShrink.vertical"
 
 [[hotkeys]]
