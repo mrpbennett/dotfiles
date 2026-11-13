@@ -37,7 +37,7 @@ followsMouseOnlyFullyVisible = false
 followsWindowToMonitor = false
 lockModifier = "off"
 moveCrossesMonitorAtEdge = false
-moveMouseToFocusedWindow = false
+moveMouseToFocusedWindow = true
 raiseOnMouseFocus = false
 
 [gaps]
@@ -71,10 +71,10 @@ invertDirection = true
 mouseMoveModifierKey = "option"
 mouseResizeModifierKey = "option"
 mouseWheelSensitivity = 1.0
-overviewGestureEnabled = false
-overviewGestureFingerCount = 4
+overviewGestureEnabled = true
+overviewGestureFingerCount = 3
 resizePreviewStyle = "live"
-scrollEnabled = true
+scrollEnabled = false
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
 trackpadScrollStyle = "snap"
@@ -83,9 +83,9 @@ windowMoveEnabled = false
 windowMoveFingerCount = 4
 windowResizeEnabled = false
 windowResizeFingerCount = 3
-workspaceSwipeAxis = "vertical"
+workspaceSwipeAxis = "horizontal"
 workspaceSwipeEdgeBehavior = "cycle"
-workspaceSwipeEnabled = false
+workspaceSwipeEnabled = true
 workspaceSwipeFingerCount = 3
 
 [hiddenBar]
@@ -108,7 +108,7 @@ terminal = "terminal"
 
 [mouseWarp]
 constrainToArrangement = false
-enabled = true
+enabled = false
 margin = 1
 
 [niri]
@@ -974,27 +974,27 @@ binding = "Unassigned"
 id = "moveToRoot"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Command+J"
 id = "toggleSplit"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+Shift+L"
 id = "swapSplit"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+H"
 id = "resizeGrow.horizontal"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+K"
 id = "resizeGrow.vertical"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+L"
 id = "resizeShrink.horizontal"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+J"
 id = "resizeShrink.vertical"
 
 [[hotkeys]]
@@ -1146,7 +1146,7 @@ binding = "Option+Grave"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
-binding = "Option+Shift+L"
+binding = "Command+L"
 id = "toggleWorkspaceLayout"
 
 [[hotkeys]]
@@ -1156,18 +1156,6 @@ id = "toggleOverview"
 [[hotkeys]]
 binding = "Unassigned"
 id = "toggleSystemStats"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "toggleShellWidget.hidden-bar"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "toggleShellWidget.system-stats"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "toggleShellWidget.workspaces"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
